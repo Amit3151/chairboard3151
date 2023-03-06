@@ -1,0 +1,8 @@
+.master_body_container{
+    display: flex;
+    justify-content: center;
+    margin: 40px 80px 10px 80px;
+}
+.body_master{
+    width: 100%;
+}

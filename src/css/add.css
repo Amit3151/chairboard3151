@@ -1,0 +1,104 @@
+
+.blur1.add .input_add_wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.apro_input.add {
+    width: 46%;
+}
+
+
+.blur1.add {
+    width: 37%;
+    padding: 27px 51px;
+}
+
+.blur1.add .apro_button {
+
+    width: 95%
+}
+
+
+
+.apro_button {
+    width: 100%;
+}
+
+
+.apro_input.add {
+    padding-top: 23px;
+}
+
+
+div.apro_input.add:nth-child(1) {
+    padding-top: 0;
+}
+
+
+.blur1.add div.apro_input.add:nth-child(2) {
+    padding: 0;
+}
+
+
+.apro_input.add input {
+    height: 39px;
+    background-color: #F1F5F9;
+    box-shadow: inset 4px 4px 6px rgba(215, 228, 240, 0.8), inset -4px -4px 6px #FFFFFF;
+    border-radius: 25px;
+}
+
+.blur1.add {
+    background-color: #f1f5f9;
+}
+
+.apro_heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cross_icn_wrap img {
+    height: 20px;
+}
+
+.apro_input.add input {
+    height: 45px;
+    border: none;
+}
+
+::placeholder{
+    color: #202020;
+}
+
+.cross_icn_wrap {
+    cursor: pointer;
+  }
+
+ input.pass_input {
+    background-image: url(https://cdn-icons-png.flaticon.com/128/54/54481.png);
+    background-repeat: no-repeat;
+    background-position: 94%;
+    background-size: 12px;
+   }
+   
+   
+
+div.input_btn_wrap {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  
+  .input_btn_wrap .eypas {
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    right: 22px;
+    display: flex;
+    cursor: pointer;
+  }
+
+  .input_btn_wrap .eypas img {
+    width: 100%;
+}

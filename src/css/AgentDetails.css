@@ -1,0 +1,70 @@
+body{
+    padding: 0%;
+    margin: 0%;
+}
+
+.agent_details_page{
+    width: 100%;
+    padding: 20px;
+}
+
+.adp_heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hr{
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.adp_input_list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.apro_input.adp {
+    width: 30%; 
+    padding: 10px;
+    padding-top: 0%;
+
+}
+
+.lable_box_items {
+    border-radius: 25px;
+    background-color: #e9ecef;
+    box-shadow: 6px 6px 12px rgba(212, 224, 235, 0.8), -6px -6px 12px #FFFFFF;
+    width: 220px;
+    height: 45px;
+    border: none;
+    font-size: 15px;
+    text-indent: 20px;
+    outline: none;
+    appearance: none;
+    background: url(https://cdn-icons-png.flaticon.com/128/2985/2985150.png);
+    background-repeat: no-repeat;
+    background-position: 180px;
+    background-size: 25px;
+    cursor: pointer;
+}
+
+.filter_search_desc_second.adp {
+    width: 50%;
+  }
+  
+  .filter_search_desc_second.adp .label_box.adp {
+    gap: 0;
+    padding: 0 10px;
+  }
+  
+  .lable_box_items {
+    background-color: #F1F5F9;
+    border-radius: 25px;
+  }
+
+  .label_box.adp2 {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}

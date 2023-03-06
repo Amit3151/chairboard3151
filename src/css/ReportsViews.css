@@ -1,0 +1,92 @@
+.halfButton {
+    background: #ffa600;
+    padding: 10px 17px;
+    border-radius: 25px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 20px;
+}
+
+.declineButton {
+    background: #ff0000;
+    padding: 10px 17px;
+    border-radius: 25px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 20px;
+}
+
+.fullButton{
+    background: #26a100;
+    padding: 10px 17px;
+    border-radius: 25px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 20px;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+}
+
+.tablee{
+    border: 2px solid black;
+    margin-bottom: 30px;
+}
+
+.thh{
+    border: 2px solid black;
+}
+
+.tdd{
+    border: 2px solid black;
+    text-align: center;
+}
+
+.tableHeading{
+    font-weight: 500;
+    font-size: large
+}
+
+.repo_main_box_heading.rvs {
+    height: 450px;
+    overflow: scroll;
+    border-collapse: collapse;
+    width: 95%;
+    padding-left: 35px;
+}
+
+.repo_main_cont.rvs {
+    margin: 2%;
+}
+
+.idHeading{
+    font-size: 10px;
+    margin: 5px;
+}
+
+.idPhoto{
+    width: 300px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.idPhotos{
+    display: flex;
+    flex-direction: row;
+    text-align: center
+}
+
+.id_head{
+    margin: 25px;
+}

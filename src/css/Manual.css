@@ -1,0 +1,8 @@
+.manual_req_body_contanier{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.manual_body{
+    width: 95%; 
+}

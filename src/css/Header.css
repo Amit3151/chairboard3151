@@ -1,0 +1,125 @@
+body{
+    background-color: #e9ecef;
+}
+:root{
+    --font: 'Courier New', Courier, monospace;
+    --background: rgb(153, 153, 153);
+    --button:linear-gradient(97.29deg, #7879cd, #4244a0);
+}
+.router{
+    display: flex;
+}
+a{
+    color: rgb(52, 52, 52);
+    text-decoration: none;
+}
+hr{
+    width: 177px;
+    margin-left: -20px;
+}
+button:active {
+    box-shadow: 5px 7px 21px #ffffff91;
+    transform: scale(0.90);
+}
+
+label{
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+.chair_header_box {
+    display: flex;
+    justify-content: flex-end;
+    gap: 250px;
+    padding: 15px 60px;
+    align-items: center;
+    background-color: #444597;
+    position: relative;
+}
+.customer_name{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    cursor: pointer;
+}
+a.style_txt_img.active {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    transition: 1s;
+}
+a.style_txt_img img {
+    width: 18px;
+    height: 18px;
+}
+
+.customer_name img{
+    height: 20px;
+}
+.customer_name h3{
+    color: white;
+    font-size: 15px;
+}
+.chair_board button{
+    background: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 7px;
+    letter-spacing: 1px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.4s;
+    box-shadow: 5px 5px 6px rgb(0 0 0 / 44%), -6px -6px 12px #fff0;
+} 
+.chair_board button:active {
+    box-shadow: 5px 7px 21px #ffffff91;
+    transform: scale(0.90);
+}
+.header_back button img {
+    width: 80%;
+}
+.chair_board button:hover{
+    color: rgb(0, 0, 0);
+    background: white;
+}
+.header_back button{
+    cursor: pointer;
+    background-color: #444597;
+    border: none;
+    outline: none;
+}
+.tab_style{
+    color: #9e9ff3;
+    cursor: pointer;
+}
+.header_opt ul li a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.menu.active .header_opt ul{
+    font-size: 15px;
+}
+
+.hide_box {
+    position: absolute;
+    top: 65px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px;
+    gap: 12px;
+    width: 140px;
+    right: 30px;
+    z-index: 1;
+    border-radius: 6px;
+    display: none;
+}
+.hide_box.active{
+    display: inherit;
+}
+a.style_txt_img.active:hover {
+    scale: 1.1;
+}
+

@@ -1,0 +1,143 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.router{
+  background-color: #e9ecef;
+
+}
+
+.login {
+  width: 100vw;
+  background-color: #A4A5FF;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-image: url('./images/LoginImage.png')
+}
+
+.login-form-container {
+  background: #F0F0F0;
+  box-shadow: -6px -6px 12px rgba(210, 210, 255, 0.8), 6px 6px 12px rgba(106, 108, 255, 0.8);
+  border-radius: 25px;
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 68px 80px 50px 80px;
+  width: 20%;
+}
+
+.login-form-container > form > div > label {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+
+  color: #000000;
+}
+
+.login-form-container > form > div { 
+  margin-top: 40px;
+}
+
+.login-form-container > form > div > input::placeholder {
+  color: #AFAFAF;
+}
+
+.login-form-container > form > div > input {
+  border: none;
+  background: #F1F5F9;
+  padding: 20px;
+  box-shadow: inset 4px 4px 6px rgba(215, 228, 240, 0.8), inset -4px -4px 6px #FFFFFF;
+  border-radius: 25px;
+}
+
+.login-form-container > form > button {
+  background: linear-gradient(97.29deg, #7879CD -5.97%, #4244A0 107.1%);
+  width: 100%;
+  border-radius: 25px;
+  border: none;
+  margin-top: 58px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  padding: 15px 0px;
+  line-height: 20px;
+  /* identical to box height */
+
+  text-align: center;
+
+  color: #FFFFFF;
+}
+
+.login-form-header > span {
+  margin-bottom: 21px;
+}
+
+.login-form-header > span:nth-child(2) {
+  color:  #5657B1;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 60px;
+}
+
+.login-form-header > span:nth-child(3) {
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 60px;
+  color:  #D300CB;
+}
+
+.login-form-header > span:nth-child(4) {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #525252;
+}
+
+.login-form-header {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 44px;
+  /* identical to box height */
+
+
+  color: #000000;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

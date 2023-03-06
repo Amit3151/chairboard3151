@@ -1,0 +1,114 @@
+/* ==============================Menu Bar=================== */
+.sidebar{
+    min-width: 5%;
+    z-index: 1;
+}
+.menu {
+    width: 100%;
+    height: 100%;
+    padding-right: 7px;
+    background: hwb(240deg 2% 74%);
+    overflow: hidden;
+}
+.menu_box{
+    position: absolute;
+    width: 3%;
+    height: 40px;
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 0 24px 24px 0;
+    align-items: center;
+    padding-right: 4px;
+    z-index: 2;
+    left: 6.3%;
+    top: 20px;
+}
+.menu_btn{
+    width: 75%;
+    height: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.header_opt ul {
+    display: flex;
+    list-style-type: none;
+    gap: 15px;
+    text-decoration: none;
+    flex-direction: column;
+    padding: 20px 0px;
+    margin-top: 0px;
+}
+.nav_link{
+    display: none;
+}
+li.styling {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.sidebarnavchild {
+    width: 100%;
+    padding: 10px 20px;
+  }
+.styling img{
+    width: 25px;
+    height: 22px;
+}
+.menu_btn span{
+    width: 21px;
+    height:3px;
+    background: white;
+    display: inline-block;
+    border-radius: 5px;
+}
+.menu.active .header_opt {
+    left: 0;
+}
+.menu.active .nav_link{
+    display: flex;
+    animation: menubox 1s;
+}
+
+.menu.deactive{
+    animation: remenubox 1s;
+}
+
+.menu_btn.cross span {
+    position: absolute;
+}
+.menu_btn.cross :nth-child(1) {
+    animation: rotate1 1s ;
+    transform: rotate(45deg);
+}
+.menu_btn.cross :nth-child(2) {
+    display: none;
+}
+.menu_btn.cross :nth-child(3) {
+    animation: rotate2 1s ;
+    transform: rotate(-45deg);
+}
+.menu_box.active{
+    left: 12.3%;
+}
+.nav_link.active{
+    background-color: white;
+}
+a.sidebarnavchild{
+    margin-left: 8px;
+    border-radius: 20px 0 0 20px;
+}
+.sidenavactive {
+    background: rgb(150 151 255)
+   
+}
+a.sidebarnavchild:hover {
+    background: rgb(68, 69, 151, 1);
+}
+.nav_link {
+    color: white;
+}

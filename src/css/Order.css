@@ -1,0 +1,117 @@
+.order_body_contanier{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.order_body{
+    width: 95%;
+}
+
+.header_search button {
+    border-radius: 25px;
+    background: linear-gradient(97.29deg, #7879cd, #4244a0);
+    width: 120px;
+    height: 45px;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
+    transition: 0.4s;
+    margin-top: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.header_search1{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.item_status1 span{
+    background: #80ff5d89;
+    border-radius: 25px;
+    color: #000000; 
+    padding: 6px 17px;
+}
+
+.item_status2 span{
+    background: #ff000096;
+    border-radius: 25px;
+    color: #ffffff; 
+    padding: 6px 17px;
+}
+
+.repo_main_box_heading.OD{
+    height: fit-content;
+}
+
+.odbtns{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    gap: 10px;
+}
+
+#cancel{
+    border-radius: 25px;
+    background: linear-gradient(97.29deg, #7879cd, #4244a0);
+    width: 180px;
+    height: 45px;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
+    transition: 0.2s;
+    
+}
+
+#dispatched{
+    border-radius: 25px;
+    background: #ff0000;
+    width: 180px;
+    height: 45px;
+    color: white;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
+    transition: 0.2s;
+}
+
+.uploadBox {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.browse_file.od {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background-color: #e9ecef;
+    box-shadow: 6px 6px 12px rgb(212 224 235 / 80%), -6px -6px 12px #fff;
+    width: 35%;
+    align-items: center;
+    padding: 50px 20px;
+    cursor: pointer;
+}
+
+.sample_file.od {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background-color: #e9ecef;
+    box-shadow: 6px 6px 12px rgb(212 224 235 / 80%), -6px -6px 12px #fff;
+    width: 35%;
+    align-items: center;
+    padding: 50px 20px;
+    cursor: pointer;
+}
+
