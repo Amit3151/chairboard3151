@@ -9,6 +9,7 @@ import DateCell from '../components/Cells/DateCell';
 import StatusCell from '../components/Cells/StatusCell';
 import Table from '../components/Table'
 import "../css/Master.css";
+import { Link } from 'react-router-dom';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -69,7 +70,11 @@ export default function ManualRequest() {
     },
     {
       Header: 'Action',
-      Cell: () => <div style={{ cursor: 'pointer' }}><TableShowIcon/></div>
+      Cell: () => <div style={{ cursor: 'pointer' }}>
+        <Link to= '/ManualReqDetails'>
+        <TableShowIcon/>
+        </Link>
+        </div>
     }
   ], [])
 

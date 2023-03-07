@@ -58,20 +58,20 @@ export default function Sidebar() {
                             </li>
                         </NavLink>
 
-                        <NavLink to="/Wallet" className={({ isActive }) => (
+                        <NavLink to="/Master" className={({ isActive }) => (
                             isActive ? activeclassname : inactiveclassname
                         )}>
                             <li className="styling">
-                                <img src={wallet} alt="" />
+                                <img src={master} alt="" />
                                 <div
                                     className="nav_link"
 
                                 >
-                                    Wallet
+                                    Master
                                 </div>
                             </li>
                         </NavLink>
-
+                        
                         <NavLink to="/Agent/" className={({ isActive }) => (
                             isActive ? activeclassname : inactiveclassname
                         )}>
@@ -128,20 +128,6 @@ export default function Sidebar() {
                             </li>
                         </NavLink>
 
-                        <NavLink to="/Reports" className={({ isActive }) => (
-                            isActive ? activeclassname : inactiveclassname
-                        )}>
-                            <li className="styling">
-                                <img src={report} alt="" />
-                                <div
-                                    className="nav_link"
-
-                                >
-                                    Reports
-                                </div>
-                            </li>
-                        </NavLink>
-
                         <NavLink to="/ManualRequest" className={({ isActive }) => (
                             isActive ? activeclassname : inactiveclassname
                         )}>
@@ -156,19 +142,46 @@ export default function Sidebar() {
                             </li>
                         </NavLink>
 
-                        <NavLink to="/Master" className={({ isActive }) => (
+                        <NavLink to="/Reports" className={({ isActive }) => (
                             isActive ? activeclassname : inactiveclassname
                         )}>
                             <li className="styling">
-                                <img src={master} alt="" />
+                                <img src={report} alt="" />
                                 <div
                                     className="nav_link"
 
                                 >
-                                    Master
+                                    Reports
                                 </div>
                             </li>
                         </NavLink>
+
+
+                        <NavLink to="/Wallet" className={({ isActive }) => (
+                            isActive ? activeclassname : inactiveclassname
+                        )}>
+                            <li className="styling">
+                                <img src={wallet} alt="" />
+                                <div
+                                    className="nav_link"
+                                >
+                                    Recharge / Wallet
+                                </div>
+                            </li>
+                        </NavLink>
+
+                        
+
+                        
+
+                        
+                        
+
+                        
+
+                        
+
+                        
 
                        
                     </ul>

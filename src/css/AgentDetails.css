@@ -68,3 +68,16 @@ body{
     flex-direction: column;
     margin-left: 15px;
 }
+
+.phasethree {
+    display: flex;
+    flex-wrap: wrap;
+}
+.phasefour {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.apro_input.add.adp.phasefour {
+    width: 280px;
+}

@@ -58,38 +58,38 @@ export default function Filter() {
     const [demo2, setDemo2] = useState('');
     const [acknowledgment, setAcknowledgment] = useState('');
 
-    
+
     // ====================Setting Options===============================
     const [showMenu, setShowMenu] = useState(false);
-  const menuRef = useRef(null);
+    const menuRef = useRef(null);
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowMenu(false);
-      }
+    const toggleMenu = () => {
+        setShowMenu(!showMenu);
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setShowMenu(false);
+            }
+        };
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [menuRef]);
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [menuRef]);
 
     return (
         <>
             <form>
                 <div className={fillter} >
-                    <div><img src={customise} alt="dropdown.img"
-                        onClick={toggleMenu}
-                    /></div>
+                    {/* <div><img src={customise} alt="dropdown.img"
+                        onClick={toggleMenu} />
+                    </div> */}
 
-                    {showMenu && ( <div ref={menuRef} className="dropdown-menu">
+                    {showMenu && (<div ref={menuRef} className="dropdown-menu">
                         <ul>
                             <li>Show/Hide Column</li>
                             <li>Add a Column</li>
@@ -100,7 +100,7 @@ export default function Filter() {
                         <div className={upload_img} >
                             <img src={download} alt="" type='file' onClick={show_pop} />
                         </div>
-                        <div className= {pop_box_backdrop}>
+                        <div className={pop_box_backdrop}>
                         </div>
                         <div className={pop_box} ref={pop}>
                             <div className="browse_file">

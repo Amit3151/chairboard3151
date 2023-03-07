@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer } from 'react'
+import React, { useMemo, useReducer, useRef, useState } from 'react'
 import { DateTime } from 'luxon'
 import Header from "../components/Header";
 import Sidebar from '../components/Sidebar';
@@ -9,6 +9,8 @@ import AgentCell from '../components/Cells/AgentCell';
 import AddressCell from '../components/Cells/AddressCell';
 import DateCell from '../components/Cells/DateCell';
 import CreateMasterModal from '../modals/CreateMaster'
+import cross from "../images/cross-23.svg";
+import warning from "../images/mdi_alert-circle-outline.svg";
 import '../css/Master.css'
 import '../css/Request.css'
 
@@ -78,12 +80,64 @@ export default function Master() {
       accessor: 'id',
       Cell: () => (
         <div className="flex row center">
-          <button className="table-danger">Block</button>
+
+          <button className={styling_aprove2} onClick={approve2}>Block</button>
+          <div className={approve_box2} >
+            <div className="approve_inside">
+              <div className="blur1" ref={aprove_ref2}>
+                <div className="apro_heading">
+                  <span>Block</span>
+                  <div className="cross_icn_wrap">
+                    <img src={cross} alt="" onClick={notApprove2} />
+                  </div>
+                </div>
+                <div className="apro_input">
+                  <label htmlFor="">Enter Master Code</label>
+                  <input type="text" ref={inputRef2} placeholder="Enter Master Code" />
+                  {error2 && <span><img src={warning} alt="" /> {'Invaild Master Code'}</span>}
+                </div>
+                <div className="apro_button">
+                  <button onClick={() => {
+                    let pattern = /\d/g;
+                    let result2 = pattern.test(inputRef2.current.value2);
+                    if (!result2) {
+                      setError2(true);
+                    } else {
+                      setError2(false);
+                    }
+                  }}>Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       ),
     }
   ], [])
+
   const [createModalOpen, toggleModal] = useReducer(st => !st, false)
+
+  const [value2, newvalue2] = useState(true);
+  const [error2, setError2] = useState(false);
+  const inputRef2 = useRef();
+
+  function approve2() {
+    newvalue2((value2) => !value2);
+  }
+  function notApprove2() {
+    newvalue2((value2) => !value2);
+  }
+
+  const styling_aprove2 = value2 ? "styling_aprove2" : "styling_aprove2 ";
+  let approve_box2 = value2 ? "approve_box" : "approve_box active";
+
+  const aprove_ref2 = useRef()
+  const outclick2 = e => {
+    if (!aprove_ref2.current.contains(e.target)) {
+      newvalue2(true);
+    }
+  }
 
   return (
     <>
@@ -100,7 +154,7 @@ export default function Master() {
             <div className="search_bar">
               <div className="search_main">
                 <div className="search_main_left">
-                  <h3>Master</h3> 
+                  <h3>Master</h3>
                 </div>
                 <div className="header_search">
                   <span>

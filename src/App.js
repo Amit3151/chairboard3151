@@ -15,6 +15,7 @@ import Add from './pages/add';
 import AgentDetails from './pages/AgentDetails';
 import Orderdetails from './pages/OrderDetails';
 import ReportsViews from './pages/ReportsViews';
+import ManualReqDetails from './pages/ManualReqDetails';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route exact path='/Agentdetails' element={<AgentDetails/>} />
           <Route exact path='/Orderdetails' element={<Orderdetails/>}/>
           <Route exact path='/ReportsViews' element={<ReportsViews/>} />
+          <Route exact path='/ManualReqDetails' element={<ManualReqDetails/>}/>
         </Routes>
       </div>
     </BrowserRouter>

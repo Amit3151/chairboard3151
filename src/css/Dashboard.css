@@ -48,7 +48,7 @@ align-items: space-between;
 .dashboard_body_container h3 {
 display: inline-block;
 width: 100%;
-margin-bottom: 80px;
+margin-bottom: 40px;
 font-style: normal;
 font-weight: 600;
 font-size: 40px;
@@ -60,7 +60,7 @@ color: #000000;
 .figure {
 max-height: 188px;
 flex: 1 0;
-padding: 30px;
+padding: 10px;
 background: linear-gradient(180deg, #3BA1F6 0%, #2669F1 100%);
 box-shadow: -6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8);
 position: relative;
@@ -97,7 +97,7 @@ font-style: normal;
 text-overflow: ellipsis;
 overflow: hidden;
 font-weight: 600;
-font-size: 28px;
+font-size: 18px;
 line-height: 28px;
 padding-top: 45px;
 }

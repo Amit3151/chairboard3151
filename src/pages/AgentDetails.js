@@ -124,7 +124,87 @@ const AgentDetails = () => {
                         </div>
                     </div>
 
+                    {/* phase three */}
+                    <div className='adp_heading'>
+                        <h1>Tag Commission</h1>
+                        <hr className='hr'></hr>
+                    </div>
 
+                    <div className='phasethree'>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 4</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 5</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 6</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 7</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 8</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 12</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 15</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 16</label>
+                            <input type="text" placeholder="Amount" />
+                        </div>
+                    </div>
+
+                    {/* phase four */}
+                    <div className='adp_heading'>
+                        <h1>Upload Document</h1>
+                        <hr className='hr'></hr>
+                    </div>
+
+                    <div className='phasefour'>
+
+                        <div className="apro_input add adp phasefour">
+                            <label htmlFor="">Aadhaar number</label>
+                            <input type="text" placeholder="30301245464561656" />
+                        </div>
+
+                            <div className="browse_file ">
+                                <span>1. Aadhaar card front</span>
+                            </div>
+                            <div>
+                                <img src='' alt=''/>
+                            </div>
+
+                        <div className="apro_input add adp">
+
+                        </div>
+
+                        <div className="apro_input add adp phasefour">
+                            <label htmlFor="">Aadhaar number</label>
+                            <input type="text" placeholder="30301245464561656" />
+                        </div>
+
+                        <div className="apro_input add adp phasefour">
+                            <label htmlFor="">Aadhaar number</label>
+                            <input type="text" placeholder="30301245464561656" />
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </>
