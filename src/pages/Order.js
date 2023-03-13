@@ -63,11 +63,11 @@ export default function Profile() {
   // Creating Dummy Static Data For Channnel Partner Table
 
   const tableData = [
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 , 21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 , 21:50:49', Status: 'Placed',},
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 , 21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 , 21:50:49', Status: 'Dispatched',},
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 , 21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 , 21:50:49', Status: 'Cancel',},
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 , 21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 , 21:50:49', Status: 'Placed',},
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 , 21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 , 21:50:49', Status: 'Dispatched',},
+    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Placed', },
+    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Dispatched', },
+    // { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Cancel',},
+    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Placed', },
+    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Dispatched', },
   ];
 
 
@@ -104,7 +104,15 @@ export default function Profile() {
             </div>
             <div className="filter_section">
               <Filter />
+              <div className="OrderFilters">
+              <ul className="un-list">
+                <li className="un-li">All</li>
+                <li className="un-li">Agent</li>
+                <li className="un-li">Master</li>
+              </ul>
             </div>
+            </div>
+            
             <div className="repo_main_cont">
               <div className="repo_main_box">
                 <div className="repo_main_box_heading">
@@ -168,7 +176,11 @@ export default function Profile() {
                       {tableData.map((item, index) => (
                         <tr key={index}>
                           <td>{item.Id}</td>
-                          <td>{item.Customer_details}</td>
+                          <td>
+                            <div className="customer_detail_wrap">
+                            <span className="customer_detail_icon"><span className="span_a">A</span></span>{item.Customer_details}
+                            </div>
+                            </td>
                           {/* <td>{showPassword && selectedindex === index ? `${item.password}` : '**********'}</td>
                           <td>{showPassword && selectedindex === index ? `${item.Key}` : 'G1LI*************1020'}</td> */}
                           <td>{item.MasterCode}</td>
@@ -181,9 +193,9 @@ export default function Profile() {
                           <td >
                             <span className="btn_sty_tick" >
                               <Link to='/Orderdetails'>
-                              <button className="eye_btn_channel">
-                                <img src={eye} alt="" />
-                              </button>
+                                <button className="eye_btn_channel">
+                                  <img src={eye} alt="" />
+                                </button>
                               </Link>
                             </span>
                           </td>

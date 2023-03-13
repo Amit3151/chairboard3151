@@ -9,6 +9,8 @@ import Search from "../components/Search";
 import Sidebar from '../components/Sidebar';
 import { Link } from "react-router-dom";
 import cross from "../images/cross-23.svg";
+import {AiOutlineClose} from 'react-icons/ai'
+
 
 export default function Agent() {
   const [value, newvalue] = useState(true);
@@ -53,11 +55,14 @@ export default function Agent() {
     }
   }
 
+  function closePop1() {
+    newvalue1(!value1)
+  }
 
   const [value2, newvalue2] = useState(true);
   const [error2, setError2] = useState(false);
   const inputRef2 = useRef();
-
+  
   function approve2() {
     newvalue2((value2) => !value2);
   }
@@ -74,6 +79,13 @@ export default function Agent() {
       newvalue2(true);
     }
   }
+  function closePop2() {
+    newvalue2(!value2)
+  }
+  function closePop() {
+    newvalue(!value)
+  }
+  
 
   useEffect(() => {
     document.addEventListener("mousedown", outclick);
@@ -111,7 +123,7 @@ export default function Agent() {
         </div>
         <div className="aget_body_container">
           <div className="aget_body">
-            <div className="search_bar">
+            <div className="search_bar" >
               <Search title="Agent" />
             </div>
             <div className="fillter_section">
@@ -194,12 +206,13 @@ export default function Agent() {
 
 
                           <td>
-                            <button className={styling_aprove1} onClick={approve1}>Unblock</button>
+                            <button className={styling_aprove1} >Unblock</button>
                             <div className={approve_box1} >
                               <div className="approve_inside">
                                 <div className="blur1" ref={aprove_ref1}>
                                   <div className="apro_heading">
                                     <span>Unblock</span>
+                                    <AiOutlineClose  />
                                     <div className="cross_icn_wrap">
                                       <img src={cross} alt="" onClick={notApprove1} />
                                     </div>
@@ -261,6 +274,7 @@ export default function Agent() {
                               <div className="blur1" ref={aprove_ref}>
                                 <div className="apro_heading">
                                   <span>Approve</span>
+                                  <AiOutlineClose  onClick={closePop}/>
                                   <div className="cross_icn_wrap">
                                     <img src={cross} alt="" onClick={notApprove} />
                                   </div>
@@ -315,14 +329,15 @@ export default function Agent() {
                         <td>
 
                           <td>
-                            <button className={styling_aprove2} onClick={approve2}>Block</button>
+                            <button className={styling_aprove2} >Block</button>
                             <div className={approve_box2} >
                               <div className="approve_inside">
                                 <div className="blur1" ref={aprove_ref2}>
                                   <div className="apro_heading">
                                     <span>Block</span>
+                                    <AiOutlineClose  />
                                     <div className="cross_icn_wrap">
-                                      <img src={cross} alt="" onClick={notApprove2} />
+                                    
                                     </div>
                                   </div>
                                   <div className="apro_input">

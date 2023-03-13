@@ -10,6 +10,7 @@ import Filter from '../components/Filter';
 import cross from "../images/cross-23.svg";
 import eyepass from "../images/eye-21.svg";     
 import eyeclose from "../images/eye-close-3.svg";
+import {AiOutlineClose} from 'react-icons/ai' 
 
 export default function Profile() {
   const [new_ch_stt, new_ch_btn] = useState(true);
@@ -110,7 +111,19 @@ export default function Profile() {
   
  function sortit(){  
   return isSortedDesc ? sortDesc : sortAsc;
+  
  }
+
+ function closePop() {
+  new_ch_btn((new_ch_stt) => !new_ch_stt);
+}
+
+//sorting icon change
+const [rotation, setRotation] = useState(0);
+
+  const handleClick = () => {
+    setRotation(rotation + 180);}
+
 
   return (
     <>
@@ -134,6 +147,7 @@ export default function Profile() {
                     <div className="blur1 add" ref={for_outclick_ref} >
                       <div className="apro_heading">
                         <span>Channel Partner Creation</span>
+                        <AiOutlineClose onClick={closePop}/>
                         <div className="cross_icn_wrap" onClick={create_channel_partner}><img src={cross} alt="" />
                         </div>
                       </div>
@@ -150,7 +164,7 @@ export default function Profile() {
                               <div className="eypas" onClick={handleClickShowPassword}> <img src={value ? eyepass : eyeclose} /></div>
                             </div>
                           </div>
-
+    
                           <div className="apro_input add">
                             <label htmlFor="password">ENCRYPTION KEY</label>
                             <div className="input_btn_wrap">
@@ -185,12 +199,12 @@ export default function Profile() {
                   <table>
                     <thead>
                       <tr className="align_head">
-                        <th className="alignn"> <div>Sr.no</div>  <div><img src={sort} alt="" onClick={sortit()}/></div></th>
-                        <th className="align">CP ID <div><img src={sort} alt="" onClick={sortit()}/></div></th>
-                        <th className="align">Password <div><img src={sort} alt="" onClick={sortit()}/></div></th>
-                        <th className="align">Encryption key <div><img src={sort} alt="" onClick={sortit()}/></div></th>
-                        <th className="align">Agent ID <div><img src={sort} alt="" onClick={sortit()}/></div></th>
-                        <th className="align">Action <div><img src={sort} alt="" onClick={sortit()}/></div></th>
+                        <th className="alignn"> <div>Sr.no</div>  <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
+                        <th className="align">CP ID <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
+                        <th className="align">Password <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
+                        <th className="align">Encryption key <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
+                        <th className="align">Agent ID <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
+                        <th className="align">Action <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
                       </tr>
                     </thead>
                     <tbody>

@@ -13,7 +13,7 @@ export default function Table({ columns, data }) {
   } = tableInstance
  
   return (
-    <div style={{ maxHeight: '500px', overflow: 'auto' }}>
+    <div className="elea_table_wrap" style={{ maxHeight: '500px', overflow: 'auto' }}>
       <table {...getTableProps()} style={{ width: '100%' }}>
         <thead>
           {headerGroups.map(hG => (

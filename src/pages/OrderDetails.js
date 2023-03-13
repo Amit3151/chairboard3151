@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import cross from "../images/cross-23.svg";
 import upload from "../images/ic_outline-cloud-upload.svg";
 import download from "../images/download.svg";
+import {AiOutlineClose} from 'react-icons/ai'
 
 export default function Orderdetails() {
 
@@ -38,6 +39,16 @@ export default function Orderdetails() {
 
     let new_ch_box_class = new_ch_stt ? "approve_box" : "approve_box active";
 
+    const uploadd = useRef()
+    function uploadfile() {
+        console.log('click')
+        uploadd.current.click()
+    }
+
+    const closePop = () => {
+        new_ch_btn(!new_ch_stt)
+    }
+
     return (
         <>
             <div className="sidebar">
@@ -53,6 +64,7 @@ export default function Orderdetails() {
                             <div className="wallet_search">
                                 <div className="wallet_search_left">
                                     <h3>Order Details</h3>
+                                    
                                 </div>
                                 <div className="header_search">
                                     <span className='label_style'>
@@ -142,15 +154,22 @@ export default function Orderdetails() {
                                         <div className="blur1 add" ref={for_outclick_ref} >
                                             <div className="apro_heading">
                                                 <span>Upload File</span>
+                                                < AiOutlineClose onClick={closePop} />
                                                 <div className="cross_icn_wrap" onClick={create_channel_partner}><img src={cross} alt="" />
                                                 </div>
                                             </div>
                                             <div className="uploadBox">
-                                                <div className="browse_file od">
-                                                    <img src={upload} alt="" className="allow_size" />
+                                                
+                                                <div className="browse_file od" >
+                                                
+                                                    <img src={upload} alt="" className="allow_size" onClick={uploadfile}/>
+                                                    <input type='file' hidden ref={uploadd} />
+                                                    <Link to='/CheckDetails'>
                                                     <span>Browse File</span>
-                                                    <span>Choose Images</span>
+                                                    
+                                                    </Link>
                                                 </div>
+                                                
                                                 <div className="sample_file od">
                                                     <img src={download} alt="" className="allow_size" />
                                                     <span>Download Sample File</span>

@@ -23,3 +23,36 @@
     box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
     transition: 0.2s;
 }
+
+.idimages{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.idimagesheading{
+    display: flex;
+    justify-content: center;
+}
+
+.enterAmount{
+    position: relative;
+    border-radius: 25px;
+    background-color: #e9ecef;
+    border: 1px #c4c4c4 solid;
+    box-shadow: -2px -2px 6px 0px rgba(255, 255, 255, 1) inset, 4px 4px 6px 0px rgba(215, 228, 240, 0.8)inset;
+    width: 160px;
+    height: 45px;
+    font-size: 15px;
+    text-indent: 0px;
+    outline: none;
+    /* background-image: url(https://cdn-icons-png.flaticon.com/128/54/54481.png); */
+    background-repeat: no-repeat;
+    background-position: 200px;
+    background-size: 20px;
+    padding: 0 40px;
+}
+
+.idHeading .navigation_popup_slider {
+    width: 50%;
+    }

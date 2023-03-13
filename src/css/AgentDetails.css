@@ -5,7 +5,6 @@ body{
 
 .agent_details_page{
     width: 100%;
-    padding: 20px;
 }
 
 .adp_heading{
@@ -74,10 +73,141 @@ body{
     flex-wrap: wrap;
 }
 .phasefour {
+    width: 95%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .apro_input.add.adp.phasefour {
     width: 280px;
+}
+
+.browse_file_img{
+    width: 250px;
+}
+
+.browse_file.upload{
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    background-color: #e9ecef;
+    box-shadow: 6px 6px 12px rgb(212 224 235 / 80%), -6px -6px 12px #fff;
+    width: 97%;
+    align-items: center;
+    padding: 50px 0px;
+    margin-left: 8px;
+}
+
+.browse_file.upload.acb {
+    margin-top: 80px;
+    width: 300px;
+    height: 180px;
+    justify-content: center;
+}
+
+.browse_file_img.acb{
+    width: 35px;
+}
+
+.acb.chooseimg{
+    color: blue;
+}
+
+.browse_file.upload.PAN{
+    width: 300px;
+    height: 180px;
+    justify-content: center;
+}
+
+.icons{
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.apro_input.add.adp.addr{
+    width: 90%;
+}
+
+.threeCol{
+    display: flex;
+}
+
+input.inputfield{
+    width: 420px;
+}
+
+.odbtns.ads{
+    width: 91%;
+    margin-right: 200px;
+}
+
+/* Inline #20 | http://192.168.1.10:3000/AgentDetails */
+
+.fourcols {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  
+  
+  div.adp_input_list:nth-child(1) {
+    width: 60%;
+    }
+  
+  .apro_input.add.adp.addr {
+    width: 100%;
+  }
+  
+  
+  
+  .fourcols > div:nth-child(2) {
+    width: 40%;
+  }
+  
+s */
+  
+  div.adp_input_list:nth-child(3) {
+    width: 30%;
+  }
+  
+  
+  
+  .fourcols > div:nth-child(4) {
+    width: 30%;
+  }
+
+ 
+
+
+
+
+
+.fourcols > div:nth-child(2) > div:nth-child(1) > input:nth-child(2) {
+  width: 100%;
+}
+
+
+
+.fourcols > div:nth-child(2) > div:nth-child(1) {
+  width: 100%;
+}
+
+
+
+.odbtns.ads {
+    
+  width: 98%;
+}
+
+.iconss{
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.uploadedImg{
+  width: 250px;
 }

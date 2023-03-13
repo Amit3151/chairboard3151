@@ -70,7 +70,7 @@ export default function ManualRequest() {
     },
     {
       Header: 'Action',
-      Cell: () => <div style={{ cursor: 'pointer' }}>
+      Cell: () => <div className='eye_icon_img_wrap_mr' style={{ cursor: 'pointer' }}>
         <Link to= '/ManualReqDetails'>
         <TableShowIcon/>
         </Link>
@@ -113,7 +113,7 @@ export default function ManualRequest() {
             </div>
           </div>
         </div>
-        <div className="dashboard_table_container" style={{ margin: '0 80px' }}>
+        <div className="dashboard_table_container master" style={{ margin: '0 80px' }}>
           <Table columns={manualColumns} data={mockData} />
         </div>
       </div>

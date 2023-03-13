@@ -4,7 +4,9 @@ import Sidebar from '../components/Sidebar'
 import '../css/AgentDetails.css'
 import '../css/Filter.css'
 import '../css/Channel.css'
+import '../css/Master.css'
 import id_bluespace from '../images/id_bluespace.png'
+import download from "../images/download.svg";
 import { BsTrash } from 'react-icons/bs'
 import { AiOutlineEye } from 'react-icons/ai'
 import { HiDownload } from 'react-icons/hi'
@@ -13,7 +15,8 @@ import { AiOutlineCloudUpload } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
 
-const AgentDetails = () => {
+const MasterDetails = () => {
+
 
     const uploadd = useRef()
     function uploadfile() {
@@ -26,7 +29,6 @@ const AgentDetails = () => {
         console.log('click')
         uploadd2.current.click()
     }
-
 
     //display uploaded img
    const [imageURL, setImageURL] = useState('');
@@ -51,7 +53,6 @@ const AgentDetails = () => {
      };
    };
 
-
     return (
         <>
             <div className="sidebar">
@@ -65,7 +66,7 @@ const AgentDetails = () => {
 
                 <div className='agent_details_page'>
                     <div className='adp_heading'>
-                        <h1>Agent Details</h1>
+                        <h1>Profile Details</h1>
                         <hr className='hr'></hr>
                     </div>
 
@@ -81,8 +82,8 @@ const AgentDetails = () => {
                         </div>
 
                         <div className="apro_input add adp">
-                            <label htmlFor="">Email</label>
-                            <input type="email" placeholder="Enter Email" />
+                            <label  for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Enter Email" />
                         </div>
 
                         <div className="apro_input add adp">
@@ -90,32 +91,7 @@ const AgentDetails = () => {
                             <input type="number" placeholder="Enter Mobile" />
                         </div>
 
-                        <div className="apro_input add  adp">
-                            <label htmlFor="">Alternate Mobile</label>
-                            <input type="number" placeholder="Enter Alternate Mobile" />
-                        </div>
-
-                        <div className="apro_input add  adp">
-                            <label htmlFor="">Relative Name</label>
-                            <input type="text" placeholder="Enter Relative Name" />
-                        </div>
-
-                        <div className="apro_input add  adp">
-                            <label htmlFor="">Relative Mobile</label>
-                            <input type="number" placeholder="Enter Relative Mobile" />
-                        </div>
-
-                        <div className="filter_search_desc_second adp">
-                            <div className="label_box adp">
-                                <label htmlFor="">Add:</label>
-                                <select className="lable_box_items">
-                                    <option value="">Father</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                            </div>
-                        </div>
+                        
                     </div>
 
                     {/* second phase */}
@@ -158,16 +134,29 @@ const AgentDetails = () => {
                             <label htmlFor="">Vehicle class 7</label>
                             <input type="number" placeholder="Amount" />
                         </div>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 8</label>
+                            <input type="number" placeholder="Amount" />
+                        </div>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 9</label>
+                            <input type="number" placeholder="Amount" />
+                        </div>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 10</label>
+                            <input type="number" placeholder="Amount" />
+                        </div>
+                        <div className="apro_input add adp">
+                            <label htmlFor="">Vehicle class 11</label>
+                            <input type="number" placeholder="Amount" />
+                        </div>
 
                         <div className="apro_input add adp">
                             <label htmlFor="">Vehicle class 12</label>
                             <input type="number" placeholder="Amount" />
                         </div>
 
-                        <div className="apro_input add adp">
-                            <label htmlFor="">Vehicle class 17</label>
-                            <input type="number" placeholder="Amount" />
-                        </div>
+                        
                     </div>
 
                     {/* phase three */}
@@ -216,7 +205,6 @@ const AgentDetails = () => {
                         </div>
                     </div>
 
-                    {/* phase four */}
                     {/* phase four */}
                     <div className='adp_heading'>
                         <h1>Upload Document</h1>
@@ -329,10 +317,8 @@ const AgentDetails = () => {
                                 </div>
                             
                         </div>
-
-
                         <div className="odbtns ads">
-                            <Link to='/Agent'>
+                            <Link to='/Master'>
                                 <button id="cancel">Cancel</button>
                             </Link>
                             <button id='dispatched' >Update</button>
@@ -348,4 +334,4 @@ const AgentDetails = () => {
     )
 }
 
-export default AgentDetails;
+export default MasterDetails;

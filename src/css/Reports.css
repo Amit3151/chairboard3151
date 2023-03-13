@@ -1,25 +1,30 @@
-.repo_body_container{
+.repo_body_container {
     display: flex;
     justify-content: center;
     margin-top: 40px;
 }
-.repo_body{
+
+.repo_body {
     width: 92%;
 }
-.repo_search{
+
+.repo_search {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .repo_search_left h3 {
     font-size: 22px;
     font-weight: 400;
 }
+
 .repo_search_right {
     width: 32%;
     display: flex;
     justify-content: space-between;
 }
+
 .repo_search_right select {
     border-radius: 25px;
     background-color: #e9ecef;
@@ -37,7 +42,8 @@
     background-size: 25px;
     cursor: pointer;
 }
-.repo_search_right button{
+
+.repo_search_right button {
     border-radius: 25px;
     background: linear-gradient(97.29deg, #7879cd, #4244a0);
     width: 120px;
@@ -49,34 +55,40 @@
     box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
     transition: 0.4s;
 }
+
 .repo_search_right button:active {
     box-shadow: 5px 7px 21px #ffffff91;
     transform: scale(0.90);
 }
-.repo_main_box{
-    border-radius:25px;
-    background-color:#e9ecef;
+
+.repo_main_box {
+    border-radius: 25px;
+    background-color: #e9ecef;
     box-shadow: 6px 6px 12px rgb(212 224 235 / 80%), -6px -6px 12px #fff;
     margin-top: 15px
 }
+
 .repo_main_box_heading {
     height: 450px;
     overflow: scroll;
     border-collapse: collapse;
 }
-.repo_main_box_heading table{
+
+.repo_main_box_heading table {
     width: 100%;
     border-collapse: collapse;
     overflow: scroll;
     border-radius: 25px 25px 25px 25px;
-} 
-.repo_main_box_heading table thead{
+}
+
+.repo_main_box_heading table thead {
     background-color: #eaebfd;
     width: 91.6%;
     border-radius: 25px 25px 0px 0px;
 }
-.repo_main_box_heading table thead tr td{
-    padding: 30px 20px; 
+
+.repo_main_box_heading table thead tr td {
+    padding: 30px 20px;
     text-align: center;
     font-size: 15px;
     font-weight: 400;
@@ -84,28 +96,33 @@
     position: sticky;
     top: 0;
 }
-.repo_main_box_heading table thead{
-    background-color:#eaebfd ;
+
+.repo_main_box_heading table thead {
+    background-color: #eaebfd;
 }
 
-tbody tr td{
+tbody tr td {
     text-align: center;
     padding: 15px 0;
     font-size: 12px;
 }
-tbody tr:nth-child(odd){
+
+tbody tr:nth-child(odd) {
     background-color: #f1f5f9;
 }
-tbody tr:nth-child(even){
+
+tbody tr:nth-child(even) {
     background-color: white;
 }
-.half_styling{
+
+.half_styling {
     background: #e9ebff;
     padding: 6px 17px;
     border-radius: 25px;
     color: #7384ff;
 }
-.eye_btn{
+
+.eye_btn {
     padding: 2px 12px;
     border: none;
     color: white;
@@ -120,10 +137,49 @@ tbody tr:nth-child(even){
     box-shadow: 4px 9px 7px rgb(177 177 177), -6px -6px 12px #fff;
     transition: 0.4s;
 }
+
 .eye_btn:active {
     box-shadow: 5px 7px 21px #ffffff91;
     transform: scale(0.90);
 }
-.eye_btn img{
+
+.eye_btn img {
     width: 20px;
+}
+
+.vehNumYellow {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+    align-items: center;
+}
+
+.yellow_num {
+    border: 2px solid;
+    background: #FFFA8C;
+    border-radius: 95px;
+    padding: 0 7px;
+}
+
+.vehNum {
+
+    display: flex;
+    margin-top: 6px;
+    justify-content: center;
+    align-items: center;
+}
+
+.red_num {
+    border: 2px solid;
+    border-radius: 95px;
+    padding: 0 7px;
+
+}
+
+.agent_name {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 5px;
+
 }

@@ -89,3 +89,18 @@ label.wallet_label {
   ._inside.fix_popup .fillter {
     position: initial;
   }
+
+ 
+
+.com_paid {
+    color: #1abcf4;
+  }
+  
+  .cost_return {
+    color: #f4911a;
+  }
+  
+
+  .wallet_body .pop_box_backdrop.active{
+    display: none;
+  }

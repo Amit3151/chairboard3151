@@ -1,5 +1,6 @@
 import React, { useReducer } from 'react'
 import { ReactComponent as Eye } from '../images/clarity_eye-hide-line.svg'
+import '../css/Login.css'
 
 export default function Login() {
   const [showPassword, toggleShowPassword] = useReducer((st) => !st, false)
@@ -23,13 +24,13 @@ export default function Login() {
         </span>
         <form onSubmit={e => e.preventDefault()}>
           <div className="flex column">
-            <label htmlFor="email">Email</label>
-            <input id="email" placeholder="mail@abc.com" />
+            <label htmlFor="email" >Email</label>
+            <input id="email" type='email' placeholder="mail@abc.com" />
           </div>
           <div className="flex column">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" >Password</label>
             <div style={{ position: 'relative', display: 'flex', width: '100%' }}>
-              <input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••••" />
+              <input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••••••" className='passwordlogin' />
               <Eye
                 onClick={toggleShowPassword}
                 style={{

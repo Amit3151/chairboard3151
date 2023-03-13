@@ -22,7 +22,7 @@ background: #F1F5F9;
 box-shadow: -6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8);
 border-radius: 25px;
 margin-top: 37px;
-padding: 40px 62px;
+padding: 40px 4px;
 }
 
 .flex {
@@ -51,7 +51,7 @@ width: 100%;
 margin-bottom: 40px;
 font-style: normal;
 font-weight: 600;
-font-size: 40px;
+font-size: 25px;
 line-height: 40px;
 /* identical to box height */
 color: #000000;
@@ -104,4 +104,39 @@ padding-top: 45px;
 
 .scroll-thumb-black::-webkit-scrollbar-thumb {
 background: #000; 
+}
+
+.main_body.dashboard_fix {
+  overflow: hidden;
+}
+
+/* Fixing  */
+
+
+.elea_table_wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: scroll;
+  border-radius: 25px 25px 25px 25px;
+}
+
+.elea_table_wrap table thead {
+  background-color: #eaebfd;
+  width: 91.6%;
+  border-radius: 25px 25px 0px 0px;
+}
+
+
+.elea_table_wrap table thead tr th {
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  background: #eaebfd;
+  position: sticky;
+  top: 0;
+}
+
+.elea_table_wrap {
+  scrollbar-width: none;
 }

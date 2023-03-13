@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState , Fra} from 'react';
 import '../css/Wallet.css';
 import Filter from '../components/Filter';
 import wallet from "../images/black_wallet.svg"
@@ -37,9 +37,9 @@ export default function Wallet() {
   //sorting :- same logic as Channel page , when the data will get added from the backend!!
   // these are just for example
   const [list, setList] = useState([
-    { Sr: 1, Transaction: "DFGDH23021301", UserDetail: "Aditya Jangid , 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "98765-264-231421 , Cost Return", Amount: "1" },
-    { Sr: 2, Transaction: "DFGDH23021301", UserDetail: "Aditya Jangid , 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "98765-264-231421 , Cost Return", Amount: "1" },
-    { Sr: 3, Transaction: "DFGDH23021301", UserDetail: "Aditya Jangid , 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "98765-264-231421 , Cost Return", Amount: "1" },
+    { Sr: 1, Transactionid: "DFGDH23021301", UserDetail: 'Aditya Jangid , </br> 854697845', MasterCode: "ASDF9876", Time: "18:23:55", Transaction: " <span class='cost_return'>Cost Return</span></br>98765-264-231421 ", Amount: "1" },
+    { Sr: 2, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid ,</br> 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "<span class='com_paid'>Commition Paid</span></br>98765-264-231421", Amount: "1" },
+    { Sr: 3, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid ,</br> 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "<span class='cost_return'>Cost Return</span></br>98765-264-231421", Amount: "1" },
   ]);
 
   const [sortAsc, setSortAsc] = useState(true);
@@ -188,13 +188,13 @@ export default function Wallet() {
                       {list.map((item, index) => (
                         <tr key={index}>
                           <td>{item.Sr}</td>
-                          <td>{item.Transaction}</td>
+                          <td >{item.Transactionid}</td>
                           {/* <td>{showPassword && selectedindex === index ? `${item.password}` : '**********'}</td>
                           <td>{showPassword && selectedindex === index ? `${item.Key}` : 'G1LI*************1020'}</td> */}
-                          <td>{item.UserDetail}</td>
+                          <td dangerouslySetInnerHTML={{__html: (item.UserDetail)}}></td>
                           <td>{item.MasterCode}</td>
                           <td>{item.Time}</td>
-                          <td>{item.Transaction}</td>
+                          <td dangerouslySetInnerHTML={{__html: (item.Transaction)}}></td>
                           <td>{item.Amount}</td>
                         </tr>
                       ))}

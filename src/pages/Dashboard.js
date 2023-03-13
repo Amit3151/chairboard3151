@@ -11,6 +11,8 @@ import { ReactComponent as ChevronDown } from '../images/ep_arrow-down.svg'
 import { ComposedChart, Line, CartesianGrid, ResponsiveContainer, YAxis, XAxis, Bar } from 'recharts'
 import Table from '../components/Table'
 
+
+//getting random init
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -149,6 +151,7 @@ export default function Dashboard() {
   const [chartTiming, setChartTiming] = useReducer((_, a) => a, 2)
   const [inventoryTiming, setInventoryTiming] = useReducer((_, a) => a, 0)
   const [selectedAgent, setAgent] = useReducer((_, a) => a, 'All')
+  //try to add " : 'none' " after 'All'
 
   const dates = useMemo(() => ({
     lastFourDays: [
@@ -238,7 +241,7 @@ export default function Dashboard() {
       <div className="sidebar">
         <Sidebar/>
       </div>
-      <div className="main_body">
+      <div className="main_body dashboard_fix">
         <div className="req_header">
           <Header />
         </div>

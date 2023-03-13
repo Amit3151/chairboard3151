@@ -152,7 +152,7 @@ function Request() {
                             </span>
                           </div>
                         </td>
-                        <td>607469-00B-258445</td>
+                        <td className={action.accepted ? "color_green" : "color_red"}>607469-00B-258445</td>
                         <td>SADE3202</td>
                         <td>05/01/202310:23:55</td>
                         <td>06/01/202318:23:55</td>

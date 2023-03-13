@@ -59,11 +59,11 @@ span.align {
     border-radius: 25px;
     background-color: #e9ecef;
     box-shadow: 6px 6px 12px rgb(212 224 235 / 80%), -6px -6px 12px #fff;
-    display: flex;
+    display: none;
     gap: 50px;
     justify-content: center;
     padding: 120px 0;
-    display: none;
+   
 }
 .pop_box.active{
     display: flex;
@@ -92,3 +92,26 @@ span.align {
 .allow_size{
     width: 10%;
 }
+
+.invent_body_container .pop_box_backdrop {
+    top: -250px;
+  }
+
+
+  .upload_pop_up_box{
+    display: none;
+  }
+
+.upload_pop_up_box.active {
+    position: absolute;
+    width: 100vw;
+    z-index: 1;
+    right: 0;
+    height: 100vh;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+  }
+  

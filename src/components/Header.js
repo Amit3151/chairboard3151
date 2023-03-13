@@ -5,7 +5,7 @@ import user from "../images/user.png";
 import gear from "../images/gear.png";
 import chat from "../images/chat.png";
 import customer from "../images/customer-support.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
 
@@ -57,9 +57,11 @@ export default function Header() {
               <img src={customer} alt="" />
               Support</NavLink>
             <hr />
-            <NavLink to="" className="style_txt_img">
+            <Link to = '/Login'>
+            <NavLink to="/Login" className="style_txt_img">
               <img src={back} alt="" />
               Logout</NavLink>
+              </Link>
           </div>
         </div>
       </div>

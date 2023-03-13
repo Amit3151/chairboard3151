@@ -3,7 +3,10 @@ import "../css/Filter.css";
 import setting from "../images/mi_filter.svg";
 import customise from "../images/ep_setting.svg";
 import download from "../images/download.svg";
+import cross from "../images/cross-23.svg";
 export default function Filter() {
+
+
 
     // ===================Pop-up=====================================
 
@@ -11,6 +14,7 @@ export default function Filter() {
     function show_fill() {
         setshow((show) => !show);
     }
+
     const fillter = show ? "fillter" : "fillter active";
     const pop_up = show ? "pop_up" : "pop_up active";
 
@@ -19,6 +23,10 @@ export default function Filter() {
     //download button
     const [hide, sethide] = useState(true);
     function show_pop() {
+        sethide(!hide)
+    }
+
+    const closePop = () => {
         sethide(!hide)
     }
     const upload_img = hide ? "upload_img" : "upload_img active";
@@ -58,6 +66,15 @@ export default function Filter() {
     const [demo2, setDemo2] = useState('');
     const [acknowledgment, setAcknowledgment] = useState('');
 
+    //reset everything
+    const ResetEverything = () => {
+        setMasterCode('')
+        setStatus('')
+        setDemo1('')
+        setDemo2('')
+        setAcknowledgment('')
+    }
+
 
     // ====================Setting Options===============================
     const [showMenu, setShowMenu] = useState(false);
@@ -81,6 +98,12 @@ export default function Filter() {
         };
     }, [menuRef]);
 
+    const uploadd = useRef()
+    function uploadfile() {
+        console.log('click')
+        uploadd.current.click()
+    }
+
     return (
         <>
             <form>
@@ -97,22 +120,39 @@ export default function Filter() {
                     </div>)}
 
                     <div >
-                        <div className={upload_img} >
+                        
+                        <div className={upload_img}>
+
                             <img src={download} alt="" type='file' onClick={show_pop} />
                         </div>
                         <div className={pop_box_backdrop}>
-                        </div>
                         <div className={pop_box} ref={pop}>
-                            <div className="browse_file">
+
+                            
+                            <div className="cross_icn_wrap" onClick={closePop} ><img src={cross} alt="" />
+                            </div>
+                            {/* <div className="browse_file" onClick={uploadfile}>
                                 <img src={download} alt="" className="allow_size" />
-                                <span>browse_file</span>
+                                <input type='file' hidden ref={uploadd} />
+                                <span>Download CSV File</span>
+                                <span></span>
+                            </div> */}
+                            <div className="browse_file" >
+                                <img src={download} alt="" className="allow_size" />
+                                <input type='file' hidden ref={uploadd} />
+                                <span>Download CSV File</span>
                                 <span></span>
                             </div>
                             <div className="sample_file">
                                 <img src={download} alt="" className="allow_size" />
-                                <span>Download Sample File</span>
+                                <span>Download PDF File</span>
                             </div>
+
+
                         </div>
+                        </div>
+
+
                     </div>
 
                     <div className="input_file">
@@ -188,11 +228,9 @@ export default function Filter() {
                         </div>
 
                         <div className="filter_button">
-                            <button type='reset' onClick={() => {
-                                console.log('reset clicked')
-                            }}>Reset</button>
+                            <button type='reset' onClick={() => { ResetEverything() }}>Reset</button>
 
-                            <button onClick={() => {
+                            <button type='submit' onClick={() => {
                                 console.log('clicked')
                                 setshow(!show)
                             }}>Apply</button>

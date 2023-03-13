@@ -13,6 +13,8 @@ import cross from "../images/cross-23.svg";
 import warning from "../images/mdi_alert-circle-outline.svg";
 import '../css/Master.css'
 import '../css/Request.css'
+import {GrEdit} from 'react-icons/gr'
+import { Link } from 'react-router-dom';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -82,34 +84,10 @@ export default function Master() {
         <div className="flex row center">
 
           <button className={styling_aprove2} onClick={approve2}>Block</button>
-          <div className={approve_box2} >
-            <div className="approve_inside">
-              <div className="blur1" ref={aprove_ref2}>
-                <div className="apro_heading">
-                  <span>Block</span>
-                  <div className="cross_icn_wrap">
-                    <img src={cross} alt="" onClick={notApprove2} />
-                  </div>
-                </div>
-                <div className="apro_input">
-                  <label htmlFor="">Enter Master Code</label>
-                  <input type="text" ref={inputRef2} placeholder="Enter Master Code" />
-                  {error2 && <span><img src={warning} alt="" /> {'Invaild Master Code'}</span>}
-                </div>
-                <div className="apro_button">
-                  <button onClick={() => {
-                    let pattern = /\d/g;
-                    let result2 = pattern.test(inputRef2.current.value2);
-                    if (!result2) {
-                      setError2(true);
-                    } else {
-                      setError2(false);
-                    }
-                  }}>Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <Link to='/MasterDetails'>
+          <GrEdit/>
+          </Link>
 
         </div>
       ),
@@ -139,6 +117,8 @@ export default function Master() {
     }
   }
 
+  
+
   return (
     <>
       <CreateMasterModal isOpen={createModalOpen} onClickOutside={toggleModal} />
@@ -154,7 +134,7 @@ export default function Master() {
             <div className="search_bar">
               <div className="search_main">
                 <div className="search_main_left">
-                  <h3>Master</h3>
+                  <h3 style={{ fontSize: '22px', fontWeight: 600 }}>Master</h3>
                 </div>
                 <div className="header_search">
                   <span>
@@ -176,7 +156,7 @@ export default function Master() {
             </div>
           </div>
         </div>
-        <div className="dashboard_table_container" style={{ margin: '0 80px' }}>
+        <div className="dashboard_table_container master" style={{ margin: '0 80px' }}>
           <Table columns={masterColumns} data={mockData} />
         </div>
       </div>

@@ -20,7 +20,7 @@
     margin-left: 20px;
 }
 
-.fullButton{
+.fullButton {
     background: #26a100;
     padding: 10px 17px;
     border-radius: 25px;
@@ -31,7 +31,7 @@
     margin-left: 20px;
 }
 
-.buttons{
+.buttons {
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
@@ -39,27 +39,27 @@
     padding-right: 40px;
 }
 
-.tablee{
+.tablee {
     border: 2px solid black;
     margin-bottom: 30px;
 }
 
-.thh{
+.thh {
     border: 2px solid black;
 }
 
-.tdd{
+.tdd {
     border: 2px solid black;
     text-align: center;
 }
 
-.tableHeading{
+.tableHeading {
     font-weight: 500;
     font-size: large
 }
 
 .repo_main_box_heading.rvs {
-    height: 450px;
+    height: fit-content;
     overflow: scroll;
     border-collapse: collapse;
     width: 95%;
@@ -70,23 +70,178 @@
     margin: 2%;
 }
 
-.idHeading{
+.idHeading {
     font-size: 10px;
     margin: 5px;
 }
 
-.idPhoto{
+.idPhoto {
     width: 300px;
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.idPhotos{
+.idPhotos {
     display: flex;
     flex-direction: row;
     text-align: center
 }
 
-.id_head{
+.id_head {
     margin: 25px;
 }
+
+.NonServiceable {
+    color: #ff0000;
+}
+
+.Serviceable {
+    color: green;
+}
+
+.green {
+    color: green;
+}
+
+.blue {
+    color: blue;
+}
+
+.idPhotos {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ImgHeading {
+    display: flex;
+    justify-content: center;
+    gap: 280px;
+}
+
+
+
+.document_preview_wrap_title {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000000;
+}
+
+.document_preview_wrap {
+    padding: 25px 0px;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+}
+
+.document_preview_wrap_title {
+    position: relative;
+}
+
+.document_preview_slide img {
+    width: 90%;
+}
+
+.document_preview_slide {
+    padding: 1px 10px;
+    display: flex;
+}
+
+
+.document_preview_slider_wrap {
+    width: 100%;
+}
+
+.main_body.rv {
+    width: 95%;
+    min-height: 100vh;
+    position: relative;
+}
+
+
+/* Slider  Popup */
+.popup_box_slider_main {
+    justify-content: center;
+    align-items: center;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    backdrop-filter: blur(3px);
+
+}
+
+.popup_box_slider_main.opened {
+    display: flex;
+}
+
+.popup_box_slider {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    padding: 57px 0px;
+    background: #F1F5F9;
+    border-radius: 25px;
+    box-shadow: -6px -6px 4px #FFFFFF, 6px 6px 12px rgba(212, 224, 229, 0.8);
+    gap: 20px;
+    position: relative;
+}
+
+.main_display_popup_slider {
+    width: 60%;
+}
+
+
+.navigation_popup_slider {
+    width: 70%;
+}
+
+
+.document_preview_slide {
+    justify-content: center;
+}
+
+.open_popub_slider {
+    position: absolute;
+    width: 100%;
+}
+
+
+.cross_icon_slider {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.cross_icon_slider img {
+    width: 25px;
+    top: 0;
+}
+
+.download_icon_slider {
+    position: absolute;
+    top: 75px;
+    right: 225px;
+    z-index: 2;
+}
+
+.image_name {
+    text-align: center;
+    padding-bottom: 25px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.slick-prev::before {
+    color: black;
+  }
+  
+  .slick-next::before {
+    color: black;
+  }
+  

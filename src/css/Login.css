@@ -1,0 +1,8 @@
+.passwordlogin{
+    border: none;
+    background: #F1F5F9;
+    padding: 20px;
+    box-shadow: inset 4px 4px 6px rgba(215, 228, 240, 0.8), inset -4px -4px 6px #FFFFFF;
+    border-radius: 25px;
+    width: 100%;
+}

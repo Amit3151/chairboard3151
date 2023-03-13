@@ -6,6 +6,8 @@ import Sidebar from '../components/Sidebar';
 import Filter from "../components/Filter";
 import eye from "../images/eye.png";
 import { Link } from "react-router-dom";
+import {TiTickOutline} from 'react-icons/ti'
+import {RxCrossCircled} from 'react-icons/rx'
 
 export default function Reports() {
   return (
@@ -19,11 +21,11 @@ export default function Reports() {
         </div>
         <div className="repo_body_container">
           <div className="repo_body">
-          <div className="search_bar">
-            <Search title="Reports"/>
-           </div>
+            <div className="search_bar">
+              <Search title="Reports" />
+            </div>
             <div className="filter_section">
-              <Filter/>
+              <Filter />
             </div>
             <div className="repo_main_cont">
               <div className="repo_main_box">
@@ -33,35 +35,44 @@ export default function Reports() {
                       <tr>
                         <td>Sr.no</td>
                         <td>Agent name</td>
-                        <td>Agent Mobile no.</td>
                         <td>Master code</td>
                         <td>Issue date</td>
-                        <td>Tag serial no.</td>
+                        <td>Vehicle Number</td>
+                        <td>Cust mob no.</td>
+                        <td>insurance exp date</td>
+                        <td>Tag serial no</td>
                         <td>Commission status</td>
                         <td>Registration type</td>
                         <td>Action</td>
                       </tr>
                     </thead>
-                    
+
                     <tbody>
-                      
+
                       <tr>
                         <td>1</td>
-                        <td>Vishal Jadhav</td>
-                        <td>9854721210</td>
+                        <td className="agent_name"><span className="span_a">A</span>Vishal Jadhav<br />9854721210</td>
                         <td>ASDF9876</td>
-                        <td>06/01/202318:23:55</td>
-                        <td>98765-264-231421</td>
+                        <td>06/01/2023<br />18:23:55</td>
+                        <td className="vehNumYellow">
+                          <div className="yellow_num">RJ 45 CM 1234</div>
+                          <div>
+                            <TiTickOutline color="green"/>
+                          </div>
+                        </td>
+                        <td>9987654321</td>
+                        <td>06/01/2023</td>
+                        <td>987654-321-123456</td>
                         <td>
                           <span className="accepted_styling">Full</span>
                         </td>
                         <td>Issued</td>
                         <td>
                           <span className="btn_sty_tick">
-                          <Link to= '/ReportsViews'>
-                            <button className="eye_btn">
-                              <img src={eye} alt="" />
-                            </button>
+                            <Link to='/ReportsViews'>
+                              <button className="eye_btn">
+                                <img src={eye} alt="" />
+                              </button>
                             </Link>
                           </span>
                         </td>
@@ -69,11 +80,18 @@ export default function Reports() {
 
                       <tr>
                         <td>2</td>
-                        <td>Vishal Jadhav</td>
-                        <td>9854721210</td>
+                        <td className="agent_name"><span className="span_a">A</span>Vishal Jadhav <br />9854721210</td>
                         <td>ASDF9876</td>
-                        <td>06/01/202318:23:55</td>
-                        <td>98765-264-231421</td>
+                        <td>06/01/2023<br />18:23:55</td>
+                        <td className="vehNum">
+                          <div className="red_num" >RJ 45 CM 1234</div>
+                          <div>
+                            <RxCrossCircled color="red"/>
+                          </div>
+                        </td>
+                        <td>9987654321</td>
+                        <td>06/01/2023</td>
+                        <td>987654-321-123456</td>
                         <td>
                           <span className="half_styling">Half</span>
                         </td>
@@ -81,10 +99,10 @@ export default function Reports() {
                         <td>
                           {" "}
                           <span className="btn_sty_tick">
-                          <Link to= '/ReportsViews'>
-                            <button className="eye_btn">
-                              <img src={eye} alt="" />
-                            </button>
+                            <Link to='/ReportsViews'>
+                              <button className="eye_btn">
+                                <img src={eye} alt="" />
+                              </button>
                             </Link>
                           </span>
                         </td>
@@ -92,11 +110,18 @@ export default function Reports() {
 
                       <tr>
                         <td>3</td>
-                        <td>Vishal Jadhav</td>
-                        <td>9854721210</td>
+                        <td className="agent_name"><span className="span_a">A</span>Vishal Jadhav <br />9854721210</td>
                         <td>ASDF9876</td>
-                        <td>06/01/202318:23:55</td>
-                        <td>98765-264-231421</td>
+                        <td>06/01/2023<br />18:23:55</td>
+                        <td className="vehNumYellow">
+                          <div className="yellow_num">RJ 45 CM 1234</div>
+                          <div>
+                            <TiTickOutline color="green"/>
+                          </div>
+                        </td>
+                        <td>9987654321</td>
+                        <td>06/01/2023</td>
+                        <td>987654-321-123456</td>
                         <td>
                           <span className="pending_styling">Pending</span>
                         </td>
@@ -104,10 +129,10 @@ export default function Reports() {
                         <td>
                           {" "}
                           <span className="btn_sty_tick">
-                          <Link to= '/ReportsViews'>
-                            <button className="eye_btn">
-                              <img src={eye} alt="" />
-                            </button>
+                            <Link to='/ReportsViews'>
+                              <button className="eye_btn">
+                                <img src={eye} alt="" />
+                              </button>
                             </Link>
                           </span>
                         </td>

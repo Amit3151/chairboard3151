@@ -33,16 +33,16 @@
 }
 
 .item_status1 span{
-    background: #80ff5d89;
+    background: #E1F1EA;
     border-radius: 25px;
-    color: #000000; 
+    color: #06921D;
     padding: 6px 17px;
 }
 
 .item_status2 span{
-    background: #ff000096;
+    background: #E7F4FF;
     border-radius: 25px;
-    color: #ffffff; 
+    color: #1A8CF4;
     padding: 6px 17px;
 }
 
@@ -60,7 +60,7 @@
 
 #cancel{
     border-radius: 25px;
-    background: linear-gradient(97.29deg, #7879cd, #4244a0);
+    background: red;
     width: 180px;
     height: 45px;
     color: white;
@@ -74,7 +74,7 @@
 
 #dispatched{
     border-radius: 25px;
-    background: #ff0000;
+    background: linear-gradient(97.29deg, #7879cd, #4244a0);
     width: 180px;
     height: 45px;
     color: white;
@@ -84,6 +84,7 @@
     box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
     transition: 0.2s;
 }
+
 
 .uploadBox {
     display: flex;
@@ -113,5 +114,37 @@
     align-items: center;
     padding: 50px 20px;
     cursor: pointer;
+}
+
+.un-list{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 25px;
+    background: #4244a020;
+    width: fit-content;
+    color: rgb(182, 183, 198);
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    /* box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff; */
+    transition: 0.2s;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+}
+
+.un-li{
+    width: 100%;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 8px 20px;
+}
+
+.un-li:hover{
+    background-color: #4244a0;
+    color: white;
 }
 

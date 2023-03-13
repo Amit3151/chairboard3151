@@ -6,3 +6,26 @@
 .body_master{
     width: 100%;
 }
+
+
+
+
+.elea_table_wrap table tbody tr td div {
+  align-items: center;
+}
+.box_span .label {
+  padding: 7px 15px;
+  border-radius: 25px;
+}
+
+.eye_icon_img_wrap_mr a svg {
+  width: 25px;
+}
+
+.dashboard_table_container.master {
+  background: #F1F5F9;
+  box-shadow: -6px -6px 12px #ffffff, 6px 6px 12px rgb(212 224 235 / 80%);
+  border-radius: 25px;
+  margin-top: 37px;
+  padding: 0px 4px;
+}

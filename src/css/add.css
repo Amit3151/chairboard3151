@@ -1,4 +1,3 @@
-
 .blur1.add .input_add_wrap {
     display: flex;
     flex-wrap: wrap;
@@ -67,38 +66,42 @@ div.apro_input.add:nth-child(1) {
     border: none;
 }
 
-::placeholder{
+::placeholder {
     color: #202020;
 }
 
+
 .cross_icn_wrap {
     cursor: pointer;
-  }
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
 
- input.pass_input {
+input.pass_input {
     background-image: url(https://cdn-icons-png.flaticon.com/128/54/54481.png);
     background-repeat: no-repeat;
     background-position: 94%;
     background-size: 12px;
-   }
-   
-   
+}
+
+
 
 div.input_btn_wrap {
     display: flex;
     position: relative;
     width: 100%;
-  }
-  
-  .input_btn_wrap .eypas {
+}
+
+.input_btn_wrap .eypas {
     position: absolute;
     height: 100%;
     width: 20px;
     right: 22px;
     display: flex;
     cursor: pointer;
-  }
+}
 
-  .input_btn_wrap .eypas img {
+.input_btn_wrap .eypas img {
     width: 100%;
 }

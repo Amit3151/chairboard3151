@@ -16,6 +16,8 @@ import AgentDetails from './pages/AgentDetails';
 import Orderdetails from './pages/OrderDetails';
 import ReportsViews from './pages/ReportsViews';
 import ManualReqDetails from './pages/ManualReqDetails';
+import CheckDetails from './pages/CheckDetails';
+import MasterDetails from './pages/MasterDetails';
 
 function App() {
   return (
@@ -39,6 +41,8 @@ function App() {
           <Route exact path='/Orderdetails' element={<Orderdetails/>}/>
           <Route exact path='/ReportsViews' element={<ReportsViews/>} />
           <Route exact path='/ManualReqDetails' element={<ManualReqDetails/>}/>
+          <Route exact path='/CheckDetails' element={<CheckDetails/>}/>
+          <Route exact path='/MasterDetails' element={<MasterDetails/>}/>
         </Routes>
       </div>
     </BrowserRouter>
