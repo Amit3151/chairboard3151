@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "../css/Request.css";
 import Header from "../components/Header";
 import Search from "../components/Search";
@@ -15,25 +15,28 @@ function Request() {
     rejected: null
   })
 
+ // Filter Patch
 
+ const handleFilterSubmit = () => {
+}
   return (
     <>
-    {/* ==================Dummy data with accepted and rejected functionality working in last option=============== */}
+      {/* ==================Dummy data with accepted and rejected functionality working in last option=============== */}
 
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+
+      <Sidebar />
+
       <div className="main_body">
         <div className="req_header">
           <Header />
         </div>
         <div className="req_body_container">
           <div className="req_body">
-          <div className="search_bar">
-            <Search title="Request"/>
-           </div>
+            <div className="search_bar">
+              <Search title="Request" />
+            </div>
             <div className="fillter_section">
-                <Filter/>
+              <Filter  statuses={['Accepted', 'Rejected']} onSubmit={handleFilterSubmit} />
             </div>
             <div className="req_main_cont">
               <div className="req_main_box">
@@ -78,7 +81,7 @@ function Request() {
                         </th>
                         <th>
                           <span className="align">
-                            Payment reference ID<img src={sort} alt="" />
+                            Payment<img src={sort} alt="" />
                           </span>
                         </th>
                         <th>
@@ -90,7 +93,7 @@ function Request() {
                     </thead>
 
                     <tbody>
-                      
+
 
                       <tr>
                         <td>AER15SD60D</td>
@@ -108,8 +111,8 @@ function Request() {
                           <span className="color_green">607469-00B-258445</span>
                         </td>
                         <td>SADE3202</td>
-                        <td>05/01/202310:23:55</td>
-                        <td>06/01/202318:23:55</td>
+                        <td>05/01/2023<br />10:23:55</td>
+                        <td>06/01/2023<br />18:23:55</td>
                         <td>-</td>
                         <td>
                           <span className="accepted_styling">Accepted</span>
@@ -131,15 +134,15 @@ function Request() {
                           <span className="color_red">607469-00B-258445</span>
                         </td>
                         <td>SADE3202</td>
-                        <td>05/01/202310:23:55</td>
-                        <td>06/01/202318:23:55</td>
-                        <td>-</td>
+                        <td>05/01/2023<br />1023:55</td>
+                        <td>06/01/2023<br />1823:55</td>
+                        <td>RDSFC2565<br />456 </td>
                         <td>
                           <span className="Rejected_styling">Rejected</span>
                         </td>
                       </tr>
 
-                      
+
                       <tr>
                         <td>AER15SD60D</td>
                         <td>ASXDC321</td>
@@ -154,8 +157,8 @@ function Request() {
                         </td>
                         <td className={action.accepted ? "color_green" : "color_red"}>607469-00B-258445</td>
                         <td>SADE3202</td>
-                        <td>05/01/202310:23:55</td>
-                        <td>06/01/202318:23:55</td>
+                        <td>05/01/2023<br />10:23:55</td>
+                        <td>06/01/2023<br />18:23:55</td>
                         <td>-</td>
                         <td>
                           {action.accepted === null && action.rejected === null ?

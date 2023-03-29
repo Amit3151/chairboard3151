@@ -13,9 +13,8 @@ import cross from "../images/cross-23.svg";
 import upload from "../images/ic_outline-cloud-upload.svg";
 import download from "../images/download.svg";
 import id_bluespace from '../images/id_bluespace.png';
-
-
-
+import { Breadcrumb } from "rsuite";
+import BreadcrumbItem from "rsuite/esm/Breadcrumb/BreadcrumbItem";
 
 export default function ManualReqDetails() {
 
@@ -63,13 +62,21 @@ export default function ManualReqDetails() {
 
     return (
         <>
-            <div className="sidebar">
+            
                 <Sidebar />
-            </div>
+            
             <div className="main_body">
                 <div className="aget_header">
                     <Header />
                 </div>
+                
+                <div className='bread-crumbs'>
+                    <Breadcrumb>
+                        <Link to='/ManualRequest'> <BreadcrumbItem className='breadcolor'> Manual Request </BreadcrumbItem></Link>
+                        <Link to='/ManualReqDetails'> <BreadcrumbItem className='breadcolor'>Manual Request Details</BreadcrumbItem></Link>
+                    </Breadcrumb>
+                </div>
+
                 <div className='channel_body_container'>
                     <div className="channel_body">
                         <div className="channel_search">
@@ -79,7 +86,7 @@ export default function ManualReqDetails() {
                                 </div>
                                 <div className="odbtns mrd">
 
-                                    <input className="enterAmount" placeholder="Enter Amount" />
+                                    <input className="enterAmount" placeholder="Enter Amount" type='number'/>
                                     <Link to='/ManualRequest'>
                                         <button id="mrdbtnone">Decline Request</button>
                                     </Link>

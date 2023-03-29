@@ -11,6 +11,8 @@ import cross from "../images/cross-23.svg";
 import upload from "../images/ic_outline-cloud-upload.svg";
 import download from "../images/download.svg";
 import {AiOutlineClose} from 'react-icons/ai'
+import { Breadcrumb } from "rsuite";
+import BreadcrumbItem from "rsuite/esm/Breadcrumb/BreadcrumbItem";
 
 export default function Orderdetails() {
 
@@ -49,15 +51,29 @@ export default function Orderdetails() {
         new_ch_btn(!new_ch_stt)
     }
 
+
+     // Filter Patch
+
+     const handleFilterSubmit = () => {
+    }
+
     return (
         <>
-            <div className="sidebar">
+            
                 <Sidebar />
-            </div>
+            
             <div className="main_body">
                 <div className="aget_header">
                     <Header />
                 </div>
+
+                <div className='bread-crumbs'>
+                    <Breadcrumb>
+                        <Link to='/Order'> <BreadcrumbItem className='breadcolor'> Order  </BreadcrumbItem></Link>
+                        <Link to='/Orderdetails'> <BreadcrumbItem className='breadcolor'>Order Details</BreadcrumbItem></Link>
+                    </Breadcrumb>
+                </div>
+
                 <div className='channel_body_container'>
                     <div className="channel_body">
                         <div className="channel_search">
@@ -82,7 +98,7 @@ export default function Orderdetails() {
 
                         </div>
                         <div className="filter_section">
-                            <Filter />
+                            <Filter statuses={['Placed', 'Dispached']} onSubmit={handleFilterSubmit} />
                         </div>
                         <div className="repo_main_cont">
                             <div className="repo_main_box">

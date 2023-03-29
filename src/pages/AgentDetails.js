@@ -6,11 +6,13 @@ import '../css/Filter.css'
 import '../css/Channel.css'
 import id_bluespace from '../images/id_bluespace.png'
 import { BsTrash } from 'react-icons/bs'
-import { AiOutlineEye } from 'react-icons/ai'
+import { AiOutlineEye, AiOutlineHome } from 'react-icons/ai'
 import { HiDownload } from 'react-icons/hi'
 import { BsPencil } from 'react-icons/bs'
 import { AiOutlineCloudUpload } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import { Breadcrumb } from 'rsuite'
+import BreadcrumbItem from 'rsuite/esm/Breadcrumb/BreadcrumbItem'
 
 
 const AgentDetails = () => {
@@ -54,13 +56,20 @@ const AgentDetails = () => {
 
     return (
         <>
-            <div className="sidebar">
+            
                 <Sidebar />
-            </div>
+            
 
             <div className="main_body">
                 <div className="aget_header">
                     <Header />
+                </div>
+
+                <div className='bread-crumbs'>
+                    <Breadcrumb>
+                        <Link to='/Agent'> <BreadcrumbItem className='breadcolor'> Agent  </BreadcrumbItem></Link>
+                        <Link to='/AgentDetails'> <BreadcrumbItem className='breadcolor'>Agent Details</BreadcrumbItem></Link>
+                    </Breadcrumb>
                 </div>
 
                 <div className='agent_details_page'>
@@ -108,8 +117,8 @@ const AgentDetails = () => {
                         <div className="filter_search_desc_second adp">
                             <div className="label_box adp">
                                 <label htmlFor="">Add:</label>
-                                <select className="lable_box_items">
-                                    <option value="">Father</option>
+                                <select className="lable_box_items selectable">
+                                    <option value="" >Father</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -130,7 +139,7 @@ const AgentDetails = () => {
                         <div className="filter_search_desc_second">
                             <div className="label_box adp2">
                                 <label htmlFor="">Bank:</label>
-                                <select className="lable_box_items">
+                                <select className="lable_box_items selectable">
                                     <option value="">Select Bank</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
@@ -216,7 +225,7 @@ const AgentDetails = () => {
                         </div>
                     </div>
 
-                    {/* phase four */}
+                    
                     {/* phase four */}
                     <div className='adp_heading'>
                         <h1>Upload Document</h1>
@@ -274,21 +283,28 @@ const AgentDetails = () => {
 
                         <div className='uplaod'>
                             <div className="apro_input add adp phasefour">
-                                <label htmlFor="">Aadhaar number</label>
-                                <input type="number" placeholder="30301245464561656" />
+                                <label htmlFor="">Toll</label>
+                                <select className="lable_box_items selectable1">
+                                    <option value="">Select toll pla..</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
                             </div>
+                            
 
                             <div className='container'>
                                 <div className="browse_file upload">
                                     <div className='icons'>
                                         <div>1. GST card front</div>
-                                        <div>
+                                        <div className='iconss'>
                                             <AiOutlineEye />
                                             <HiDownload />
                                             <BsPencil />
                                             <BsTrash />
                                         </div>
                                     </div>
+                                    {/* <br /> */}
                                     <img src={id_bluespace} alt='' className='browse_file_img' />
                                 </div>
                             </div>
@@ -298,7 +314,7 @@ const AgentDetails = () => {
                     {/* phase five */}
                     <div className='agent_details_page'>
                         <div className='adp_heading'>
-                            <h1>Agent Details</h1>
+                            <h1>Address Details</h1>
                             <hr className='hr'></hr>
                         </div>
                         <div className='fourcols'>

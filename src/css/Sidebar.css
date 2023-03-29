@@ -1,16 +1,18 @@
-/* ==============================Menu Bar=================== */
-.sidebar{
-    min-width: 5%;
+/* =========================Menu Bar=================== */
+.sidebar {
+    min-width: 4%;
     z-index: 1;
 }
+
 .menu {
     width: 100%;
     height: 100%;
-    padding-right: 7px;
+    padding-right: 10px;
     background: hwb(240deg 2% 74%);
     overflow: hidden;
 }
-.menu_box{
+
+.menu_box {
     position: absolute;
     width: 3%;
     height: 40px;
@@ -20,10 +22,11 @@
     align-items: center;
     padding-right: 4px;
     z-index: 2;
-    left: 6.3%;
+    left: 4.3%;
     top: 20px;
 }
-.menu_btn{
+
+.menu_btn {
     width: 75%;
     height: 34px;
     display: flex;
@@ -40,75 +43,117 @@
     gap: 15px;
     text-decoration: none;
     flex-direction: column;
-    padding: 20px 0px;
+    padding: 20px 15px;
     margin-top: 0px;
+    background: hwb(240deg 2% 74%);
+    height: 100vh;
 }
-.nav_link{
+
+.nav_link {
     display: none;
 }
+
 li.styling {
     display: flex;
     gap: 20px;
     align-items: center;
 }
+
 .sidebarnavchild {
     width: 100%;
-    padding: 10px 20px;
-  }
-.styling img{
+    padding: 10px 7px;
+}
+
+.styling img {
     width: 25px;
     height: 22px;
 }
-.menu_btn span{
+
+.menu_btn span {
     width: 21px;
-    height:3px;
+    height: 3px;
     background: white;
     display: inline-block;
     border-radius: 5px;
 }
+
 .menu.active .header_opt {
     left: 0;
 }
-.menu.active .nav_link{
+
+.menu.active .nav_link {
     display: flex;
     animation: menubox 1s;
 }
 
-.menu.deactive{
+.menu.deactive {
     animation: remenubox 1s;
 }
 
 .menu_btn.cross span {
     position: absolute;
 }
+
 .menu_btn.cross :nth-child(1) {
-    animation: rotate1 1s ;
+    animation: rotate1 1s;
     transform: rotate(45deg);
 }
+
 .menu_btn.cross :nth-child(2) {
     display: none;
 }
+
 .menu_btn.cross :nth-child(3) {
-    animation: rotate2 1s ;
+    animation: rotate2 1s;
     transform: rotate(-45deg);
 }
-.menu_box.active{
-    left: 12.3%;
+
+.menu_box.active {
+    left: 13.3%;
 }
-.nav_link.active{
+
+.nav_link.active {
     background-color: white;
 }
-a.sidebarnavchild{
-    margin-left: 8px;
+
+a.sidebarnavchild {
     border-radius: 20px 0 0 20px;
 }
+
 .sidenavactive {
     background: rgb(150 151 255)
-   
 }
+
 a.sidebarnavchild:hover {
     background: rgb(68, 69, 151, 1);
 }
+
 .nav_link {
     color: white;
 }
+
+.header_opt {
+    position: fixed;
+    padding-right: 1px;
+}
+
+.sidebar.active {
+    width: 14%;
+}
+
+.sidebar {
+    min-width: 4%;
+}
+
+.menu.active {
+    padding-right: 7px;
+}
+  
+  .sidebarnavchild {
+    padding: 10px 8px;
+  }
+  
+  .menu.active .sidebarnavchild {
+    padding: 10px 6px;
+  }
+  

@@ -6,7 +6,8 @@ import Header from "../components/Header";
 import Sidebar from '../components/Sidebar';
 import Figure from '../components/Figure'
 import AgentCell from '../components/Cells/AgentCell'
-import { ReactComponent as SortIcon } from '../images/uil_sort-amount-down.svg'
+import MasterCell from '../components/Cells/MasterCell'
+import MasterDetailsCell from '../components/Cells/MasterDetailsCell'
 import { ReactComponent as ChevronDown } from '../images/ep_arrow-down.svg'
 import { ComposedChart, Line, CartesianGrid, ResponsiveContainer, YAxis, XAxis, Bar } from 'recharts'
 import Table from '../components/Table'
@@ -45,12 +46,12 @@ const mockData = {
   agents: new Array(100).fill(0).map((_, i) => ({
     id: i,
     agent: {
-      name: `Vishal Jadhav ${i}`,
+      name: `Vishal Jadhav`,
       phone: '9876543210',
     },
     dayData: {
       [DateTime.now().toFormat('dd/MM/yyyy')]: getRandomInt(0, 10),
-      [DateTime.now().minus({ day: 1 }).toFormat('dd/MM/yyyy')]: getRandomInt(0, 20),
+      [DateTime.now().minus({ day: 1 }).toFormat('dd/MM/yyyy')]: getRandomInt(0, 20 ),
       [DateTime.now().minus({ day: 2 }).toFormat('dd/MM/yyyy')]: getRandomInt(0, 30),
       [DateTime.now().minus({ day: 3 }).toFormat('dd/MM/yyyy')]: getRandomInt(0, 40),
     },
@@ -72,7 +73,12 @@ const mockData = {
       [DateTime.now().minus({ year: 2 }).toFormat('dd/MM/yyyy')]: getRandomInt(0, 3000),
       [DateTime.now().minus({ year: 3 }).toFormat('dd/MM/yyyy')]: getRandomInt(0, 4000),
     },
-    masterCode: 'ICHP8797\n9876543210',
+    masterCode: 
+    {
+      masterCodevalue1: 'ICHP8797',
+      masterCodevalue2: '9876543210'
+    }
+    ,
     total: getRandomInt(0, 1000),
   })),
   inventory: new Array(100).fill(0).map((_, i) => ({
@@ -81,7 +87,10 @@ const mockData = {
       name: `Vishal Jadhav ${i}`,
       phone: '9876543210',
     },
-    masterDetails: 'ICHP8797\n9876543210',
+    masterDetails: {
+      code: `P8797`,
+      phone: `9876543210`
+    },
     availableInventory: getRandomInt(0, 200),
     usedColumn: getRandomInt(100, 200),
     avgDayActivation: getRandomInt(10, 30),
@@ -146,7 +155,6 @@ export default function Dashboard() {
   const [agentTimingPopoverOpen, toggleAgentTimingPopover] = useReducer(st => !st, false)
   const [chartPopoverOpen, toggleChartPopoverOpen] = useReducer(st => !st, false)
   const [inventoryPopoverOpen, toggleInventoryPopover] = useReducer(st => !st, false)
-
   const [agentTiming, setAgentTiming] = useReducer((_, a) => a, 0)
   const [chartTiming, setChartTiming] = useReducer((_, a) => a, 2)
   const [inventoryTiming, setInventoryTiming] = useReducer((_, a) => a, 0)
@@ -192,7 +200,8 @@ export default function Dashboard() {
     },
     {
       Header: 'Master Code',
-      accessor: 'masterCode'
+      accessor: 'masterCode',
+      Cell: MasterCell
     },
     ...(dates['lastFour' + ['Days', 'Weeks', 'Months', 'Years'][agentTiming]].map(day => ({
       Header: day,
@@ -212,7 +221,8 @@ export default function Dashboard() {
     },
     {
       Header: 'Master Details',
-      accessor: 'masterDetails'
+      accessor: 'masterDetails',
+      Cell: MasterDetailsCell
     },
     {
       Header: 'Available Inventory',
@@ -238,9 +248,9 @@ export default function Dashboard() {
 
   return (
     <>  
-      <div className="sidebar">
+      
         <Sidebar/>
-      </div>
+      
       <div className="main_body dashboard_fix">
         <div className="req_header">
           <Header />

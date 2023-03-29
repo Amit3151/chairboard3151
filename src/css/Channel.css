@@ -55,7 +55,21 @@
     transition: 0.2s;
 }
 
-.align_head{
-    height: 80px;
-    
-}
+
+/* Inline #25 | http://192.168.1.36:3000/Channel */
+
+.align_ch_head {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    align-items: center;
+    padding: 20px 0px;
+  }
+  
+  .align_ch_head div:nth-child(2) {
+    display: flex;
+  }
+  .lable_box_items.selectable{
+    background-position: 400px;
+
+  }

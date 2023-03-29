@@ -7,9 +7,9 @@ import "../css/Recharge.css";
 export default function Recharge() {
   return (
     <>
-      <div className="sidebar">
+      
         <Sidebar />
-      </div>
+      
       <div className="main_body">
         <div className="aget_header">
           <Header />

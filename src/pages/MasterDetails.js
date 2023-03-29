@@ -5,14 +5,22 @@ import '../css/AgentDetails.css'
 import '../css/Filter.css'
 import '../css/Channel.css'
 import '../css/Master.css'
+import '../css/Breadcrumbs.css'
 import id_bluespace from '../images/id_bluespace.png'
 import download from "../images/download.svg";
 import { BsTrash } from 'react-icons/bs'
 import { AiOutlineEye } from 'react-icons/ai'
 import { HiDownload } from 'react-icons/hi'
 import { BsPencil } from 'react-icons/bs'
+import { ImArrowRight2 } from 'react-icons/im'
 import { AiOutlineCloudUpload } from 'react-icons/ai'
+import { AiOutlineHome } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import BreadcrumbItem from 'rsuite/esm/Breadcrumb/BreadcrumbItem'
+import { Breadcrumb } from 'rsuite'
+
+
+
 
 
 const MasterDetails = () => {
@@ -31,37 +39,43 @@ const MasterDetails = () => {
     }
 
     //display uploaded img
-   const [imageURL, setImageURL] = useState('');
+    const [imageURL, setImageURL] = useState('');
 
-   const handleFileUpload = (event) => {
-     const file = event.target.files[0];
-     const reader = new FileReader();
-     reader.readAsDataURL(file);
-     reader.onloadend = () => {
-       setImageURL(reader.result);
-     };
-   };
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setImageURL(reader.result);
+        };
+    };
     //display uploaded img 2
-   const [imageURL2, setImageURL2] = useState('');
+    const [imageURL2, setImageURL2] = useState('');
 
-   const handleFileUpload2 = (event) => {
-     const file = event.target.files[0];
-     const reader = new FileReader();
-     reader.readAsDataURL(file);
-     reader.onloadend = () => {
-       setImageURL2(reader.result);
-     };
-   };
+    const handleFileUpload2 = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setImageURL2(reader.result);
+        };
+    };
 
     return (
         <>
-            <div className="sidebar">
-                <Sidebar />
-            </div>
+
+            <Sidebar />
+
 
             <div className="main_body">
                 <div className="aget_header">
                     <Header />
+                </div>
+                <div className='bread-crumbs'>
+                    <Breadcrumb>
+                        <Link to='/Master'> <BreadcrumbItem className='breadcolor'> Master  </BreadcrumbItem></Link>
+                        <Link to='/MasterDetails'> <BreadcrumbItem className='breadcolor'>Master Details</BreadcrumbItem></Link>
+                    </Breadcrumb>
                 </div>
 
                 <div className='agent_details_page'>
@@ -82,7 +96,7 @@ const MasterDetails = () => {
                         </div>
 
                         <div className="apro_input add adp">
-                            <label  for="email">Email</label>
+                            <label for="email">Email</label>
                             <input type="email" id="email" name="email" placeholder="Enter Email" />
                         </div>
 
@@ -91,7 +105,7 @@ const MasterDetails = () => {
                             <input type="number" placeholder="Enter Mobile" />
                         </div>
 
-                        
+
                     </div>
 
                     {/* second phase */}
@@ -156,7 +170,7 @@ const MasterDetails = () => {
                             <input type="number" placeholder="Amount" />
                         </div>
 
-                        
+
                     </div>
 
                     {/* phase three */}
@@ -224,7 +238,7 @@ const MasterDetails = () => {
                                     <div className='icons'>
                                         <div>1. Aadhaar card front</div>
                                         <div className='iconss'>
-                                            <AiOutlineEye />    
+                                            <AiOutlineEye />
                                             <HiDownload />
                                             <BsPencil />
                                             <BsTrash />
@@ -240,7 +254,7 @@ const MasterDetails = () => {
                                 <AiOutlineCloudUpload size={40} color='blue' />
                                 <span>Aadhaar card back</span>
                                 <input type='file' hidden ref={uploadd} onChange={handleFileUpload} />
-                                {imageURL && <img src={imageURL} alt="Image description" className = 'browse_file_img'/>}
+                                {imageURL && <img src={imageURL} alt="Image description" className='browse_file_img' />}
                                 <span className='acb chooseimg'>Choose image</span>
 
                             </div>
@@ -254,29 +268,36 @@ const MasterDetails = () => {
                             <div className="browse_file upload PAN" onClick={uploadfile2}>
                                 <AiOutlineCloudUpload size={40} color='blue' />
                                 <span>PAN card back</span>
-                                <input type='file' hidden ref={uploadd2} onChange={handleFileUpload2}/>
-                                {imageURL2 && <img src={imageURL2} alt="Image description" className = 'browse_file_img'/>}
+                                <input type='file' hidden ref={uploadd2} onChange={handleFileUpload2} />
+                                {imageURL2 && <img src={imageURL2} alt="Image description" className='browse_file_img' />}
                                 <span className='acb chooseimg'>Choose image</span>
                             </div>
                         </div>
 
                         <div className='uplaod'>
                             <div className="apro_input add adp phasefour">
-                                <label htmlFor="">Aadhaar number</label>
-                                <input type="number" placeholder="30301245464561656" />
+                                <label htmlFor="">Toll</label>
+                                <select className="lable_box_items selectable1">
+                                    <option value="">Select toll pla..</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
                             </div>
+
 
                             <div className='container'>
                                 <div className="browse_file upload">
                                     <div className='icons'>
                                         <div>1. GST card front</div>
-                                        <div>
+                                        <div className='iconss'>
                                             <AiOutlineEye />
                                             <HiDownload />
                                             <BsPencil />
                                             <BsTrash />
                                         </div>
                                     </div>
+                                    {/* <br /> */}
                                     <img src={id_bluespace} alt='' className='browse_file_img' />
                                 </div>
                             </div>
@@ -286,7 +307,7 @@ const MasterDetails = () => {
                     {/* phase five */}
                     <div className='agent_details_page'>
                         <div className='adp_heading'>
-                            <h1>Agent Details</h1>
+                            <h1>Address Details</h1>
                             <hr className='hr'></hr>
                         </div>
                         <div className='fourcols'>
@@ -296,27 +317,29 @@ const MasterDetails = () => {
                                     <input type="text" placeholder="Enter Address" />
                                 </div>
                             </div>
-                            
-                                <div className='adp_input_list'>
-                                    <div className="apro_input add adp">
-                                        <label htmlFor="">PIN code</label>
-                                        <input type="number" placeholder="Enter PIN" className='inputfield' />
-                                    </div>
+
+                            <div className='adp_input_list'>
+                                <div className="apro_input add adp">
+                                    <label htmlFor="">PIN code</label>
+                                    <input type="number" placeholder="Enter PIN" className='inputfield' />
                                 </div>
-                                <div className='adp_input_list'>
-                                    <div className="apro_input add adp">
-                                        <label htmlFor="">State</label>
-                                        <input type="text" placeholder="Enter State" className='inputfield' />
-                                    </div>
+                            </div>
+                            <div className='adp_input_list'>
+                                <div className="apro_input add adp">
+                                    <label htmlFor="">State</label>
+                                    <input type="text" placeholder="Enter State" className='inputfield' />
                                 </div>
-                                <div className='adp_input_list'>
-                                    <div className="apro_input add adp">
-                                        <label htmlFor="">District</label>
-                                        <input type="text" placeholder="Enter District" className='inputfield' />
-                                    </div>
+                            </div>
+                            <div className='adp_input_list'>
+                                <div className="apro_input add adp">
+                                    <label htmlFor="">District</label>
+                                    <input type="text" placeholder="Enter District" className='inputfield' />
                                 </div>
-                            
+                            </div>
+
                         </div>
+
+
                         <div className="odbtns ads">
                             <Link to='/Master'>
                                 <button id="cancel">Cancel</button>

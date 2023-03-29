@@ -52,7 +52,7 @@ export default function Profile() {
     setShow(!show)
   }
 
-  // Eye Butten Table Pass Show
+  // Eye Button Table Pass Show
 
   const [showPassword, setShowPassword] = useState(false)
   const [selectedindex, setselectedIndex] = useState(-1)
@@ -65,18 +65,6 @@ export default function Profile() {
   // Creating Dummy  Data For Channnel Partner Table
   const [text, setText] = useState("")
   const [result, setResult] = useState([])
-
-  // helping functions
-  // const inputTaken = (event) => {
-  //   setText(event.target.value)
-  // }
-  // const listOfItems = () => {
-  //   setResult((oldItems) => {
-  //     return [...oldItems, text]
-  //   })
-  //   setText("")
-  // }
-
   const [cpId, setCpId] = useState('');
   const [password, setPassword] = useState('');
   const [encryptionKey, setEncryptionKey] = useState('');
@@ -99,19 +87,16 @@ export default function Profile() {
     const sortedList = [...tableData].sort((a, b) => b.id - a.id);
     setTableData(sortedList);
   setIsSortedDesc(!isSortedDesc) 
-
   };
 
   const sortAsc = () => {
     const sortedList = [...tableData].sort((a, b) => a.id - b.id);
     setTableData(sortedList);
   setIsSortedDesc(!isSortedDesc) 
-
   }; 
   
  function sortit(){  
   return isSortedDesc ? sortDesc : sortAsc;
-  
  }
 
  function closePop() {
@@ -123,13 +108,16 @@ const [rotation, setRotation] = useState(0);
 
   const handleClick = () => {
     setRotation(rotation + 180);}
+  
 
+    // Filter Patch
+    const handleFilterSubmit = () => {
+    }
 
   return (
     <>
-      <div className="sidebar">
         <Sidebar />
-      </div>
+      
       <div className="main_body">
         <div className="aget_header">
           <Header />
@@ -168,10 +156,7 @@ const [rotation, setRotation] = useState(0);
                           <div className="apro_input add">
                             <label htmlFor="password">ENCRYPTION KEY</label>
                             <div className="input_btn_wrap">
-                              {/* <input
-                                type={values ? 'password' : 'text'}
-                                placeholder="ENCRYPTION KEY"
-                              /> */}
+                              
                               <input type={values ? 'password' : 'text'} value={encryptionKey} onChange={(e) => setEncryptionKey(e.target.value)} placeholder="Encryption Key" />
                               <div className="eypas" onClick={handleClickShowEncryption}> <img src={values ? eyepass : eyeclose} /></div>
                             </div>
@@ -191,7 +176,7 @@ const [rotation, setRotation] = useState(0);
               </div>
             </div>
             <div className="filter_section">
-              <Filter />
+              <Filter statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit}/>
             </div>
             <div className="repo_main_cont">
               <div className="repo_main_box">
@@ -199,12 +184,12 @@ const [rotation, setRotation] = useState(0);
                   <table>
                     <thead>
                       <tr className="align_head">
-                        <th className="alignn"> <div>Sr.no</div>  <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
-                        <th className="align">CP ID <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
-                        <th className="align">Password <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
-                        <th className="align">Encryption key <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
-                        <th className="align">Agent ID <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
-                        <th className="align">Action <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div></th>
+                        <th className="align"> <div className='align_ch_head'> <div>Sr.no</div>  <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div> </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>CP ID </div><div onClick={handleClick}><img src={sort} /></div> </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Password</div> <div onClick={handleClick}><img src={sort} alt="" /></div> </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Encryption key</div> <div onClick={handleClick}><img src={sort} alt="" /></div> </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Agent ID</div> <div onClick={handleClick}><img src={sort} alt=""  /></div> </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Action</div> <div onClick={handleClick}><img src={sort} alt=""  /></div> </div> </th>
                       </tr>
                     </thead>
                     <tbody>

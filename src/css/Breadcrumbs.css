@@ -1,0 +1,22 @@
+.bread-crumbs {
+    margin-top: 5px;
+    margin-left: 30px;
+    padding: 10px;
+    border-bottom: 2px solid #444597;
+    border-top: 2px solid #444597;
+    ;
+    border-radius: 25%;
+    width: max-content;
+}
+
+.breadcolor {
+    color: #444597;
+    font-weight: 500;
+    border-radius: 25%;
+    padding: 5px;
+    transition: width 1s, height 1s, background-color 0.5s, transform 0.5s;
+}
+
+.breadcolor:hover {
+    background-color: #cccdfc;
+}

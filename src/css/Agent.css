@@ -83,31 +83,37 @@ tbody tr:nth-child(even){
 }
 .styling_block{
     background: #ff0000;
-    padding: 10px 17px;
+    padding: 10px 39px;
     border-radius: 25px;
     color: #ffffff;
     border: none;
     cursor: pointer;
     transition: 0.2s;
+    width: 100%;
+    margin-left: 8px;
 }
 .styling_unblock{
     background: #000dff;
-    padding: 10px 17px;
+    padding: 10px 30px;
     border-radius: 25px;
     color: #ffffff;
     border: none;
     cursor: pointer;
     transition: 0.2s;
+    width: 100%;
+    margin-left: 8px;
 }
 .styling_aprove{
     background: #1d5f01;
-    padding: 10px 17px;
+    padding: 10px 21px;
     border-radius: 25px;
     color: #ffffff;
     border: none;
     cursor: pointer;
     transition: 0.2s;
     margin: -20px 7px;
+    width: 100%;
+    margin-left: 5px;
 }
 .edit {
     display: flex;

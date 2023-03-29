@@ -3,7 +3,7 @@
   flex-flow: column nowrap;
   justify-content: center;
   margin-top: 40px;
-  padding: 0px 80px
+  padding: 0px 40px
 }
 
 .dashboard_table_header {
@@ -35,6 +35,8 @@ flex-flow: row nowrap;
 
 .flex.row.space-between {
 justify-content: space-between;
+padding-left: 36px;
+    padding-right: 36px;
 }
 
 .flex.column {
@@ -140,3 +142,7 @@ background: #000;
 .elea_table_wrap {
   scrollbar-width: none;
 }
+
+/* .react-tiny-popover-container {
+  transform: translate(1051px, 80px) !important;
+} */

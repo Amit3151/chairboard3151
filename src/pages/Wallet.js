@@ -6,6 +6,7 @@ import sort from "../images/uil_sort-amount-down.svg";
 import Header from "../components/Header";
 import Sidebar from '../components/Sidebar';
 import cross from "../images/cross-23.svg";
+import {AiOutlineClose} from 'react-icons/ai'
 
 export default function Wallet() {
 
@@ -37,9 +38,9 @@ export default function Wallet() {
   //sorting :- same logic as Channel page , when the data will get added from the backend!!
   // these are just for example
   const [list, setList] = useState([
-    { Sr: 1, Transactionid: "DFGDH23021301", UserDetail: 'Aditya Jangid , </br> 854697845', MasterCode: "ASDF9876", Time: "18:23:55", Transaction: " <span class='cost_return'>Cost Return</span></br>98765-264-231421 ", Amount: "1" },
-    { Sr: 2, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid ,</br> 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "<span class='com_paid'>Commition Paid</span></br>98765-264-231421", Amount: "1" },
-    { Sr: 3, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid ,</br> 854697845", MasterCode: "ASDF9876", Time: "18:23:55", Transaction: "<span class='cost_return'>Cost Return</span></br>98765-264-231421", Amount: "1" },
+    { Sr: 1, Transactionid: "DFGDH23021301", UserDetail: 'Aditya Jangid  </br> 854697845', MasterCode: "ASDF9876", Time: "06/01/23 <br/> 18:23:55 PM", Transaction: " <span class='cost_return'>Cost Return</span></br>98765-264-231421 ", Amount: "1" },
+    { Sr: 2, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid </br> 854697845", MasterCode: "ASDF9876", Time: "06/01/23 <br/> 18:23:55 PM", Transaction: "<span class='com_paid'>Commition Paid</span></br>98765-264-231421", Amount: "1" },
+    { Sr: 3, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid </br> 854697845", MasterCode: "ASDF9876", Time: "06/01/23 <br/> 18:23:55 PM", Transaction: "<span class='cost_return'>Cost Return</span></br>98765-264-231421", Amount: "1" },
   ]);
 
   const [sortAsc, setSortAsc] = useState(true);
@@ -56,12 +57,19 @@ export default function Wallet() {
     setSortAsc(!sortAsc);
   };
 
+  function closePop() {
+    newvalue((value) => !value);
+  }
 
+ // Filter Patch
+
+ const handleFilterSubmit = () => {
+}
   return (
     <>
-      <div className="sidebar">
+      
         <Sidebar />
-      </div>
+      
       <div className="main_body">
         <div className="aget_header">
           <Header />
@@ -82,13 +90,14 @@ export default function Wallet() {
                   </span>
                   {/* <button>Add Money</button> */}
                   <td>
-                    <button className={styling_aprove} onClick={approve}>Add Money</button>
-
+                    <button className='add_money' onClick={approve}>Add Money</button>
+                    
                     <div className={approve_box} >
                       <div className="approve_inside">
                         <div className="blur1" ref={aprove_ref}>
                           <div className="apro_heading">
-                            <span>Add Money</span>
+                            <span>Add Money</span>  
+                            <AiOutlineClose onClick={closePop}/>
                             <div className="cross_icn_wrap">
                               <img src={cross} alt="" onClick={handleClose} />
                             </div>
@@ -128,7 +137,7 @@ export default function Wallet() {
             </div>
             <div className="filter">
               <div className="_inside fix_popup">
-                <Filter />
+                <Filter   statuses={['Approved', 'Declined']} onSubmit={handleFilterSubmit}/>
                 <div className="credit_box">
                   <span>
                     <label className='wallet_label'>Total Credit</label>
@@ -193,7 +202,7 @@ export default function Wallet() {
                           <td>{showPassword && selectedindex === index ? `${item.Key}` : 'G1LI*************1020'}</td> */}
                           <td dangerouslySetInnerHTML={{__html: (item.UserDetail)}}></td>
                           <td>{item.MasterCode}</td>
-                          <td>{item.Time}</td>
+                          <td dangerouslySetInnerHTML={{__html: (item.Time)}}></td>
                           <td dangerouslySetInnerHTML={{__html: (item.Transaction)}}></td>
                           <td>{item.Amount}</td>
                         </tr>

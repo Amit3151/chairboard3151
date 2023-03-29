@@ -10,6 +10,8 @@ import Sidebar from '../components/Sidebar';
 import { Link } from "react-router-dom";
 import cross from "../images/cross-23.svg";
 import { AiOutlineClose } from 'react-icons/ai'
+import Block from "../components/Cells/Block";
+import Approved from "../components/Cells/Approved";
 
 
 export default function Agent() {
@@ -107,11 +109,11 @@ export default function Agent() {
     className1=== "styling_unblock" ?setClassName1('styling_block') : setClassName1 ('styling_unblock');
   };
 
-  // const data = [
-  //   { id: 1, AgentDetails: 'Aditya Jangid, 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: '', SignUp: '3'},
-  //   { id: 2, AgentDetails: 'Aditya Jangid, 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: '', SignUp: '3'},
-  //   { id: 3, AgentDetails: 'Aditya Jangid, 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: '', SignUp: '3'},
-  // ];  
+  const [tableData, setTableData] = useState([
+    { id: 1, AgentDetails: '<span className="span_a">A</span> Aditya Jangid <br /> 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35',Block : <Block />, SignUp: '3'},
+    { id: 2, AgentDetails: 'Aditya Jangid <br /> 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: <Approved />, SignUp: '3'},
+    { id: 3, AgentDetails: 'Aditya Jangid <br /> 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: <Block />, SignUp: '3'},
+  ])
 
   //sorting :- same logic as Channel page , when the data will get added from the backend!!
 
@@ -200,131 +202,20 @@ export default function Agent() {
 
                     {/* this is only dummy data , real data will come from backend */}
                     <tbody>
-                      <tr>
-                        <td>
-                          <div className="box_span">
-                            <span className="span_a">A</span>
-                            <span>
-                              Aditya Jangid, <br />
-                              854697845
-                            </span>
-                          </div>
-                        </td>
-                        <td>ICHP8797</td>
-                        <td>
-                          Bikaner,<br /> Rajasthan
-                        </td>
-                        <td>46</td>
-                        <td>125</td>
-                        <td>225</td>
-                        <td>06/01/2023 <br />18:23:55</td>
-                        <td>
-                          <td>
-                            <button className={className} onClick={handleClick}>{buttonText}</button>
-                          </td>
-                        </td>
-                        <td>
-                          <div className="edit">
-                            <span>3</span>
-                            <Link to='/AgentDetails'>
-                              <img src={edit} alt="" />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="box_span">
-                            <span className="span_a">A</span>
-                            <span>
-                              Aditya Jangid, <br />
-                              854697845
-                            </span>
-                          </div>
-                        </td>
-                        <td>ICHP8797</td>
-                        <td>
-                          Bikaner,<br /> Rajasthan
-                        </td>
-                        <td>46</td>
-                        <td>125</td>
-                        <td>225</td>
-                        <td>06/01/2023 <br />18:23:55</td>
-                        <td>
-                          <button className={styling_aprove} onClick={approve}>Approved</button>
-                          <div className={approve_box} >
-                            <div className="approve_inside">
-                              <div className="blur1" ref={aprove_ref}>
-                                <div className="apro_heading">
-                                  <span>Approve</span>
-                                  <AiOutlineClose onClick={closePop} />
-                                  <div className="cross_icn_wrap">
-                                    <img src={cross} alt="" onClick={notApprove} />
-                                  </div>
-                                </div>
-                                <div className="apro_input">
-                                  <label htmlFor="">Enter Master Code</label>
-                                  <input type="text" ref={inputRef} placeholder="Enter Master Code" />
-                                  {error && <span><img src={warning} alt="" /> {'Invaild Master Code'}</span>}
-                                </div>
-                                <div className="apro_button">
-                                  <button onClick={() => {
-                                    let pattern = /\d/g;
-                                    let result = pattern.test(inputRef.current.value);
-                                    if (!result) {
-                                      setError(true);
-                                    } else {
-                                      setError(false);
-                                    }
-                                  }}>Submit</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="edit">
-                            <span>3</span>
-                            <Link to='/AgentDetails'>
-                              <img src={edit} alt="" />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="box_span">
-                            <span className="span_a">A</span>
-                            <span>
-                              Aditya Jangid, <br />
-                              854697845
-                            </span>
-                          </div>
-                        </td>
-                        <td>ICHP8797</td>
-                        <td>
-                          Bikaner,<br /> Rajasthan
-                        </td>
-                        <td>46</td>
-                        <td>125</td>
-                        <td>225</td>
-                        <td>06/01/2023 <br />18:23:55</td>
-                        <td>
-
-                          <td>
-                            <button className={className1} onClick = {handleClick1}>{buttonText1}</button>
-                          </td>
-
-                        </td>
-                        <td>
-                          <div className="edit">
-                            <span>3</span>
-                            <Link to='/AgentDetails'>
-                              <img src={edit} alt="" />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
+                    {tableData.map((item, index) => (
+                        <tr key={index}>
+                          {/* <td>{item.id}</td> */}
+                          <td dangerouslySetInnerHTML={{ __html: (item.AgentDetails) }}></td>
+                          <td>{item.MasterCode}</td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.DistrictState) }}></td>
+                          <td>{item.AvailableInventory}</td>
+                          <td>{item.ActivatedTags}</td>
+                          <td>{item.Balance}</td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.JoiningTime) }}></td>
+                          <td><span>{item.Block}</span></td>
+                          <td>{item.SignUp} <Link to='/AgentDetails'><img src={edit} alt="" /></Link></td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

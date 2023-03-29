@@ -10,7 +10,7 @@ import Sidebar from '../components/Sidebar';
 import Search from "../components/Search";
 import cross from "../images/cross-23.svg";
 import warning from "../images/mdi_alert-circle-outline.svg";
-import {AiOutlineClose} from 'react-icons/ai'
+import { AiOutlineClose } from 'react-icons/ai'
 
 
 export default function Inventory() {
@@ -40,7 +40,7 @@ export default function Inventory() {
 
   const closePop = () => {
     sethide(!hide)
-}
+  }
   // ===================Popup_box================================
   const [value2, newvalue2] = useState(true);
   const [error2, setError2] = useState(false);
@@ -52,7 +52,7 @@ export default function Inventory() {
   function notApprove2() {
     newvalue2((value2) => !value2);
   }
-  function closePop5(){
+  function closePop5() {
     newvalue2(!value2)
   }
 
@@ -67,16 +67,20 @@ export default function Inventory() {
   }
 
   const uploadd = useRef()
-    function uploadfile() {
-        console.log('click')
-        uploadd.current.click()
-    }
+  function uploadfile() {
+
+    uploadd.current.click()
+  }
+  //Filter Patch
+  const handleFilterSubmit = () => {
+  }
+
 
   return (
     <>
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+
+      <Sidebar />
+
       <div className="main_body">
         <div className="aget_header">
           <Header />
@@ -87,27 +91,27 @@ export default function Inventory() {
               <img src={upload} alt="" onClick={show_pop} />
             </div>
             <div className={upload_pop_up_box} >
-            <div className={pop_box} ref={pop}>
-              <div className="cross_icn_wrap" onClick={closePop} ><img src={cross} alt="" />
+              <div className={pop_box} ref={pop}>
+                <div className="cross_icn_wrap" onClick={closePop} ><img src={cross} alt="" />
+                </div>
+                <div className="browse_file" onClick={uploadfile}>
+                  <input type='file' hidden ref={uploadd} />
+                  <img src={upload} alt="" className="allow_size" />
+                  <span>Browse File</span>
+                  <span>Choose Images</span>
+                </div>
+                <div className="sample_file">
+                  <img src={download} alt="" className="allow_size" />
+                  <span>Download Sample File</span>
+                </div>
               </div>
-              <div className="browse_file" onClick={uploadfile}>
-              <input type='file' hidden ref={uploadd} />
-                <img src={upload} alt="" className="allow_size" />
-                <span>Browse File</span>
-                <span>Choose Images</span>
-              </div>
-              <div className="sample_file">
-                <img src={download} alt="" className="allow_size" />
-                <span>Download Sample File</span>
-              </div>
-            </div>
             </div>
 
             <div className="search_bar">
               <Search title="Inventory" />
             </div>
             <div className="filter_section">
-              <Filter />
+              <Filter   statuses={['Apporved', 'Unapproved']} onSubmit={handleFilterSubmit} />
             </div>
             <div className="invent_main_cont">
               <div className="aget_main_cont">
@@ -204,7 +208,7 @@ export default function Inventory() {
                                   <div className="blur1" ref={aprove_ref2}>
                                     <div className="apro_heading">
                                       <span>Block</span>
-                                      <AiOutlineClose onClick={closePop5}/>
+                                      <AiOutlineClose onClick={closePop5} />
                                       <div className="cross_icn_wrap">
                                         <img src={cross} alt="" onClick={notApprove2} />
                                       </div>
@@ -229,9 +233,6 @@ export default function Inventory() {
                                 </div>
                               </div>
                             </td>
-
-
-
                           </td>
                         </tr>
 

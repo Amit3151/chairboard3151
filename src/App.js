@@ -18,6 +18,7 @@ import ReportsViews from './pages/ReportsViews';
 import ManualReqDetails from './pages/ManualReqDetails';
 import CheckDetails from './pages/CheckDetails';
 import MasterDetails from './pages/MasterDetails';
+import Test from './pages/test';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route exact path='/ManualReqDetails' element={<ManualReqDetails/>}/>
           <Route exact path='/CheckDetails' element={<CheckDetails/>}/>
           <Route exact path='/MasterDetails' element={<MasterDetails/>}/>
+          <Route exact path='/Test' element={<Test/>}/>
         </Routes>
       </div>
     </BrowserRouter>

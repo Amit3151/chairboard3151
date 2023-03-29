@@ -19,14 +19,14 @@ function getRandomInt(min, max) {
 
 const mockData = new Array(100).fill(0).map((_, i) => ({
   srNum: 1,
-  id: i,
+  id: `SIGNxdwUNcEWVBAVXW`,
   master: {
     name: `Vishal Jadhav ${i}`,
     phone: '9876543210',
   },
-  masterCode: 'ICHP8797\n9876543210',
+  masterCode: 'ICHP8797',
   createdAt: DateTime.now().minus({ week: getRandomInt(1, 3) }),
-  tagSrNo: getRandomInt(0, 200),
+  tagSrNo: '1234567890987654',
   type: ['Issue', 'Replace'][getRandomInt(0, 1)],
   status: ['Pending', 'Approved', 'Declined'][getRandomInt(0, 2)],
 }))
@@ -42,7 +42,7 @@ export default function ManualRequest() {
       accessor: 'id'
     },
     {
-      Header: 'Master Details',
+      Header: 'Agent Details',
       accessor: 'master',
       Cell: AgentCell
     },
@@ -78,11 +78,16 @@ export default function ManualRequest() {
     }
   ], [])
 
+   // Filter Patch
+
+   const handleFilterSubmit = () => {
+  }
+
   return (
     <>
-      <div className="sidebar">
+      
         <Sidebar />
-      </div>
+      
       <div className="main_body">
         <div className="aget_header">
           <Header />
@@ -109,11 +114,11 @@ export default function ManualRequest() {
               </div>
             </div>
             <div className="filter_section">
-              <Filter/>
+              <Filter statuses={['Approved', 'Declined']} onSubmit={handleFilterSubmit}/>
             </div>
           </div>
         </div>
-        <div className="dashboard_table_container master" style={{ margin: '0 80px' }}>
+        <div className="dashboard_table_container master" style={{ margin: '0 40px' }}>
           <Table columns={manualColumns} data={mockData} />
         </div>
       </div>

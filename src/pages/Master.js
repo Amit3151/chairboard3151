@@ -5,7 +5,7 @@ import Sidebar from '../components/Sidebar';
 import Filter from "../components/Filter";
 import Search from '../components/Search';
 import Table from '../components/Table'
-import AgentCell from '../components/Cells/AgentCell';
+import BalanceCell from '../components/Cells/BalanceCell';
 import AddressCell from '../components/Cells/AddressCell';
 import DateCell from '../components/Cells/DateCell';
 import CreateMasterModal from '../modals/CreateMaster'
@@ -15,6 +15,8 @@ import '../css/Master.css'
 import '../css/Request.css'
 import {GrEdit} from 'react-icons/gr'
 import { Link } from 'react-router-dom';
+import MasterDetailsCell from '../components/Cells/MasterDetailsCell';
+import {BiRupee} from 'react-icons/bi'
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -24,15 +26,19 @@ function getRandomInt(min, max) {
 
 const mockData = new Array(100).fill(0).map((_, i) => ({
   id: i,
+  actionstatus: getRandomInt(0, 1),
   master: {
-    name: `Vishal Jadhav ${i}`,
+    code: `Vishal Jadhav ${i}`,
     phone: '9876543210',
   },
-  masterCode: 'ICHP8797\n9876543210',
+  masterCode: 'ICHP8797',
   availableInventory: getRandomInt(0, 200),
-  usedColumn: getRandomInt(100, 200),
-  agents: getRandomInt(10, 30),
-  balance: getRandomInt(100, 200),
+  usedColumn: getRandomInt(10, 20),
+  agents: getRandomInt(1000000000000000, 3000000000000000),
+  balance: {
+    logo: <BiRupee />,
+    num: getRandomInt(100, 200),
+  },
   createdAt: DateTime.now().minus({ week: getRandomInt(1, 3) }),
   address: {
     state: 'Rajasthan',
@@ -41,15 +47,46 @@ const mockData = new Array(100).fill(0).map((_, i) => ({
 }))
 
 export default function Master() {
+ 
+  
+
+// Filter Status Amit
+const [filteredData, setFilteredData] = useState(mockData);
+  
+  const handleFilterSubmit = (selectedStatus) => {
+    if (selectedStatus) {
+      let filtval = selectedStatus=="Blocked"? 0 : 1;
+      const filtered = mockData.filter(item => item.actionstatus === Number(filtval));
+      setData(filtered);
+    } else {
+      setData(mockData);
+    }
+  };
+
+  const [data, setData] = useState(mockData);
+
+  const handleBlockClick = (value) => {
+      const updatedData = [...data];
+      updatedData[value].actionstatus =  mockData[value].actionstatus === 0 ? 1:0;
+      setData(updatedData);
+  };
+  
+
+  function shortdet(){
+console.log("detail clicked")
+  }
+
+// Filter Status 
+
   const masterColumns = useMemo(() => [
     {
       Header: 'Master Details',
       accessor: 'master',
-      Cell: AgentCell
+      Cell: MasterDetailsCell
     },
     {
       Header: 'Master Code',
-      accessor: 'masterCode'
+      accessor: 'masterCode'      
     },
     {
       Header: 'Available Inventory',
@@ -65,7 +102,8 @@ export default function Master() {
     },
     {
       Header: 'Wallet Balance',
-      accessor: 'balance'
+      accessor: 'balance',
+      Cell: BalanceCell
     },
     {
       Header: 'Joining Date',
@@ -80,18 +118,15 @@ export default function Master() {
     {
       Header: 'Action',
       accessor: 'id',
-      Cell: () => (
+      Cell: ({ value }) => (
         <div className="flex row center">
-
-          <button className={styling_aprove2} onClick={approve2}>Block</button>
-
-          <Link to='/MasterDetails'>
-          <GrEdit/>
-          </Link>
-
+            <button className={data[value].actionstatus===0 ? "styling_aprove2 block_btn new":"styling_aprove2 Unblock_btn"} onClick={() => handleBlockClick(value)}>{data[value].actionstatus===0 ? "Block":"Unblock"}</button>
+            <Link to='/MasterDetails'>
+                <GrEdit />
+            </Link>
         </div>
-      ),
-    }
+    ),
+    },   
   ], [])
 
   const [createModalOpen, toggleModal] = useReducer(st => !st, false)
@@ -116,18 +151,16 @@ export default function Master() {
       newvalue2(true);
     }
   }
-
   
-
   return (
     <>
       <CreateMasterModal isOpen={createModalOpen} onClickOutside={toggleModal} />
-      <div className="sidebar">
+      
         <Sidebar />
-      </div>
+      
       <div className="main_body">
         <div className="aget_header">
-          <Header />
+          <Header />                                                                                                                                                             
         </div>
         <div className="master_body_container">
           <div className="body_master">
@@ -152,12 +185,12 @@ export default function Master() {
               </div>
             </div>
             <div className="filter_section">
-              <Filter />
+              <Filter statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit} />
             </div>
           </div>
         </div>
-        <div className="dashboard_table_container master" style={{ margin: '0 80px' }}>
-          <Table columns={masterColumns} data={mockData} />
+        <div className="dashboard_table_container master" style={{ margin: '0 40px' }}>
+          <Table columns={masterColumns} data={data} shorting={shortdet}/>
         </div>
       </div>
     </>

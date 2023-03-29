@@ -1,7 +1,7 @@
 import { ReactComponent as SortIcon } from '../images/uil_sort-amount-down.svg';
 import { useTable } from 'react-table'
 
-export default function Table({ columns, data }) {
+export default function Table({ columns, data, shorting }) {
   const tableInstance = useTable({ columns, data })
 
   const {
@@ -23,7 +23,7 @@ export default function Table({ columns, data }) {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {c.render('Header')}
                     <div style={{ width: 5 }} />
-                    <SortIcon />
+                    <SortIcon onClick={shorting}/>
                   </div>
                 </th>
               ))}

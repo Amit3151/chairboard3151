@@ -61,21 +61,53 @@ export default function Profile() {
   }
 
   // Creating Dummy Static Data For Channnel Partner Table
+  const [tableData, setTableData] = useState([
+    { Id: 'z61dqqhyy98u6', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:53:49', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Placed', },
+    { Id: 'z61dqqhyy98u9', Customer_details: 'ChairBoard pvt limited\n9929292928', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:56:49', Amount: '10', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Dispatched', },
+    { Id: 'z61dqqhyy98u8', Customer_details: 'ChairBoard pvt limited\n9929292927', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:13:49', Amount: '15', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Placed', },
+    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292926', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:03:49', Amount: '20', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Dispatched', },
+  ])
 
-  const tableData = [
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Placed', },
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Dispatched', },
-    // { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Cancel',},
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Placed', },
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023\n21:50', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023\n21:50:49', Status: 'Dispatched', },
-  ];
+  // Filter Patch
+  const handleFilterSubmit = () => {
+  }
 
+  //sorting
+  const [isSortedDesc, setIsSortedDesc] = useState(true);
+
+  const sortDesc = () => {
+    const sortedList = [...tableData].sort((a, b) => b.Amount - a.Amount);
+    setTableData(sortedList);
+    setIsSortedDesc(!isSortedDesc)
+  };
+
+  const sortAsc = () => {
+    const sortedList = [...tableData].sort((a, b) => a.Amount - b.Amount);
+    setTableData(sortedList);
+    setIsSortedDesc(!isSortedDesc)
+  };
+
+  function sortit() {
+    return isSortedDesc ? sortDesc : sortAsc;
+  }
+
+  //sorting icon change
+  const [rotation, setRotation] = useState(0);
+
+  const handleClick = () => {
+    setRotation(rotation + 180);
+  }
+  
+
+  //all filter carasoul 
+  const all = () => {
+    
+  }
 
   return (
     <>
-      <div className="sidebar">
-        <Sidebar />
-      </div>
+      <Sidebar />
+
       <div className="main_body">
         <div className="aget_header">
           <Header />
@@ -103,16 +135,16 @@ export default function Profile() {
 
             </div>
             <div className="filter_section">
-              <Filter />
+              <Filter statuses={['Placed', 'Dispached']} onSubmit={handleFilterSubmit} />
               <div className="OrderFilters">
-              <ul className="un-list">
-                <li className="un-li">All</li>
-                <li className="un-li">Agent</li>
-                <li className="un-li">Master</li>
-              </ul>
+                <ul className="un-list">
+                  <li className="un-li all" >All</li>
+                  <li className="un-li">Agent</li>
+                  <li className="un-li">Master</li>
+                </ul>
+              </div>
             </div>
-            </div>
-            
+
             <div className="repo_main_cont">
               <div className="repo_main_box">
                 <div className="repo_main_box_heading">
@@ -125,8 +157,8 @@ export default function Profile() {
                           </span>
                         </td>
                         <td>
-                          <span className="align">
-                            Customer Details<img src={sort} alt="" />
+                          <span className="align" onClick={handleClick}>
+                            Customer Details<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
                           </span>
                         </td>
                         <td>
@@ -140,8 +172,8 @@ export default function Profile() {
                           </span>
                         </td>
                         <td>
-                          <span className="align">
-                            Amount<img src={sort} alt="" />
+                          <span className="align" onClick={handleClick}>
+                            Amount<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
@@ -155,8 +187,8 @@ export default function Profile() {
                           </span>
                         </td>
                         <td>
-                          <span className="align">
-                            Dispatched on<img src={sort} alt="" />
+                          <span className="align" onClick={handleClick}>
+                            Dispatched on<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
                           </span>
                         </td>
                         <td>
@@ -178,17 +210,18 @@ export default function Profile() {
                           <td>{item.Id}</td>
                           <td>
                             <div className="customer_detail_wrap">
-                            <span className="customer_detail_icon"><span className="span_a">A</span></span>{item.Customer_details}
+                              <span className="customer_detail_icon"><span className="span_a">A</span></span>{item.Customer_details}
                             </div>
-                            </td>
+                          </td>
                           {/* <td>{showPassword && selectedindex === index ? `${item.password}` : '**********'}</td>
                           <td>{showPassword && selectedindex === index ? `${item.Key}` : 'G1LI*************1020'}</td> */}
                           <td>{item.MasterCode}</td>
-                          <td>{item.OrderedAt}</td>
+                          {/* <td>{item.OrderedAt}</td> */}
+                          <td dangerouslySetInnerHTML={{ __html: (item.OrderedAt) }}></td>
                           <td>{item.Amount}</td>
                           <td>{item.VehicleClass}</td>
                           <td>{item.PaymentRefrence}</td>
-                          <td>{item.DispatchOn}</td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.DispatchOn) }}></td>
                           <td className={item.Status == 'Placed' ? "item_status1 span" : 'item_status2 span'}><span>{item.Status}</span></td>
                           <td >
                             <span className="btn_sty_tick" >

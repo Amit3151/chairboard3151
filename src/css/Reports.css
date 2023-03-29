@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    margin: 0px -18px;
 }
 
 .repo_body {
@@ -152,13 +153,15 @@ tbody tr:nth-child(even) {
     justify-content: center;
     margin-top: 6px;
     align-items: center;
+    font-weight: 600;
 }
 
 .yellow_num {
-    border: 2px solid;
+    border: 2px solid #2891E2;
     background: #FFFA8C;
     border-radius: 95px;
     padding: 0 7px;
+    font-weight: 600;
 }
 
 .vehNum {
@@ -182,4 +185,32 @@ tbody tr:nth-child(even) {
     align-items: center;
     gap: 5px;
 
+}
+
+.yellow_num_main {
+    /* display: contents; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.vehNumYellow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 6px;
+    align-items: center;
+}
+
+.logoSize{
+    width: 15px;
+    margin-left: 5px;
+    
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }

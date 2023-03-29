@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react'
 import "../css/Filter.css";
 import setting from "../images/mi_filter.svg";
-import customise from "../images/ep_setting.svg";
 import download from "../images/download.svg";
+import 'react-date-range/dist/styles.css'; //Date range main style file
+import 'react-date-range/dist/theme/default.css'; //Date range theme css file
 import cross from "../images/cross-23.svg";
-export default function Filter() {
+import DateRangeSelector from './DateRange';
 
 
+export default function Filter({ statuses, onSubmit }) {
 
     // ===================Pop-up=====================================
 
@@ -46,12 +48,10 @@ export default function Filter() {
         return () => document.removeEventListener("mousedown", outerclick);
     }, [hide])
 
-
-
     const hidebox = useRef()
     const outclick = e => {
         if (!hidebox.current.contains(e.target)) {
-            setshow(true);
+            // setshow(true);
         }
     }
     useEffect(() => {
@@ -61,7 +61,6 @@ export default function Filter() {
 
     // ====================Filter Applied======================================
     const [masterCode, setMasterCode] = useState('');
-    const [status, setStatus] = useState('');
     const [demo1, setDemo1] = useState('');
     const [demo2, setDemo2] = useState('');
     const [acknowledgment, setAcknowledgment] = useState('');
@@ -69,12 +68,12 @@ export default function Filter() {
     //reset everything
     const ResetEverything = () => {
         setMasterCode('')
-        setStatus('')
+        setSelectedStatus('')
         setDemo1('')
         setDemo2('')
         setAcknowledgment('')
-    }
 
+    }
 
     // ====================Setting Options===============================
     const [showMenu, setShowMenu] = useState(false);
@@ -104,10 +103,26 @@ export default function Filter() {
         uploadd.current.click()
     }
 
+    //date range
+    let upload_pop_up_box = hide ? "upload_pop_up_box" : "upload_pop_up_box active";
+
+    //Form Filter Submit
+    const [selectedStatus, setSelectedStatus] = useState('');
+
+    const handleStatusChange = (event) => {
+        setSelectedStatus(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        setshow(!show);
+        onSubmit(selectedStatus);
+    };
+
     return (
         <>
-            <form>
-                <div className={fillter} >
+            <form onSubmit={handleSubmit}>
+                <div className={fillter}>
                     {/* <div><img src={customise} alt="dropdown.img"
                         onClick={toggleMenu} />
                     </div> */}
@@ -120,39 +135,31 @@ export default function Filter() {
                     </div>)}
 
                     <div >
-                        
+
                         <div className={upload_img}>
 
                             <img src={download} alt="" type='file' onClick={show_pop} />
                         </div>
                         <div className={pop_box_backdrop}>
-                        <div className={pop_box} ref={pop}>
+                            <div className={pop_box} ref={pop}>
 
-                            
-                            <div className="cross_icn_wrap" onClick={closePop} ><img src={cross} alt="" />
-                            </div>
-                            {/* <div className="browse_file" onClick={uploadfile}>
-                                <img src={download} alt="" className="allow_size" />
-                                <input type='file' hidden ref={uploadd} />
-                                <span>Download CSV File</span>
-                                <span></span>
-                            </div> */}
-                            <div className="browse_file" >
-                                <img src={download} alt="" className="allow_size" />
-                                <input type='file' hidden ref={uploadd} />
-                                <span>Download CSV File</span>
-                                <span></span>
-                            </div>
-                            <div className="sample_file">
-                                <img src={download} alt="" className="allow_size" />
-                                <span>Download PDF File</span>
-                            </div>
+                                <div className="cross_icn_wrap" onClick={closePop} >
+                                    <h3>Download List</h3>
+                                    <img src={cross} alt="" />
+                                </div>
 
-
+                                <div className="browse_file" >
+                                    <img src={download} alt="" className="allow_size" />
+                                    <input type='file' hidden ref={uploadd} />
+                                    <span className='customblue'>Download CSV File</span>
+                                    <span></span>
+                                </div>
+                                <div className="sample_file">
+                                    <img src={download} alt="" className="allow_size" />
+                                    <span className='customblue'>Download PDF File</span>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-
-
                     </div>
 
                     <div className="input_file">
@@ -169,10 +176,10 @@ export default function Filter() {
                         <div className="filter_search_desc_first">
                             <div className="label_box update">
                                 <label>Calendar:</label>
-                                <input className="input_calendar" type="date" />
-                            </div>
+                                <DateRangeSelector />
 
-                            <div className="label_box">
+                            </div>
+                            <div className="label_box hasdot">
                                 <label htmlFor="">Master Code:</label>
                                 <select className="lable_box_items" value={masterCode} onChange={e => setMasterCode(e.target.value)}>
                                     <option value="">Master Code</option>
@@ -180,23 +187,23 @@ export default function Filter() {
                                     <option value="B">B</option>
                                     <option value="C">C</option>
                                 </select>
-                                {masterCode && <span style={{ color: 'green', marginLeft: '5px' }}>●</span>}
+                                {masterCode && <span style={{ color: 'green', marginLeft: '116px' }}>●</span>}
                             </div>
 
-                            <div className="label_box">
+                            <div className="label_box hasdot">
                                 <label htmlFor="">Status:</label>
-                                <select className="lable_box_items" value={status} onChange={e => setStatus(e.target.value)}>
+                                <select className="lable_box_items" value={selectedStatus} onChange={handleStatusChange}>
                                     <option value="">Status</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Accepted">Accepted</option>
-                                    <option value="Rejected">Rejected</option>
+                                    {statuses.map(status => (
+                                        <option key={status} value={status}>{status}</option>
+                                    ))}
                                 </select>
-                                {status && <span style={{ color: 'green', marginLeft: '5px' }}>●</span>}
+                                {selectedStatus && <span style={{ color: 'green', marginLeft: '70px' }}>●</span>}
                             </div>
 
                         </div>
                         <div className="filter_search_desc_second">
-                            <div className="label_box">
+                            <div className="label_box hasdot">
                                 <label htmlFor="">Demo 1:</label>
                                 <select className="lable_box_items" value={demo1} onChange={e => setDemo1(e.target.value)}>
                                     <option value="">Demo 1</option>
@@ -204,9 +211,9 @@ export default function Filter() {
                                     <option value="B">B</option>
                                     <option value="C">C</option>
                                 </select>
-                                {demo1 && <span style={{ color: 'green', marginLeft: '5px' }}>●</span>}
+                                {demo1 && <span style={{ color: 'green', marginLeft: '85px' }}>●</span>}
                             </div>
-                            <div className="label_box">
+                            <div className="label_box hasdot">
                                 <label htmlFor="">Demo 2:</label>
                                 <select className="lable_box_items" value={demo2} onChange={e => setDemo2(e.target.value)}>
                                     <option value="">Demo 2</option>
@@ -214,26 +221,23 @@ export default function Filter() {
                                     <option value="B">B</option>
                                     <option value="C">C</option>
                                 </select>
-                                {demo2 && <span style={{ color: 'green', marginLeft: '5px' }}>●</span>}
+                                {demo2 && <span style={{ color: 'green', marginLeft: '85px' }}>●</span>}
                             </div>
-                            <div className="label_box">
+                            <div className="label_box hasdot">
                                 <label htmlFor="">Acknowledgment:</label>
                                 <select className="lable_box_items" value={acknowledgment} onChange={e => setAcknowledgment(e.target.value)}>
                                     <option value="">Acknowledgment</option>
                                     <option value="yes">Yes</option>
                                     <option value="No">No</option>
                                 </select>
-                                {acknowledgment && <span style={{ color: 'green', marginLeft: '5px' }}>●</span>}
+                                {acknowledgment && <span style={{ color: 'green', marginLeft: '150px' }}>●</span>}
                             </div>
                         </div>
 
                         <div className="filter_button">
                             <button type='reset' onClick={() => { ResetEverything() }}>Reset</button>
 
-                            <button type='submit' onClick={() => {
-                                console.log('clicked')
-                                setshow(!show)
-                            }}>Apply</button>
+                            <button type='submit' >Apply</button>
                         </div>
                     </div>
                 </div>

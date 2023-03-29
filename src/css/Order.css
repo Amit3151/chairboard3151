@@ -144,7 +144,16 @@
 }
 
 .un-li:hover{
+    color: #4244a0;
+}
+
+.un-li.all{
+    width: 100%;   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 8px 20px;
     background-color: #4244a0;
     color: white;
 }
-

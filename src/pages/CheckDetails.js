@@ -5,6 +5,8 @@ import Sidebar from '../components/Sidebar'
 import '../css/CheckDetails.css'
 import sort from "../images/uil_sort-amount-down.svg";
 import { BsDownload } from 'react-icons/bs'
+import BreadcrumbItem from 'rsuite/esm/Breadcrumb/BreadcrumbItem';
+import { Breadcrumb } from 'rsuite';
 
 const CheckDetails = () => {
 
@@ -21,13 +23,22 @@ const CheckDetails = () => {
 
     return (
         <>
-            <div className="sidebar">
+            
                 <Sidebar />
-            </div>
+            
             <div className="main_body">
                 <div className="aget_header">
                     <Header />
                 </div>
+
+                <div className='bread-crumbs'>
+                    <Breadcrumb>
+                        <Link to='/Order'> <BreadcrumbItem className='breadcolor'> Order </BreadcrumbItem></Link>
+                        <Link to='/Orderdetails'> <BreadcrumbItem className='breadcolor'>Order Details </BreadcrumbItem></Link>
+                        <Link to='/CheckDetails'> <BreadcrumbItem className='breadcolor'>Check Details</BreadcrumbItem></Link>
+                    </Breadcrumb>
+                </div>
+
                 <div className='mainBody'>
                     <div className='page_heading'>
                         <h1>Check Details</h1>

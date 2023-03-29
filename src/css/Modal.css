@@ -63,3 +63,22 @@
   display: inline;
   margin: 0;
 }
+
+.submitBtn {
+ 
+    display: inline;
+    width: auto;
+    border-radius: 25px;
+    background: linear-gradient(97.29deg, #7879cd, #4244a0);
+    height: 45px;
+    color: white;
+    border: none;
+    font-size: 15px;
+    padding: 15px 42px;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: 6px 6px 12px rgb(106 108 194 / 84%), -6px -6px 12px #fff;
+    transition: 0.4s;
+    margin-top: 22px;
+    margin-right: 35px;
+}

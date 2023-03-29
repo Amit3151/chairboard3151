@@ -85,6 +85,8 @@ body{
 
 .browse_file_img{
     width: 250px;
+    margin-top: 15px;
+    height: 140px;
 }
 
 .browse_file.upload{
@@ -210,4 +212,15 @@ s */
 
 .uploadedImg{
   width: 250px;
+}
+
+.selectable{
+  width: 440px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lable_box_items.selectable1{
+width: 290px;
+background-position: 250px;
 }

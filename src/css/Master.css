@@ -7,9 +7,6 @@
     width: 100%;
 }
 
-
-
-
 .elea_table_wrap table tbody tr td div {
   align-items: center;
 }
@@ -28,4 +25,27 @@
   border-radius: 25px;
   margin-top: 37px;
   padding: 0px 4px;
+  margin: 0px 40px;
+}
+
+.styling_aprove2.Unblock_btn {
+  background-color: #1A8CF4;
+  }
+
+  .styling_aprove2.block_btn.new{
+    background: #ff0000;
+    padding: 10px 17px;
+    border-radius: 25px;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: -20px 7px;
+    width: 100%;
+    margin-left: 20px;
+    justify-content: center;
+  }
+  
+  .master_body_container .pop_up.active {
+    width: 70%;
 }

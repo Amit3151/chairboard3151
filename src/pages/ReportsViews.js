@@ -8,6 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import cross from "../images/cross-23.svg";
 import download from "../images/download.svg";
+import { Breadcrumb } from 'rsuite'
+import BreadcrumbItem from 'rsuite/esm/Breadcrumb/BreadcrumbItem'
+import { Link } from 'react-router-dom'
 
 
 
@@ -59,13 +62,21 @@ const ReportsViews = () => {
 
     return (
         <>
-            <div className="sidebar">
-                <Sidebar />
-            </div>
+            
+                <Sidebar className="menu RP" />
+            
             <div className="main_body rv">
                 <div className="req_header">
                     <Header />
                 </div>
+
+                <div className='bread-crumbs'>
+                    <Breadcrumb>
+                        <Link to='/Reports'> <BreadcrumbItem className='breadcolor'> Reports </BreadcrumbItem></Link>
+                        <Link to='/ReportsViews'> <BreadcrumbItem className='breadcolor'>Reports Views</BreadcrumbItem></Link>
+                    </Breadcrumb>
+                </div>
+
                 <div className='buttons'>
                     <button className='halfButton'>Half</button>
                     <div>

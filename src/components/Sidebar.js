@@ -23,11 +23,13 @@ export default function Sidebar() {
     let menu_box = btnstate ? "menu_box" : "menu_box active";
     let cross = btnstate ? "menu_btn" : "menu_btn cross";
     let menu = btnstate ? "menu" : "menu active";
+    let sidebar = btnstate ? "sidebar" : "sidebar active";
 
     let activeclassname = "sidebarnavchild sidenavactive";
     let inactiveclassname = "sidebarnavchild";
     return (
         <>
+         <div className={sidebar}>
             <div className={menu}>
                 <div className="header_opt">
                     <ul>
@@ -193,6 +195,7 @@ export default function Sidebar() {
                     <span></span>
                     <span></span>
                 </div>
+            </div>
             </div>
         </>
     )
