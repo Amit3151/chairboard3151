@@ -339,6 +339,7 @@ export default function Dashboard() {
   const [filteredAgents, setFilteredAgents] = useState(mockData.agents);
   const [selectedAgents, setSelectedAgents] = useState([]);  
   const [newReports, setNewreports] = useState(mockData.agents);
+  const [selectAll, setSelectAll] = useState(false);
   
 
   function handleSearchChange(event) {
@@ -352,13 +353,34 @@ export default function Dashboard() {
   }
 
   function handleAgentSelect(agentId) {
-    const index = selectedAgents.indexOf(agentId);
-    if (index === -1) {
-      setSelectedAgents([...selectedAgents, agentId]);
+    if (selectAll) {
+      setSelectedAgents([]);
+      setSelectAll(false);
     } else {
-      setSelectedAgents([...selectedAgents.slice(0, index), ...selectedAgents.slice(index + 1)]);
+      const index = selectedAgents.indexOf(agentId);
+      if (index === -1) {
+        setSelectedAgents([...selectedAgents, agentId]);
+        if (selectedAgents.length + 1 === filteredAgents.length) {
+          setSelectAll(true);
+        }
+      } else {
+        setSelectedAgents([...selectedAgents.slice(0, index), ...selectedAgents.slice(index + 1)]);
+        if (selectedAgents.length - 1 === filteredAgents.length - 1) {
+          setSelectAll(false);
+        }
+      }
     }
-  } 
+  }
+
+  function handleSelectAll() {
+    if (selectAll) {
+      setSelectedAgents([]);
+      setSelectAll(false);
+    } else {
+      setSelectedAgents(filteredAgents.map(agent => agent.id));
+      setSelectAll(true);
+    }
+  }
  const newnewReports = selectedAgents.length === 0 ?  newReports : newReports.filter(agent => selectedAgents.includes(agent.id))
 
 //  Agent Report colomn Filter By Check Box End
@@ -412,7 +434,7 @@ export default function Dashboard() {
                     value={searchText} 
                     onChange={handleSearchChange} />
                     <div className="flex column scroll-thumb-black" style={{ maxHeight: 200, overflow: 'auto' }}>    
-                    <div><input type="checkbox"/>All  </div>         
+                    <div><input type="checkbox" checked={selectAll} onChange={handleSelectAll}/>All  </div>         
                       {filteredAgents.map(agent => (
                         <div key={agent.id}>
                           <input type="checkbox"  checked={selectedAgents.includes(agent.id)} onChange={() => handleAgentSelect(agent.id)}/>
