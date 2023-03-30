@@ -1,7 +1,7 @@
 import { ReactComponent as SortIcon } from '../images/uil_sort-amount-down.svg';
 import { useTable } from 'react-table'
 
-export default function Table({ columns, data, shorting }) {
+export default function Table({ columns, data, onSort }) {
   const tableInstance = useTable({ columns, data })
 
   const {
@@ -13,7 +13,7 @@ export default function Table({ columns, data, shorting }) {
   } = tableInstance
  
   return (
-    <div className="elea_table_wrap" style={{ maxHeight: '500px', overflow: 'auto' }}>
+    <div className="elea_table_wrap" style={{ maxHeight: '500px',minHeight:'300px', overflow: 'auto' }}>
       <table {...getTableProps()} style={{ width: '100%' }}>
         <thead>
           {headerGroups.map(hG => (
@@ -23,7 +23,7 @@ export default function Table({ columns, data, shorting }) {
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {c.render('Header')}
                     <div style={{ width: 5 }} />
-                    <SortIcon onClick={shorting}/>
+                    <SortIcon onClick={() => onSort(c.id, c.sortFn)}/>
                   </div>
                 </th>
               ))}

@@ -224,7 +224,7 @@ const mockData = {
 const timingFilters = ['Day wise', 'Week wise', 'Monthly wise', 'Year wise'];
 
 const TimingSelect = ({ onClick }) => (
-  <div className="flex column" style={{ background: 'white', padding: '10px 15px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
+  <div className="flex column" style={{ background: '#F1F5F9', padding: '10px 15px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
     {timingFilters.map((label, index) => (
       <div onClick={() => onClick(index)} style={{ marginBottom: 10, cursor: 'pointer' }}>
         {label}
@@ -276,18 +276,23 @@ export default function Dashboard() {
     ]
   }), [])
 
+ 
+  
+
 
   const agentReportColumns = useMemo(() => [
     {
       Header: 'Agent Details',
       accessor: 'agent',
-      Cell: AgentCell
+      Cell: AgentCell,
+      sortFn: myNameSortFunction,
     },
 
     {
       Header: 'Master Code',
       accessor: 'masterCode',
-      Cell: MasterCell
+      Cell: MasterCell,
+      
     },
     ...(dates['lastFour' + ['Days', 'Weeks', 'Months', 'Years'][agentTiming]].map(day => ({
       Header: day,
@@ -351,7 +356,6 @@ export default function Dashboard() {
       return nameMatch || phoneMatch;})
     setFilteredAgents(filteredAgents);
   }
-
   function handleAgentSelect(agentId) {
     if (selectAll) {
       setSelectedAgents([]);
@@ -384,6 +388,22 @@ export default function Dashboard() {
  const newnewReports = selectedAgents.length === 0 ?  newReports : newReports.filter(agent => selectedAgents.includes(agent.id))
 
 //  Agent Report colomn Filter By Check Box End
+
+ // Shorting Function 
+ // Shorting Function 
+ function myNameSortFunction() {
+  console.log("jai Shree Ram")
+ }
+ function handleSort(columnId,myNameSortFunction) {
+  const column = agentReportColumns.find(c => c.id === columnId);
+  if (column && column.sortFn) {
+    // call the custom sort function for the clicked column
+     myNameSortFunction()
+    agentReportColumns.sortFn();
+  }
+}
+ 
+
  return (
     <>
       <Sidebar />
@@ -414,7 +434,7 @@ export default function Dashboard() {
                   onClickOutside={toggleAgentPopover}
                   positions={['bottom']}
                   content={
-                    <div className="flex column" style={{ background: 'white', padding: '20px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
+                    <div className="flex column" style={{ background: '#F1F5F9', padding: '20px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
                     <span style={{ fontSize: 12, lineHeight: '18px', marginLeft: 17 }}>
                       Search
                     </span>
@@ -468,7 +488,7 @@ export default function Dashboard() {
                 </Popover>
               </div>
             </div>
-            <Table columns={agentReportColumns} data={newnewReports} />
+            <Table columns={agentReportColumns} data={newnewReports}  onSort={handleSort} />
           </div>
           <div className="dashboard_table_container">
             <div className="dashboard_table_header flex row space-between">
