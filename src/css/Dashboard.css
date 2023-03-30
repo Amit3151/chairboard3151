@@ -137,12 +137,54 @@ background: #000;
   background: #eaebfd;
   position: sticky;
   top: 0;
+  z-index: 1;
 }
 
 .elea_table_wrap {
   scrollbar-width: none;
 }
 
-/* .react-tiny-popover-container {
-  transform: translate(1051px, 80px) !important;
-} */
+
+
+.datedatatb {
+  display: flex;
+  justify-content: center;
+}
+
+.datedatatb_inner {
+  display: flex;
+  align-items: center;
+}
+
+.upper_diff {
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.upper_diff.neg {
+  color: #FF0000;
+}
+
+.upper_diff.pos {
+ 
+  color: #25B73C;
+}
+
+.upper_diff.pos::before {
+  content: "+";
+}
+
+.upper_diff.zero{
+  display: none;
+}
+
+.react-tiny-popover-container {
+  z-index: 3;
+}
+
+
+.datedatatb_inner {
+  /* display: f block; */
+  align-items: center;
+  display: f;
+}
