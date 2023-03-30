@@ -1,4 +1,4 @@
-import React, { useReducer, useMemo } from 'react'
+import React, {useState, useReducer, useMemo } from 'react'
 import { Popover } from 'react-tiny-popover'
 import { DateTime } from 'luxon'
 import "../css/Dashboard.css";
@@ -36,9 +36,7 @@ const WEEKS = new Array(24).fill(0).map((_, i) => DateTime.now().minus({ week: i
 const DAYS = new Array(31).fill(0).map((_, i) => DateTime.now().minus({ day: i }).toFormat('dd/MM/yyyy')).reverse()
 
 
-const calculateD = (a, b) => {
-  return b - a;
-}
+
 
 const mockData = {
   figures: {
@@ -52,8 +50,8 @@ const mockData = {
   agents: new Array(100).fill(0).map((_, i) => ({
     id: i,
     agent: {
-      name: `Vishal Jadhav`,
-      phone: '9876543210',
+      name: `Vishal Jadhav `,
+      phone: getRandomInt(8888888888, 9999999999),
     },
     // Data for Dates Start
     dayData: {
@@ -203,7 +201,7 @@ const mockData = {
     id: i,
     agent: {
       name: `Vishal Jadhav ${i}`,
-      phone: '9876543210',
+      phone: getRandomInt(8888888888, 9999999999),
     },
     masterDetails: {
       code: `P8797`,
@@ -225,39 +223,6 @@ const mockData = {
 }
 const timingFilters = ['Day wise', 'Week wise', 'Monthly wise', 'Year wise'];
 
-const AgentSelect = ({ onSelect, selected }) => (
-  <div className="flex column" style={{ background: 'white', padding: '20px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
-    <span style={{ fontSize: 12, lineHeight: '18px', marginLeft: 17 }}>
-      Search
-    </span>
-    <input
-      style={{
-        border: 'none',
-        height: '40px',
-        background: '#F1F5F9',
-        boxShadow: 'inset 4px 4px 6px rgba(215, 228, 240, 0.8), inset -4px -4px 6px #FFFFFF',
-        padding: '5px 17px',
-        borderRadius: '25px',
-        marginBottom: 22,
-        width: 223,
-      }}
-      placeholder="Search Details"
-    />
-    <div className="flex column scroll-thumb-black" style={{ maxHeight: 200, overflow: 'auto' }}>
-      <div style={{ cursor: 'pointer' }} onClick={() => onSelect('All')} className="flex row">
-        <input type="checkbox" checked={selected === 'All'} />
-        <label>All</label>
-      </div>
-      {mockData.agents.slice(0, 60).map(a => (
-        <div style={{ cursor: 'pointer' }} onClick={() => onSelect(a.id)} className="flex row">
-          <input checked={selected === a.id || selected === 'All'} type="checkbox" />
-          <label>{a.agent.name}</label>
-        </div>
-      ))}
-    </div>
-  </div>
-)
-
 const TimingSelect = ({ onClick }) => (
   <div className="flex column" style={{ background: 'white', padding: '10px 15px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
     {timingFilters.map((label, index) => (
@@ -278,6 +243,8 @@ export default function Dashboard() {
   const [inventoryTiming, setInventoryTiming] = useReducer((_, a) => a, 0)
   const [selectedAgent, setAgent] = useReducer((_, a) => a, 'All')
   //try to add " : 'none' " after 'All'
+
+ 
 
   const dates = useMemo(() => ({
     lastFourDays: [
@@ -367,9 +334,36 @@ export default function Dashboard() {
     }
   ], [])
 
-  return (
-    <>
+// Filter By Checkbox Agent
+  const [searchText, setSearchText] = useState('');
+  const [filteredAgents, setFilteredAgents] = useState(mockData.agents);
+  const [selectedAgents, setSelectedAgents] = useState([]);  
+  const [newReports, setNewreports] = useState(mockData.agents);
+  
 
+  function handleSearchChange(event) {
+    const searchText = event.target.value;
+    setSearchText(searchText);
+    const filteredAgents = mockData.agents.filter(agent => {
+      const nameMatch = agent.agent.name.toLowerCase().includes(searchText.toLowerCase());
+      const phoneMatch = agent.agent.phone.toString().includes(searchText);
+      return nameMatch || phoneMatch;})
+    setFilteredAgents(filteredAgents);
+  }
+
+  function handleAgentSelect(agentId) {
+    const index = selectedAgents.indexOf(agentId);
+    if (index === -1) {
+      setSelectedAgents([...selectedAgents, agentId]);
+    } else {
+      setSelectedAgents([...selectedAgents.slice(0, index), ...selectedAgents.slice(index + 1)]);
+    }
+  } 
+ const newnewReports = selectedAgents.length === 0 ?  newReports : newReports.filter(agent => selectedAgents.includes(agent.id))
+
+//  Agent Report colomn Filter By Check Box End
+ return (
+    <>
       <Sidebar />
 
       <div className="main_body dashboard_fix">
@@ -397,7 +391,38 @@ export default function Dashboard() {
                   isOpen={agentPopoverOpen}
                   onClickOutside={toggleAgentPopover}
                   positions={['bottom']}
-                  content={<AgentSelect selected={selectedAgent} onSelect={setAgent} />}
+                  content={
+                    <div className="flex column" style={{ background: 'white', padding: '20px', boxShadow: '-6px -6px 12px #FFFFFF, 6px 6px 12px rgba(212, 224, 235, 0.8)' }}>
+                    <span style={{ fontSize: 12, lineHeight: '18px', marginLeft: 17 }}>
+                      Search
+                    </span>
+                  <div>
+                    <input type="text" 
+                     style={{
+                      border: 'none',
+                      height: '40px',
+                      background: '#F1F5F9',
+                      boxShadow: 'inset 4px 4px 6px rgba(215, 228, 240, 0.8), inset -4px -4px 6px #FFFFFF',
+                      padding: '5px 17px',
+                      borderRadius: '25px',
+                      marginBottom: 22,
+                      width: 223,
+                    }}
+                    placeholder="Search Details"                    
+                    value={searchText} 
+                    onChange={handleSearchChange} />
+                    <div className="flex column scroll-thumb-black" style={{ maxHeight: 200, overflow: 'auto' }}>    
+                    <div><input type="checkbox"/>All  </div>         
+                      {filteredAgents.map(agent => (
+                        <div key={agent.id}>
+                          <input type="checkbox"  checked={selectedAgents.includes(agent.id)} onChange={() => handleAgentSelect(agent.id)}/>
+                          {agent.agent.name} ({agent.agent.phone})
+                        </div>
+                      ))}
+                    
+                  </div>
+                  </div>
+                  </div>}
                 >
                   <div onClick={toggleAgentPopover} className="flex row" style={{ alignItems: 'center', marginRight: 20 }}>
                     <span>
@@ -421,7 +446,7 @@ export default function Dashboard() {
                 </Popover>
               </div>
             </div>
-            <Table columns={agentReportColumns} data={mockData.agents} />
+            <Table columns={agentReportColumns} data={newnewReports} />
           </div>
           <div className="dashboard_table_container">
             <div className="dashboard_table_header flex row space-between">
