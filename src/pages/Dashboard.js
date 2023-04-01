@@ -1,4 +1,4 @@
-import React, {useState, useReducer, useMemo } from 'react'
+import React, {useState, useReducer, useMemo, useEffect } from 'react'
 import { Popover } from 'react-tiny-popover'
 import { DateTime } from 'luxon'
 import "../css/Dashboard.css";
@@ -278,6 +278,8 @@ export default function Dashboard() {
 
  
   
+const totalassess =(r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + 'Data'}`]['total']()
+
 
 
   const agentReportColumns = useMemo(() => [
@@ -292,6 +294,7 @@ export default function Dashboard() {
       Header: 'Master Code',
       accessor: 'masterCode',
       Cell: MasterCell,
+
       
     },
     ...(dates['lastFour' + ['Days', 'Weeks', 'Months', 'Years'][agentTiming]].map(day => ({
@@ -302,9 +305,11 @@ export default function Dashboard() {
     }))),
     {
       Header: 'Total',
-      accessor: (r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + 'Data'}`]['total']()
+      accessor: totalassess,
+      sortFn: TotaleSortFunction,
+
     }
-  ], [dates, agentTiming])
+  ], [dates, agentTiming,totalassess])
 
   const inventoryColumns = useMemo(() => [
     {
@@ -385,24 +390,51 @@ export default function Dashboard() {
       setSelectAll(true);
     }
   }
- const newnewReports = selectedAgents.length === 0 ?  newReports : newReports.filter(agent => selectedAgents.includes(agent.id))
+
+
+  
+
+  useEffect(() => {
+    const newnewReports = selectedAgents.length === 0 ? newReports : newReports.filter(agent => selectedAgents.includes(agent.id));
+    setNewreports(newnewReports);
+  }, [selectedAgents]);
 
 //  Agent Report colomn Filter By Check Box End
+
+
+const [sortOrdertotal, setSortordertotal] = useState("asc"); // default to ascending order
+const datashortingtiming = ['day', 'week', 'month', 'year'][agentTiming] + 'Data'
+
 
  // Shorting Function 
  // Shorting Function 
  function myNameSortFunction() {
-  console.log("jai Shree Ram")
- }
- function handleSort(columnId,myNameSortFunction) {
-  const column = agentReportColumns.find(c => c.id === columnId);
-  if (column && column.sortFn) {
-    // call the custom sort function for the clicked column
-     myNameSortFunction()
-    agentReportColumns.sortFn();
-  }
-}
  
+ }
+
+ 
+  //sorting
+  function TotaleSortFunction() {
+    const order = sortOrdertotal === 'asc' ? 'desc' : 'asc';
+    // console.log(order)
+    const sortedData = [...newReports].sort((a, b) => {
+      if (order === 'asc') {
+        return b[datashortingtiming].total() - a[datashortingtiming].total();
+      } else {
+        return a[datashortingtiming].total() - b[datashortingtiming].total();
+      }
+    });
+    setNewreports(sortedData);
+    setSortordertotal(order);
+  }
+ 
+ function handleSort(column) {
+  if (column.sortFn) {
+    column.sortFn();
+  }
+  
+}
+
 
  return (
     <>
@@ -488,7 +520,8 @@ export default function Dashboard() {
                 </Popover>
               </div>
             </div>
-            <Table columns={agentReportColumns} data={newnewReports}  onSort={handleSort} />
+            
+            <Table columns={agentReportColumns} data={newReports}  onSort={handleSort} />
           </div>
           <div className="dashboard_table_container">
             <div className="dashboard_table_header flex row space-between">

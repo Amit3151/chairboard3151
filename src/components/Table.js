@@ -22,8 +22,9 @@ export default function Table({ columns, data, onSort }) {
                 <th style={{ fontWeight: 'normal' }} {...c.getHeaderProps()}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {c.render('Header')}
-                    <div style={{ width: 5 }} />
-                    <SortIcon onClick={() => onSort(c.id, c.sortFn)}/>
+                    {c.sortFn && (
+  <SortIcon onClick={() => onSort(c)} />
+)}
                   </div>
                 </th>
               ))}
