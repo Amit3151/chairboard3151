@@ -188,3 +188,11 @@ background: #000;
   align-items: center;
   display: f;
 }
+
+.ascending {
+  rotate: none;
+}
+
+.descending {
+  rotate: 180deg;
+}

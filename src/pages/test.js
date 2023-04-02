@@ -56,8 +56,17 @@ function getRandomInt(min, max) {
   const [data, setData] = useState(myData);
   const [sortOrder, setSortOrder] = useState("asc"); // default to ascending order
   
-function myNameFunction(){
-  console.log("NAme")
+function myNameFunction() {
+  const order = sortOrder === 'asc' ? 'desc' : 'asc';
+  const sortedData = [...data].sort((a, b) => {
+    if (order === 'asc') {
+      return a.agent.name.localeCompare(b.agent.name);
+    } else {
+      return b.agent.name.localeCompare(a.agent.name);
+    }
+  });
+  setData(sortedData);
+  setSortOrder(order);
 }
 function myAgeFunction(){
   console.log("Age")

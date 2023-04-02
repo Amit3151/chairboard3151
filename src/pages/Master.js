@@ -47,7 +47,7 @@ const mockData = new Array(100).fill(0).map((_, i) => ({
 }))
 
 export default function Master() {
- 
+  const [data, setData] = useState(mockData);
   
 
 // Filter Status Amit
@@ -55,7 +55,7 @@ const [filteredData, setFilteredData] = useState(mockData);
   
   const handleFilterSubmit = (selectedStatus) => {
     if (selectedStatus) {
-      let filtval = selectedStatus=="Blocked"? 0 : 1;
+      let filtval = selectedStatus==="Blocked"? 0 : 1;
       const filtered = mockData.filter(item => item.actionstatus === Number(filtval));
       setData(filtered);
     } else {
@@ -63,7 +63,7 @@ const [filteredData, setFilteredData] = useState(mockData);
     }
   };
 
-  const [data, setData] = useState(mockData);
+ 
 
   const handleBlockClick = (value) => {
       const updatedData = [...data];
@@ -78,56 +78,64 @@ console.log("detail clicked")
 
 // Filter Status 
 
-  const masterColumns = useMemo(() => [
+ const masterColumns = useMemo(() => [
     {
       Header: 'Master Details',
       accessor: 'master',
-      Cell: MasterDetailsCell
+      Cell: MasterDetailsCell,
+      sortFn: masterSort
     },
     {
       Header: 'Master Code',
-      accessor: 'masterCode'      
+      accessor: 'masterCode',      
     },
     {
       Header: 'Available Inventory',
-      accessor: 'availableInventory'
+      accessor: 'availableInventory',
+      sortFn: availableInventorySort
+      
     },
     {
       Header: 'Used Column',
-      accessor: 'usedColumn'
+      accessor: 'usedColumn',
+      sortFn: usedColumnSort
     },
     {
       Header: 'Agents',
-      accessor: 'agents'
+      accessor: 'agents',
     },
     {
       Header: 'Wallet Balance',
       accessor: 'balance',
-      Cell: BalanceCell
+      Cell: BalanceCell,
+      sortFn: balanceSort
     },
     {
       Header: 'Joining Date',
       accessor: 'createdAt',
       Cell: DateCell,
+      sortFn: joindateSort
     },
     {
       Header: 'District & State',
       accessor: 'address',
       Cell: AddressCell,
+      sortFn: addressSort
     },
     {
       Header: 'Action',
-      accessor: 'id',
+      accessor: 'id',      
       Cell: ({ value }) => (
         <div className="flex row center">
-            <button className={data[value].actionstatus===0 ? "styling_aprove2 block_btn new":"styling_aprove2 Unblock_btn"} onClick={() => handleBlockClick(value)}>{data[value].actionstatus===0 ? "Block":"Unblock"}</button>
+            <button className={mockData[value].actionstatus===0 ? "styling_aprove2 block_btn new":"styling_aprove2 Unblock_btn"} onClick={() => handleBlockClick(value)}>{mockData[value].actionstatus===0 ? "Block":"Unblock"}</button>
             <Link to='/MasterDetails'>
                 <GrEdit />
             </Link>
         </div>
     ),
+    sortFn: actionstatusSort,
     },   
-  ], [])
+  ], [data,])
 
   const [createModalOpen, toggleModal] = useReducer(st => !st, false)
 
@@ -152,6 +160,125 @@ console.log("detail clicked")
     }
   }
   
+
+
+   // Table sorting Start
+   const [sortOrder, setSortOrder] = useState("asc"); // default to ascending order
+
+   function masterSort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...data].sort((a, b) => {
+       if (order === 'asc') {
+         return a.master.code.localeCompare(b.master.code);
+       } else {
+         return b.master.code.localeCompare(a.master.code);
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+   }
+   
+   function availableInventorySort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...data].sort((a, b) => {
+       if (order === 'asc') {
+         return a.availableInventory - b.availableInventory;
+       } else {
+         return b.availableInventory - a.availableInventory;
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+   
+   }
+   function usedColumnSort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...data].sort((a, b) => {
+       if (order === 'asc') {
+         return a.usedColumn - b.usedColumn;
+       } else {
+         return b.usedColumn - a.usedColumn;
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+   
+   }
+   
+   function balanceSort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...data].sort((a, b) => {
+       if (order === 'asc') {
+         return a.balance.num - b.balance.num;
+       } else {
+         return b.balance.num - a.balance.num;
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+   
+   }
+   function joindateSort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...data].sort((a, b) => {
+       if (order === 'asc') {
+         return  new Date(a.createdAt) -  new Date(b.createdAt);
+       } else {
+         return  new Date(b.createdAt) -  new Date(a.createdAt);
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+   
+   
+   
+   }
+   function addressSort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...data].sort((a, b) => {
+       if (order === 'asc') {
+         return a.address.city.localeCompare(b.address.city);
+       } else {
+         return b.address.city.localeCompare(a.address.city);
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+   
+   }
+   function actionstatusSort(){
+     const order = sortOrder === 'asc' ? 'desc' : 'asc';
+     const sortedData = [...mockData].sort((a, b) => {
+       if (order === 'asc') {
+         return a.actionstatus - b.actionstatus;
+       } else {
+         return b.actionstatus - a.actionstatus;
+       }
+     });
+     setData(sortedData);
+     setSortOrder(order);
+     
+     
+   
+   }
+   
+   
+   
+     function handleSort(column) {
+       if (column.sortFn) {
+         column.sortFn();
+       }
+       
+     }
+     // Table sorting End
+   
+   
+   
+   
+   
+   
+
+
   return (
     <>
       <CreateMasterModal isOpen={createModalOpen} onClickOutside={toggleModal} />
@@ -190,7 +317,7 @@ console.log("detail clicked")
           </div>
         </div>
         <div className="dashboard_table_container master" style={{ margin: '0 40px' }}>
-          <Table columns={masterColumns} data={data} shorting={shortdet}/>
+          <Table columns={masterColumns} data={data} onSort={handleSort}/>
         </div>
       </div>
     </>

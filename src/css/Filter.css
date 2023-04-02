@@ -30,6 +30,7 @@
 }
 .pop_up.active{
     display: flex;
+    z-index: 2;
 }
 .pop_up select {
     border-radius: 25px;

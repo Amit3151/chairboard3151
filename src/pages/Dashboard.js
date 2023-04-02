@@ -50,7 +50,7 @@ const mockData = {
   agents: new Array(100).fill(0).map((_, i) => ({
     id: i,
     agent: {
-      name: `Vishal Jadhav `,
+      name: `Vishal Jahav ${i}`,
       phone: getRandomInt(8888888888, 9999999999),
     },
     // Data for Dates Start
@@ -197,6 +197,8 @@ const mockData = {
     ,
     total: getRandomInt(0, 1000),
   })),
+
+
   inventory: new Array(100).fill(0).map((_, i) => ({
     id: i,
     agent: {
@@ -278,8 +280,6 @@ export default function Dashboard() {
 
  
   
-const totalassess =(r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + 'Data'}`]['total']()
-
 
 
   const agentReportColumns = useMemo(() => [
@@ -301,54 +301,67 @@ const totalassess =(r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + '
       Header: day,
       accessor: (r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + 'Data'}`][day],
       Cell: DatesCell,
+      sortFn: dateDatashort
 
     }))),
     {
       Header: 'Total',
-      accessor: totalassess,
+      accessor: (r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + 'Data'}`]['total'](),
       sortFn: TotaleSortFunction,
 
     }
-  ], [dates, agentTiming,totalassess])
+  ], [dates, agentTiming,TotaleSortFunction])
 
   const inventoryColumns = useMemo(() => [
     {
       Header: 'Agent Details',
       accessor: 'agent',
-      Cell: AgentCell
+      Cell: AgentCell,
+      sortFn:InvNameshort,
     },
     {
       Header: 'Master Details',
       accessor: 'masterDetails',
-      Cell: MasterDetailsCell
+      Cell: MasterDetailsCell,
     },
     {
       Header: 'Available Inventory',
-      accessor: 'availableInventory'
+      accessor: 'availableInventory',
+      sortFn:InvavailShort
+
     },
     {
       Header: 'Used Column',
-      accessor: 'usedColumn'
+      accessor: 'usedColumn',
+      sortFn:InvusdcolShort
+
     },
     {
       Header: 'Avg. Activation per day',
-      accessor: 'avgDayActivation'
+      accessor: 'avgDayActivation',
+      sortFn:InvnavgdyactShort
+
     },
     {
       Header: 'Avg. Activation per week',
-      accessor: 'avgWeekActivation'
+      accessor: 'avgWeekActivation',
+      sortFn:InvnavgwkactShort
+
     },
     {
       Header: 'Pending ord. Qty',
-      accessor: 'pendingQty'
+      accessor: 'pendingQty',
+      sortFn:InvpndqtyShort
+
     }
-  ], [])
+  ], [InvNameshort])
 
 // Filter By Checkbox Agent
   const [searchText, setSearchText] = useState('');
   const [filteredAgents, setFilteredAgents] = useState(mockData.agents);
   const [selectedAgents, setSelectedAgents] = useState([]);  
   const [newReports, setNewreports] = useState(mockData.agents);
+  const[newInvantry,setNewinvantry] =useState(mockData.inventory);
   const [selectAll, setSelectAll] = useState(false);
   
 
@@ -391,42 +404,191 @@ const totalassess =(r) => r[`${['day', 'week', 'month', 'year'][agentTiming] + '
     }
   }
 
-
-  
+ 
 
   useEffect(() => {
-    const newnewReports = selectedAgents.length === 0 ? newReports : newReports.filter(agent => selectedAgents.includes(agent.id));
+    const newnewReports = selectedAgents.length === 0 ? mockData.agents : mockData.agents.filter(agent => selectedAgents.includes(agent.id));
     setNewreports(newnewReports);
   }, [selectedAgents]);
 
 //  Agent Report colomn Filter By Check Box End
 
 
-const [sortOrdertotal, setSortordertotal] = useState("asc"); // default to ascending order
-const datashortingtiming = ['day', 'week', 'month', 'year'][agentTiming] + 'Data'
 
 
  // Shorting Function 
+const [sortOrdertotal, setSortOrdertotal] = useState("asc"); // default to ascending order
+
+
+ //Sale Reporting Shorting Start
  // Shorting Function 
  function myNameSortFunction() {
- 
+    const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newReports].sort((a, b) => {
+    if (order === "asc") {
+      
+      return  a.agent.name.localeCompare(b.agent.name);
+     
+    } else {
+     
+      return  b.agent.name.localeCompare(a.agent.name);
+     
+    }
+  });
+  setNewreports(sortedData);
+  setSortOrdertotal(order);
  }
 
  
-  //sorting
-  function TotaleSortFunction() {
-    const order = sortOrdertotal === 'asc' ? 'desc' : 'asc';
-    // console.log(order)
-    const sortedData = [...newReports].sort((a, b) => {
-      if (order === 'asc') {
-        return b[datashortingtiming].total() - a[datashortingtiming].total();
-      } else {
-        return a[datashortingtiming].total() - b[datashortingtiming].total();
-      }
-    });
-    setNewreports(sortedData);
-    setSortordertotal(order);
-  }
+
+//  Shorting Based On Total
+
+const shorttiming = ['day', 'week', 'month', 'year'][agentTiming] + 'Data' 
+ function TotaleSortFunction() {
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newReports].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a[shorttiming].total() - b[shorttiming].total();
+     
+    } else {
+     
+      return b[shorttiming].total() - a[shorttiming].total();
+     
+    }
+  });
+  setNewreports(sortedData);
+  setSortOrdertotal(order);
+}
+
+// Date Shorting
+function dateDatashort() {
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newReports].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a[shorttiming].total() - b[shorttiming].total();
+     
+    } else {
+     
+      return b[shorttiming].total() - a[shorttiming].total();
+     
+    }
+  });
+  setNewreports(sortedData);
+  setSortOrdertotal(order);
+}
+ //Sale Reporting Shorting End
+
+ //Invantary Sorting Start
+
+ function InvNameshort(){
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newInvantry].sort((a, b) => {
+    if (order === "asc") {
+      
+      return  a.agent.name.localeCompare(b.agent.name);
+     
+    } else {
+     
+      return  b.agent.name.localeCompare(a.agent.name);
+     
+    }
+  });
+  setNewinvantry(sortedData);
+  setSortOrdertotal(order);
+  
+ }
+ function InvavailShort(){
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newInvantry].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a.availableInventory - b.availableInventory;
+     
+    } else {
+     
+      return b.availableInventory - a.availableInventory;
+     
+    }
+  });
+  setNewinvantry(sortedData);
+  setSortOrdertotal(order);
+
+  
+ }
+ function InvusdcolShort(){
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newInvantry].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a.usedColumn - b.usedColumn;
+     
+    } else {
+     
+      return b.usedColumn - a.usedColumn;
+     
+    }
+  });
+  setNewinvantry(sortedData);
+  setSortOrdertotal(order);
+
+  
+ }
+ function InvnavgdyactShort(){
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newInvantry].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a.avgDayActivation - b.avgDayActivation;
+     
+    } else {
+     
+      return b.avgDayActivation - a.avgDayActivation;
+     
+    }
+  });
+  setNewinvantry(sortedData);
+  setSortOrdertotal(order);
+  
+ }
+ function InvnavgwkactShort(){
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newInvantry].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a.avgWeekActivation - b.avgWeekActivation;
+     
+    } else {
+     
+      return b.avgWeekActivation - a.avgWeekActivation;
+     
+    }
+  });
+  setNewinvantry(sortedData);
+  setSortOrdertotal(order);
+ 
+  
+ }
+ function InvpndqtyShort(){
+  const order = sortOrdertotal === "asc" ? "desc" : "asc";
+  const sortedData = [...newInvantry].sort((a, b) => {
+    if (order === "asc") {
+      
+      return a.pendingQty - b.pendingQty;
+     
+    } else {
+     
+      return b.pendingQty - a.pendingQty;
+     
+    }
+  });
+  setNewinvantry(sortedData);
+  setSortOrdertotal(order);
+ 
+ }
+ //Invantary Sorting End
+
  
  function handleSort(column) {
   if (column.sortFn) {
@@ -434,6 +596,7 @@ const datashortingtiming = ['day', 'week', 'month', 'year'][agentTiming] + 'Data
   }
   
 }
+//  Sorting End 
 
 
  return (
@@ -581,7 +744,7 @@ const datashortingtiming = ['day', 'week', 'month', 'year'][agentTiming] + 'Data
                 </Popover>
               </div>
             </div>
-            <Table columns={inventoryColumns} data={mockData.inventory} />
+            <Table columns={inventoryColumns} data={newInvantry} onSort={handleSort} />
           </div>
         </div>
       </div>
