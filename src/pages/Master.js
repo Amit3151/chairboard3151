@@ -228,11 +228,10 @@ console.log("detail clicked")
        }
      });
      setData(sortedData);
-     setSortOrder(order);
-   
-   
-   
+     setSortOrder(order);   
    }
+   
+
    function addressSort(){
      const order = sortOrder === 'asc' ? 'desc' : 'asc';
      const sortedData = [...data].sort((a, b) => {

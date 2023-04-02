@@ -1,9 +1,11 @@
 import Table from '../components/Table'
 import React, {useState, useReducer, useMemo } from 'react'
+import Search from '../components/Search';
 
 
 
 export default function Test() {
+  
   const columns = useMemo(() =>  [
     {
       Header: 'Name',
@@ -102,6 +104,12 @@ function sortTotal() {
   
 
   return (
+    <>
+   
+    <div>
     <Table columns={columns} data={data} onSort={handleSort} />
+    </div>
+    
+    </>
   );
 }
