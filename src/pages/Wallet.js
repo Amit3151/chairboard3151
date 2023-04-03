@@ -6,7 +6,8 @@ import sort from "../images/uil_sort-amount-down.svg";
 import Header from "../components/Header";
 import Sidebar from '../components/Sidebar';
 import cross from "../images/cross-23.svg";
-import {AiOutlineClose} from 'react-icons/ai'
+import {AiOutlineClose} from 'react-icons/ai';
+import Search from '../components/Search';
 
 export default function Wallet() {
 
@@ -17,6 +18,7 @@ export default function Wallet() {
   function approve() {
     newvalue((value) => !value);
   }
+
   function handleClose() {
     newvalue((value) => !value);
   }
@@ -35,41 +37,97 @@ export default function Wallet() {
     return () => document.removeEventListener("mousedown", outclick);
   })
 
-  //sorting :- same logic as Channel page , when the data will get added from the backend!!
   // these are just for example
-  const [list, setList] = useState([
+  const myData=[
     { Sr: 1, Transactionid: "DFGDH23021301", UserDetail: 'Aditya Jangid  </br> 854697845', MasterCode: "ASDF9876", Time: "06/01/23 <br/> 18:23:55 PM", Transaction: " <span class='cost_return'>Cost Return</span></br>98765-264-231421 ", Amount: "1" },
-    { Sr: 2, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid </br> 854697845", MasterCode: "ASDF9876", Time: "06/01/23 <br/> 18:23:55 PM", Transaction: "<span class='com_paid'>Commition Paid</span></br>98765-264-231421", Amount: "1" },
-    { Sr: 3, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid </br> 854697845", MasterCode: "ASDF9876", Time: "06/01/23 <br/> 18:23:55 PM", Transaction: "<span class='cost_return'>Cost Return</span></br>98765-264-231421", Amount: "1" },
-  ]);
+    { Sr: 2, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid </br> 854697846", MasterCode: "ASDF9877", Time: "07/02/23 <br/> 18:23:56 PM", Transaction: "<span class='com_paid'>Commition Paid</span></br>98765-264-231422", Amount: "3" },
+    { Sr: 3, Transactionid: "DFGDH23021301", UserDetail: "Aditya Jangid </br> 854697847", MasterCode: "ASDF9878", Time: "08/03/23 <br/> 18:23:57 PM", Transaction: "<span class='cost_return'>Cost Return</span></br>98765-264-231423", Amount: "5" },
+  ]
+
+  const [list, setList]= useState(myData)
+
+   // Search Function start
+   const [searchBy, setSearchBy] = useState('Transactionid'); // default to searching by name
+   const [searchQuery, setSearchQuery] = useState('');
+   
+   const searchOptions = [
+     { label: 'Transaction ID', value: 'Transactionid' },
+     { label: 'Name', value: 'UserDetail' },
+     { label: 'MasterCode', value: 'MasterCode' },
+     
+   ];
+   
+   function handleSearchChange(event) {
+     setSearchBy(event.target.value);
+   }
+   
+   function handleSearchQueryChange(event) {
+     setSearchQuery(event.target.value);
+   }
+   
+   function handleSearchSubmit() {
+    
+     const searchedData = myData.filter((item) => {
+       const searchProp = searchBy.split('.');
+       let searchValue = item;
+       for (let i = 0; i < searchProp.length; i++) {
+         searchValue = searchValue[searchProp[i]];
+       }
+       return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
+     });
+   
+     // update the data state with the filtered data
+     setList(searchedData);
+   }
+   // Search Function END
 
   const [sortAsc, setSortAsc] = useState(true);
-
   const handleSort = () => {
     const sortedList = [...list].sort((a, b) => {
       if (sortAsc) {
-        return a.id - b.id;
+        return a.Sr - b.Sr;
       } else {
-        return b.id - a.id;
+        return b.Sr - a.Sr;
       }
     });
     setList(sortedList);
     setSortAsc(!sortAsc);
   };
+  
+  const [rotation, setRotation] = useState(0);
+
+  const handleClick = () => {
+    setRotation(rotation + 180);
+  }
 
   function closePop() {
     newvalue((value) => !value);
   }
 
  // Filter Patch
-
  const handleFilterSubmit = () => {
 }
+const Filters = [{
+  filtername: 'Demo1', 
+  filtonChange: handeldemo, 
+  options: ['Demo 1', 'A', 'B'],
+  selectedValue: ""
+},
+{
+  filtername: 'Demo2',
+  filtonChange: handeldemo,
+  options: ['Demo 2', 'A', 'B'],
+  selectedValue: ""
+}
+];
+
+function handeldemo() {
+
+}
+
   return (
-    <>
-      
+    <>  
         <Sidebar />
-      
       <div className="main_body">
         <div className="aget_header">
           <Header />
@@ -88,10 +146,11 @@ export default function Wallet() {
                       <img src={wallet} alt="" />INR:6881
                     </span>
                   </span>
+                  
                   {/* <button>Add Money</button> */}
+                  
                   <td>
                     <button className='add_money' onClick={approve}>Add Money</button>
-                    
                     <div className={approve_box} >
                       <div className="approve_inside">
                         <div className="blur1" ref={aprove_ref}>
@@ -123,21 +182,13 @@ export default function Wallet() {
                     </div>
                   </td>
                 </div>
-                <span className='label_style'>
-                  <label htmlFor="">Search</label>
-                  <input
-                    className="input_search"
-                    type="text"
-                    placeholder="Enter"
-                    name="search"
-                  />
-                </span>
-                <button>Submit</button>
+            <Search searchOptions={searchOptions} handleSearchChange={handleSearchChange}  handleSearchQueryChange ={handleSearchQueryChange} handleSearchSubmit={handleSearchSubmit}/>
+              
               </div>
             </div>
             <div className="filter">
               <div className="_inside fix_popup">
-                <Filter   statuses={['Approved', 'Declined']} onSubmit={handleFilterSubmit}/>
+                <Filter  Filters={Filters} statuses={['Approved', 'Declined']} onSubmit={handleFilterSubmit}/>
                 <div className="credit_box">
                   <span>
                     <label className='wallet_label'>Total Credit</label>
@@ -157,38 +208,43 @@ export default function Wallet() {
                     <thead>
                       <tr>
                         <td>
-                          <span className="align">
-                            Sr No<img src={sort} alt="" onClick={handleSort}/>
+                          <span className="align" onClick={handleClick}>
+                            Sr No<img src={sort} alt="" onClick={handleSort} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            Transaction ID<img src={sort} alt="" onClick={handleSort}/>
+                            Transaction ID
+                            {/* <img src={sort} alt="" onClick={handleSort}/> */}
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            User Detail<img src={sort} alt="" onClick={handleSort}/>
+                            User Detail
+                            {/* <img src={sort} alt="" onClick={handleSort}/> */}
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            Master Code<img src={sort} alt="" onClick={handleSort}/>
+                            Master Code
+                            {/* <img src={sort} alt="" onClick={handleSort}/> */}
+                          </span>
+                        </td>
+                        <td>
+                          <span className="align" onClick={handleClick}>
+                            Time<img src={sort} alt="" onClick={handleSort} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            Time<img src={sort} alt="" onClick={handleSort}/>
+                            Transaction Details
+                            {/* <img src={sort} alt="" onClick={handleSort}/> */}
                           </span>
                         </td>
                         <td>
-                          <span className="align">
-                            Transaction Details<img src={sort} alt="" onClick={handleSort}/>
-                          </span>
-                        </td>
-                        <td>
-                          <span className="align">
-                            Amount<img src={sort} alt="" onClick={handleSort}/> 
+                          <span className="align" onClick={handleClick}>
+                            Amount
+                            <img src={sort} alt="" onClick={handleSort} style={{ transform: `rotate(${rotation}deg)` }}/> 
                           </span>
                         </td>
                       </tr>

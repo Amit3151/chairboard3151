@@ -11,6 +11,10 @@ import Search from "../components/Search";
 import cross from "../images/cross-23.svg";
 import warning from "../images/mdi_alert-circle-outline.svg";
 import { AiOutlineClose } from 'react-icons/ai'
+import { Link } from "react-router-dom";
+import Return from "../components/Cells/Return";
+import Approved from "../components/Cells/Approved";
+import Block from "../components/Cells/Block";
 
 
 export default function Inventory() {
@@ -71,10 +75,96 @@ export default function Inventory() {
 
     uploadd.current.click()
   }
+
+  const Filters = [{
+    filtername: 'Demo1', 
+    filtonChange: handeldemo, 
+    options: ['Demo 1', 'A', 'B'],
+    selectedValue: ""
+  },
+  {
+    filtername: 'Demo2',
+    filtonChange: handeldemo,
+    options: ['Demo 2', 'A', 'B'],
+    selectedValue: ""
+  }
+  ];
+// Filter Functions
+
+  function handeldemo() {
+
+  }
+  
   //Filter Patch
   const handleFilterSubmit = () => {
   }
 
+ const myData = [
+    { Serial: '607469004072651', VC: 'VC6', MasterCode: 'ICSH0446', Recieved: '21/01/2023 </br> 21:53:49', Dispatched: '21/01/2023 </br> 21:53:49', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', Acknowledge: 'Yes', Agent: {name:"Aditya Jangid",spanname:"A", mob:"854697845"} , Master : '<div class="box_span"> <span class="span_b">M</span><span> Aditya Jangid, <br /> 854697845 </span></div>' , Status : 'Admin' , Return : <Return /> },
+    { Serial: '607469004072652', VC: 'VC6', MasterCode: 'ICSH0446', Recieved: '21/01/2023 </br> 21:53:49', Dispatched: '21/01/2023 </br> 21:53:49', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', Acknowledge: 'Yes', Agent: {name:"Aditya Jangid",spanname:"A", mob:"854697845"} , Master : '<div class="box_span"> <span class="span_b">M</span><span> Aditya Jangid, <br /> 854697845 </span></div>' , Status : 'Inventory At Agent' , Return : 'Not Applicable' },
+    { Serial: '607469004072653', VC: 'VC6', MasterCode: 'ICSH0446', Recieved: '21/01/2023 </br> 21:53:49', Dispatched: '21/01/2023 </br> 21:53:49', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', Acknowledge: 'Yes', Agent: {name:"Aditya Jangid",spanname:"A", mob:"854697845"} , Master : '<div class="box_span"> <span class="span_b">M</span><span> Aditya Jangid, <br /> 854697845 </span></div>' , Status : 'Inventory At Agent' , Return : 'Not Applicable' },  
+  ]
+
+  const [tableData, setTableData] = useState(myData)
+  // Search Function start
+const [searchBy, setSearchBy] = useState('MasterCode'); // default to searching by name
+const [searchQuery, setSearchQuery] = useState('');
+
+const searchOptions = [
+  { label: 'MasterCode', value: 'MasterCode' },
+  { label: 'Serial', value: 'Serial' },
+  
+];
+
+function handleSearchChange(event) {
+  setSearchBy(event.target.value);
+}
+
+function handleSearchQueryChange(event) {
+  setSearchQuery(event.target.value);
+}
+
+function handleSearchSubmit() {
+ 
+  const searchedData = myData.filter((item) => {
+    const searchProp = searchBy.split('.');
+    let searchValue = item;
+    for (let i = 0; i < searchProp.length; i++) {
+      searchValue = searchValue[searchProp[i]];
+    }
+    return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
+  });
+
+  // update the data state with the filtered data
+  setTableData(searchedData);
+}
+// Search Function END
+
+  //sorting
+  const [isSortedDesc, setIsSortedDesc] = useState(true);
+
+  const sortDesc = () => {
+    const sortedList = [...tableData].sort((a, b) => b.Serial - a.Serial);
+    setTableData(sortedList);
+    setIsSortedDesc(!isSortedDesc)
+  };
+
+  const sortAsc = () => {
+    const sortedList = [...tableData].sort((a, b) => a.Serial - b.Serial);
+    setTableData(sortedList);
+    setIsSortedDesc(!isSortedDesc)
+  };
+
+  function sortit() {
+    return isSortedDesc ? sortDesc : sortAsc;
+  }
+
+  //sorting icon change
+  const [rotation, setRotation] = useState(0);
+
+  const handleClick = () => {
+    setRotation(rotation + 180);
+  }
 
   return (
     <>
@@ -108,10 +198,11 @@ export default function Inventory() {
             </div>
 
             <div className="search_bar">
-              <Search title="Inventory" />
+            <Search title="Inventory" searchOptions={searchOptions} handleSearchChange={handleSearchChange}  handleSearchQueryChange ={handleSearchQueryChange} handleSearchSubmit={handleSearchSubmit}/>
+              
             </div>
             <div className="filter_section">
-              <Filter   statuses={['Apporved', 'Unapproved']} onSubmit={handleFilterSubmit} />
+            <Filter statuses={['Blocked', 'Unblocked']} Filters={Filters} onSubmit={handleFilterSubmit} />
             </div>
             <div className="invent_main_cont">
               <div className="aget_main_cont">
@@ -121,45 +212,45 @@ export default function Inventory() {
                       <thead>
                         <tr>
                           <td>
-                            <span className="align">
-                              Serial No <img src={sort} alt="" />
+                            <span className="align" onClick={handleClick}>
+                              Serial No <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
+                            </span>
+                          </td>
+                          <td>
+                            <span className="align" onClick={handleClick}>
+                              VC <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
+                            </span>
+                          </td>
+                          <td>
+                            <span className="align" onClick={handleClick}>
+                              Received Date <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
+                            </span>
+                          </td>
+                          <td>
+                            <span className="align" onClick={handleClick}>
+                              Dispatched Date <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
                             </span>
                           </td>
                           <td>
                             <span className="align">
-                              VC <img src={sort} alt="" />
-                            </span>
-                          </td>
-                          <td>
-                            <span className="align">
-                              Received Date <img src={sort} alt="" />
-                            </span>
-                          </td>
-                          <td>
-                            <span className="align">
-                              Dispatched Date <img src={sort} alt="" />
-                            </span>
-                          </td>
-                          <td>
-                            <span className="align">
-                              Acknowledge <img src={sort} alt="" />
-                            </span>
-                          </td>
-                          <td>
-                            <span className="align">
-                              {" "}
-                              Agent Details <img src={sort} alt="" />
+                              Acknowledge 
                             </span>
                           </td>
                           <td>
                             <span className="align">
                               {" "}
-                              Mater Details <img src={sort} alt="" />
+                              Agent Details 
                             </span>
                           </td>
                           <td>
                             <span className="align">
-                              Status <img src={sort} alt="" />
+                              {" "}
+                              Mater Details 
+                            </span>
+                          </td>
+                          <td>
+                            <span className="align" onClick={handleClick}>
+                              Status <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
                             </span>
                           </td>
                           <td>
@@ -168,311 +259,25 @@ export default function Inventory() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
+                      {tableData.map((item, index) => (
+                        <tr key={index}>
+                          <td>{item.Serial}</td>
+                          <td>{item.VC}</td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.Recieved) }}></td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.Dispatched) }}></td>
+                          <td>{item.Acknowledge}</td>
                           <td>
-                            21/01/2023, <br />
-                            21:50:49
+                          <div className="box_span"> 
+                          <span className="span_a">{item.Agent.spanname}</span>
+                          <span> {item.Agent.name}, <br /> {item.Agent.mob} </span>
+                          </div>
                           </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Admin</td>
-                          <td>
-
-                            <td>
-                              <button className={styling_aprove2} onClick={approve2}>Return</button>
-                              <div className={approve_box2} >
-                                <div className="approve_inside">
-                                  <div className="blur1" ref={aprove_ref2}>
-                                    <div className="apro_heading">
-                                      <span>Block</span>
-                                      <AiOutlineClose onClick={closePop5} />
-                                      <div className="cross_icn_wrap">
-                                        <img src={cross} alt="" onClick={notApprove2} />
-                                      </div>
-                                    </div>
-                                    <div className="apro_input">
-                                      <label htmlFor="">Enter Master Code</label>
-                                      <input type="text" ref={inputRef2} placeholder="Enter Master Code" />
-                                      {error2 && <span><img src={warning} alt="" /> {'Invaild Master Code'}</span>}
-                                    </div>
-                                    <div className="apro_button">
-                                      <button onClick={() => {
-                                        let pattern = /\d/g;
-                                        let result2 = pattern.test(inputRef2.current.value2);
-                                        if (!result2) {
-                                          setError2(true);
-                                        } else {
-                                          setError2(false);
-                                        }
-                                      }}>Submit</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                          </td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.Master) }}></td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.Status) }}></td>
+                          <td>{item.Return}</td>
+                          
                         </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
-
-                        <tr>
-                          <td>607469004072651</td>
-                          <td>VC6</td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>
-                            21/01/2023, <br />
-                            21:50:49
-                          </td>
-                          <td>Yes</td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_a">A</span>
-                              <span>
-                                Aditya Jangid, <br />
-                                854697845
-                              </span>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="box_span">
-                              <span className="span_b">M</span>
-                              <span>
-                                854697845 , <br />
-                                ICSH0446
-                              </span>
-                            </div>
-                          </td>
-                          <td>Inventory at Agent</td>
-                          <td>Not Applicable</td>
-                        </tr>
+                      ))}
                       </tbody>
                     </table>
                   </div>

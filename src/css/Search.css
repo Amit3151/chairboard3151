@@ -2,8 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
 }
+.seracform > span {
+    display: flex;
+    flex-flow: column;
+   }
+   
 .search_main_left{
     width: 30%;
     display: flex;

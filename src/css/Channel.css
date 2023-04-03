@@ -1,6 +1,8 @@
 .main_body{
     width: 100%;
     min-height: 100vh;
+    background: #F1F5F9;
+
 }
 .channel_body_container{
     display: flex;

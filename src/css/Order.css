@@ -45,6 +45,12 @@
     color: #1A8CF4;
     padding: 6px 17px;
 }
+.item_status3 span{
+    background: #FFF0DD;
+    border-radius: 25px;
+    color: #F4911A;
+    padding: 6px 17px;
+}
 
 .repo_main_box_heading.OD{
     height: fit-content;
@@ -122,7 +128,8 @@
     justify-content: space-around;
     border-radius: 25px;
     background: #4244a020;
-    width: fit-content;
+    width: -moz-fit-content;
+    width: 200px;
     color: rgb(182, 183, 198);
     border: none;
     font-size: 15px;
@@ -132,6 +139,7 @@
     align-items: center;
     padding: 0;
     overflow: hidden;
+    height: 40px;
 }
 
 .un-li{
@@ -143,9 +151,9 @@
     padding: 8px 20px;
 }
 
-.un-li:hover{
+/* .un-li:hover{
     color: #4244a0;
-}
+} */
 
 .un-li.all{
     width: 100%;   

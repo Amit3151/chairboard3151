@@ -53,7 +53,6 @@ export default function Profile() {
   }
 
   // Eye Button Table Pass Show
-
   const [showPassword, setShowPassword] = useState(false)
   const [selectedindex, setselectedIndex] = useState(-1)
 
@@ -108,8 +107,27 @@ const [rotation, setRotation] = useState(0);
 
   const handleClick = () => {
     setRotation(rotation + 180);}
-  
 
+
+  
+    const Filters = [{
+      filtername: 'Demo1', 
+      filtonChange: handeldemo, 
+      options: ['Demo 1', 'A', 'B'],
+      selectedValue: ""
+    },
+    {
+      filtername: 'Demo2',
+      filtonChange: handeldemo,
+      options: ['Demo 2', 'A', 'B'],
+      selectedValue: ""
+    }
+    ];
+  // Filter Functions
+  
+    function handeldemo() {
+  
+    }
     // Filter Patch
     const handleFilterSubmit = () => {
     }
@@ -176,7 +194,7 @@ const [rotation, setRotation] = useState(0);
               </div>
             </div>
             <div className="filter_section">
-              <Filter statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit}/>
+              <Filter Filters={Filters}   statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit}/>
             </div>
             <div className="repo_main_cont">
               <div className="repo_main_box">
@@ -185,11 +203,22 @@ const [rotation, setRotation] = useState(0);
                     <thead>
                       <tr className="align_head">
                         <th className="align"> <div className='align_ch_head'> <div>Sr.no</div>  <div onClick={handleClick}><img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/></div> </div> </th>
-                        <th className="align"> <div className='align_ch_head'> <div>CP ID </div><div onClick={handleClick}><img src={sort} /></div> </div> </th>
-                        <th className="align"> <div className='align_ch_head'> <div>Password</div> <div onClick={handleClick}><img src={sort} alt="" /></div> </div> </th>
-                        <th className="align"> <div className='align_ch_head'> <div>Encryption key</div> <div onClick={handleClick}><img src={sort} alt="" /></div> </div> </th>
-                        <th className="align"> <div className='align_ch_head'> <div>Agent ID</div> <div onClick={handleClick}><img src={sort} alt=""  /></div> </div> </th>
-                        <th className="align"> <div className='align_ch_head'> <div>Action</div> <div onClick={handleClick}><img src={sort} alt=""  /></div> </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>CP ID </div>
+                        {/* <div onClick={handleClick}><img src={sort} /></div>  */}
+                        </div> 
+                          </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Password</div> 
+                        {/* <div onClick={handleClick}><img src={sort} alt="" /></div>  */}
+                        </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Encryption key</div> 
+                        {/* <div onClick={handleClick}><img src={sort} alt="" /></div>  */}
+                        </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Agent ID</div> 
+                        {/* <div onClick={handleClick}><img src={sort} alt=""  /></div>  */}
+                        </div> </th>
+                        <th className="align"> <div className='align_ch_head'> <div>Action</div> 
+                        {/* <div onClick={handleClick}><img src={sort} alt=""  /></div>  */}
+                        </div> </th>
                       </tr>
                     </thead>
                     <tbody>

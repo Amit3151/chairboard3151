@@ -19,7 +19,6 @@ import ManualReqDetails from './pages/ManualReqDetails';
 import CheckDetails from './pages/CheckDetails';
 import MasterDetails from './pages/MasterDetails';
 import Test from './pages/test';
-import TestSearch from './pages/testsrch';
 
 function App() {
   return (
@@ -46,7 +45,6 @@ function App() {
           <Route exact path='/CheckDetails' element={<CheckDetails/>}/>
           <Route exact path='/MasterDetails' element={<MasterDetails/>}/>
           <Route exact path='/Test' element={<Test/>}/>
-          <Route exact path='/TestSearch' element={<TestSearch/>}/>
         </Routes>
       </div>
     </BrowserRouter>

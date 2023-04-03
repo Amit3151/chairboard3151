@@ -8,7 +8,7 @@ import cross from "../images/cross-23.svg";
 import DateRangeSelector from './DateRange';
 
 
-export default function Filter({ statuses, onSubmit }) {
+export default function Filter({ statuses, onSubmit, Filters }) {
 
     // ===================Pop-up=====================================
 
@@ -61,16 +61,15 @@ export default function Filter({ statuses, onSubmit }) {
 
     // ====================Filter Applied======================================
     const [masterCode, setMasterCode] = useState('');
-    const [demo1, setDemo1] = useState('');
-    const [demo2, setDemo2] = useState('');
+    const [selectedValue, setSelectedValue] = useState("");
     const [acknowledgment, setAcknowledgment] = useState('');
 
     //reset everything
     const ResetEverything = () => {
         setMasterCode('')
         setSelectedStatus('')
-        setDemo1('')
-        setDemo2('')
+        setSelectedValue('')
+        // setDemo2('')
         setAcknowledgment('')
 
     }
@@ -112,6 +111,7 @@ export default function Filter({ statuses, onSubmit }) {
     const handleStatusChange = (event) => {
         setSelectedStatus(event.target.value);
     };
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -203,26 +203,28 @@ export default function Filter({ statuses, onSubmit }) {
 
                         </div>
                         <div className="filter_search_desc_second">
-                            <div className="label_box hasdot">
-                                <label htmlFor="">Demo 1:</label>
-                                <select className="lable_box_items" value={demo1} onChange={e => setDemo1(e.target.value)}>
-                                    <option value="">Demo 1</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                                {demo1 && <span style={{ color: 'green', marginLeft: '85px' }}>●</span>}
-                            </div>
-                            <div className="label_box hasdot">
-                                <label htmlFor="">Demo 2:</label>
-                                <select className="lable_box_items" value={demo2} onChange={e => setDemo2(e.target.value)}>
-                                    <option value="">Demo 2</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                </select>
-                                {demo2 && <span style={{ color: 'green', marginLeft: '85px' }}>●</span>}
-                            </div>
+                            {Filters.map((filter, index) => (
+                                <div className="label_box hasdot">
+                                    <label htmlFor="">{filter.filtername}</label>
+                                    <select
+                                        className="lable_box_items"
+                                        onChange={(e) => {
+                                            filter.filtonChange(e);
+                                            const newFilters = [...Filters];
+                                            newFilters[index].selectedValue = e.target.value;
+                                            setSelectedValue(newFilters);
+                                        }}
+                                    >
+                                        {filter.options.map((option) => (
+                                            <option value={option}>{option}</option>
+                                        ))}
+                                    </select>
+                                    {filter.selectedValue && (
+                                        <span style={{ color: 'green', marginLeft: '85px' }}>●</span>
+                                    )}
+                                </div>
+                            ))}
+
                             <div className="label_box hasdot">
                                 <label htmlFor="">Acknowledgment:</label>
                                 <select className="lable_box_items" value={acknowledgment} onChange={e => setAcknowledgment(e.target.value)}>

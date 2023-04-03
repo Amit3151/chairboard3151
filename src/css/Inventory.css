@@ -3,47 +3,57 @@
     justify-content: center;
     margin-top: 40px;
 }
-.invent_body{
+
+.invent_body {
     width: 95%;
 }
-.input_file{
+
+.input_file {
     display: none;
 }
+
 .filter_heading {
     display: flex;
     justify-content: space-between;
     width: 90%;
 }
-.filter_heading img{
+
+.filter_heading img {
     margin-right: 115px;
 }
-.span_a{
+
+.span_a {
     border-radius: 50%;
     background-color: rgb(19, 29, 225);
     color: white;
     padding: 1px 5px;
 }
-.span_b{
+
+.span_b {
     border-radius: 50%;
     background-color: rgb(225, 19, 139);
     color: white;
     padding: 1px 4px;
 }
-.hide_input{
+
+.hide_input {
     display: none;
 }
-.upload_img{
+
+.upload_img {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 10px;
     cursor: pointer;
 }
+
 span.align {
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
 }
+
 .box_span {
     display: flex;
     align-items: center;
@@ -51,7 +61,8 @@ span.align {
     gap: 15px;
     margin-right: 20px;
 }
-.pop_box{
+
+.pop_box {
     width: 40%;
     position: absolute;
     right: 33%;
@@ -63,12 +74,14 @@ span.align {
     gap: 50px;
     justify-content: center;
     padding: 120px 0;
-   
+
 }
-.pop_box.active{
+
+.pop_box.active {
     display: flex;
 }
-.browse_file{
+
+.browse_file {
     display: flex;
     flex-direction: column;
     border-radius: 25px;
@@ -78,7 +91,8 @@ span.align {
     align-items: center;
     padding: 50px 0px;
 }
-.sample_file{
+
+.sample_file {
     display: flex;
     flex-direction: column;
     border-radius: 25px;
@@ -89,18 +103,19 @@ span.align {
     padding: 15px 0px;
     justify-content: center;
 }
-.allow_size{
+
+.allow_size {
     width: 10%;
 }
 
 .invent_body_container .pop_box_backdrop {
     top: -250px;
-  }
+}
 
 
-  .upload_pop_up_box{
+.upload_pop_up_box {
     display: none;
-  }
+}
 
 .upload_pop_up_box.active {
     position: absolute;
@@ -113,5 +128,4 @@ span.align {
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(2px);
-  }
-  
+}

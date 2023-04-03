@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import Sidebar from '../components/Sidebar';
 import Filter from '../components/Filter';
 import { Link } from "react-router-dom";
+import Search from "../components/Search";
 
 
 export default function Profile() {
@@ -49,7 +50,7 @@ export default function Profile() {
   function showdata(index) {
     setShow(!show)
   }
-
+  console.log('activated')
   // Eye Butten Table Pass Show
 
   const [showPassword, setShowPassword] = useState(false)
@@ -61,15 +62,67 @@ export default function Profile() {
   }
 
   // Creating Dummy Static Data For Channnel Partner Table
-  const [tableData, setTableData] = useState([
-    { Id: 'z61dqqhyy98u6', Customer_details: 'ChairBoard pvt limited\n9929292929', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:53:49', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Placed', },
-    { Id: 'z61dqqhyy98u9', Customer_details: 'ChairBoard pvt limited\n9929292928', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:56:49', Amount: '10', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Dispatched', },
-    { Id: 'z61dqqhyy98u8', Customer_details: 'ChairBoard pvt limited\n9929292927', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:13:49', Amount: '15', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Placed', },
-    { Id: 'z61dqqhyy98u7', Customer_details: 'ChairBoard pvt limited\n9929292926', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:03:49', Amount: '20', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Dispatched', },
-  ])
+  const myData = [
+    { Id: 'z61dqqhyy98u6', Customer_details: '<div class="box_span"> <span class="span_a">A</span><span> ChairBoard pvt limited, <br /> 9929292929 </span></div>', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:53:49', Amount: '25', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '21/01/2023 <br/> 21:50:49', Status: 'Placed', },
+    { Id: 'z61dqqhyy98u7', Customer_details: '<div class="box_span"> <span class="span_a">A</span><span> ChairBoard pvt limited, <br /> 9929292928 </span></div>', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:54:49', Amount: '20', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '22/02/2023 <br/> 21:50:48', Status: 'Dispatched', },
+    { Id: 'z61dqqhyy98u8', Customer_details: '<div class="box_span"> <span class="span_a">A</span><span> ChairBoard pvt limited, <br /> 9929292927 </span></div>', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:55:49', Amount: '15', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '23/03/2023 <br/> 21:50:47', Status: 'Cancel', },
+    { Id: 'z61dqqhyy98u9', Customer_details: '<div class="box_span"> <span class="span_a">A</span><span> ChairBoard pvt limited, <br /> 9929292926 </span></div>', MasterCode: 'ICSH0446', OrderedAt: '21/01/2023 </br> 21:56:49', Amount: '10', VehicleClass: 'Vc4', PaymentRefrence: 'Sole345VQ37b8Nx', DispatchOn: '24/04/2023 <br/> 21:50:46', Status: 'Dispatched', },
+  ]
+  const [tableData, setTableData] = useState(myData)
+  // Search Function start
+const [searchBy, setSearchBy] = useState('Id'); // default to searching by name
+const [searchQuery, setSearchQuery] = useState('');
+
+const searchOptions = [
+  { label: 'Order ID', value: 'Id' },
+  { label: 'Master Code', value: 'MasterCode' },
+  
+];
+
+function handleSearchChange(event) {
+  setSearchBy(event.target.value);
+}
+
+function handleSearchQueryChange(event) {
+  setSearchQuery(event.target.value);
+}
+
+function handleSearchSubmit() {
+ 
+  const searchedData = myData.filter((item) => {
+    const searchProp = searchBy.split('.');
+    let searchValue = item;
+    for (let i = 0; i < searchProp.length; i++) {
+      searchValue = searchValue[searchProp[i]];
+    }
+    return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
+  });
+
+  // update the data state with the filtered data
+  setTableData(searchedData);
+}
+// Search Function END
 
   // Filter Patch
   const handleFilterSubmit = () => {
+  }
+
+  const Filters = [{
+    filtername: 'Demo1', 
+    filtonChange: handeldemo, 
+    options: ['Demo 1', 'A', 'B'],
+    selectedValue: ""
+  },
+  {
+    filtername: 'Demo2',
+    filtonChange: handeldemo,
+    options: ['Demo 2', 'A', 'B'],
+    selectedValue: ""
+  }
+  ];
+
+  function handeldemo() {
+
   }
 
   //sorting
@@ -97,11 +150,12 @@ export default function Profile() {
   const handleClick = () => {
     setRotation(rotation + 180);
   }
-  
 
   //all filter carasoul 
-  const all = () => {
-    
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleItemClick = (index) => {
+    setSelectedItem(index);
   }
 
   return (
@@ -120,27 +174,26 @@ export default function Profile() {
                   <h3>Orders</h3>
                 </div>
                 <div className="header_search">
-                  <span className='label_style'>
-                    <label htmlFor="">Search</label>
-                    <input
-                      className="input_search"
-                      type="text"
-                      placeholder="Enter"
-                      name="search"
-                    />
-                  </span>
-                  <button>Submit</button>
+            <Search searchOptions={searchOptions} handleSearchChange={handleSearchChange}  handleSearchQueryChange ={handleSearchQueryChange} handleSearchSubmit={handleSearchSubmit}/>
+                  
                 </div>
               </div>
 
             </div>
             <div className="filter_section">
-              <Filter statuses={['Placed', 'Dispached']} onSubmit={handleFilterSubmit} />
+              <Filter Filters={Filters} statuses={['Placed', 'Dispached']} onSubmit={handleFilterSubmit} />
               <div className="OrderFilters">
                 <ul className="un-list">
-                  <li className="un-li all" >All</li>
-                  <li className="un-li">Agent</li>
-                  <li className="un-li">Master</li>
+                  <li className={`un-li ${selectedItem === null ? 'selected' : ''}`} onClick={() => handleItemClick(null)}>All</li>
+                  <li className={`un-li ${selectedItem === 1 ? 'selected' : ''}`} onClick={() => handleItemClick(1)}>Agent</li>
+                  <li className={`un-li ${selectedItem === 2 ? 'selected' : ''}`} onClick={() => handleItemClick(2)}>Master</li>
+                  <style>{`
+                        .selected {
+                        background-color: #4244a0;
+                        color: white;
+                        
+                        }
+                        `}</style>
                 </ul>
               </div>
             </div>
@@ -152,23 +205,25 @@ export default function Profile() {
                     <thead>
                       <tr>
                         <td>
-                          <span className="align">
-                            Order ID<img src={sort} alt="" />
+                          <span className="align" onClick={handleClick}>
+                            Order ID
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align" onClick={handleClick}>
-                            Customer Details<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
+                            Customer Details<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            Master code<img src={sort} alt="" />
+                            Master code
+                            {/* <img src={sort} alt="" /> */}
                           </span>
                         </td>
                         <td>
-                          <span className="align">
-                            Ordered at<img src={sort} alt="" />
+                          <span className="align" onClick={handleClick}>
+                            Ordered at<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
@@ -177,23 +232,26 @@ export default function Profile() {
                           </span>
                         </td>
                         <td>
-                          <span className="align">
-                            Vehicle Class<img src={sort} alt="" />
+                          <span className="align" onClick={handleClick}>
+                            Vehicle Class
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            Payment Refrence<img src={sort} alt="" />
+                            Payment Refrence
+                            {/* <img src={sort} alt="" /> */}
                           </span>
                         </td>
                         <td>
                           <span className="align" onClick={handleClick}>
-                            Dispatched on<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }}/>
+                            Dispatched on<img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align">
-                            Status<img src={sort} alt="" />
+                            Status
+                            {/* <img src={sort} alt="" /> */}
                           </span>
                         </td>
                         <td>
@@ -208,21 +266,14 @@ export default function Profile() {
                       {tableData.map((item, index) => (
                         <tr key={index}>
                           <td>{item.Id}</td>
-                          <td>
-                            <div className="customer_detail_wrap">
-                              <span className="customer_detail_icon"><span className="span_a">A</span></span>{item.Customer_details}
-                            </div>
-                          </td>
-                          {/* <td>{showPassword && selectedindex === index ? `${item.password}` : '**********'}</td>
-                          <td>{showPassword && selectedindex === index ? `${item.Key}` : 'G1LI*************1020'}</td> */}
+                          <td dangerouslySetInnerHTML={{ __html: (item.Customer_details) }}></td>
                           <td>{item.MasterCode}</td>
-                          {/* <td>{item.OrderedAt}</td> */}
                           <td dangerouslySetInnerHTML={{ __html: (item.OrderedAt) }}></td>
                           <td>{item.Amount}</td>
                           <td>{item.VehicleClass}</td>
                           <td>{item.PaymentRefrence}</td>
                           <td dangerouslySetInnerHTML={{ __html: (item.DispatchOn) }}></td>
-                          <td className={item.Status == 'Placed' ? "item_status1 span" : 'item_status2 span'}><span>{item.Status}</span></td>
+                          <td className={item.Status === 'Placed' ? "item_status1 span" : item.Status === 'Dispatched'?'item_status2 span': 'item_status3 span'}><span>{item.Status}</span></td>
                           <td >
                             <span className="btn_sty_tick" >
                               <Link to='/Orderdetails'>

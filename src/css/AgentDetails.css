@@ -4,7 +4,9 @@ body{
 }
 
 .agent_details_page{
-    width: 100%;
+  width: 95%;
+  margin: auto;
+  padding-left: 35px;
 }
 
 .adp_heading{
@@ -13,10 +15,15 @@ body{
     align-items: center;
 }
 
-.hr{
-    width: 100%;
-    padding-bottom: 20px;
+
+
+.hr {
+  width: 100%;
+  color: #fff;
+  border: 1px solid #C4C4C4;
+  padding: 0;
 }
+
 
 .adp_input_list{
     display: flex;
@@ -93,7 +100,7 @@ body{
     display: flex;
     flex-direction: column;
     border-radius: 25px;
-    background-color: #e9ecef;
+    background-color: #F1F5F9;
     box-shadow: 6px 6px 12px rgb(212 224 235 / 80%), -6px -6px 12px #fff;
     width: 97%;
     align-items: center;
@@ -223,4 +230,33 @@ s */
 .lable_box_items.selectable1{
 width: 290px;
 background-position: 250px;
+}
+
+.apro_input.add.adp.errorrel {
+  position: relative;
+}
+
+.errror {
+  position: absolute;
+  /* margin-bottom: -3px; */
+  top: -17px;
+  left: 75px;
+  color: red;
+}
+
+select.lable_box_items.selectable.adp {
+  width: 410px;
+  background-position: 380px;
+  padding: 0%;
+}
+
+select.lable_box_items.adp {
+  padding: 0%;
+}
+
+.errrorr {
+  position: absolute;
+  top: 216px;
+  left: 1065px;
+  color: red;
 }

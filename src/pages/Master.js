@@ -13,10 +13,10 @@ import cross from "../images/cross-23.svg";
 import warning from "../images/mdi_alert-circle-outline.svg";
 import '../css/Master.css'
 import '../css/Request.css'
-import {GrEdit} from 'react-icons/gr'
+import { GrEdit } from 'react-icons/gr'
 import { Link } from 'react-router-dom';
 import MasterDetailsCell from '../components/Cells/MasterDetailsCell';
-import {BiRupee} from 'react-icons/bi'
+import { BiRupee } from 'react-icons/bi'
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -29,9 +29,9 @@ const mockData = new Array(100).fill(0).map((_, i) => ({
   actionstatus: getRandomInt(0, 1),
   master: {
     code: `Vishal Jadhav ${i}`,
-    phone: '9876543210',
+    phone: getRandomInt(9500000000, 9900000000),
   },
-  masterCode: 'ICHP8797',
+  masterCode: `ICHP8${getRandomInt(888, 979)}`,
   availableInventory: getRandomInt(0, 200),
   usedColumn: getRandomInt(10, 20),
   agents: getRandomInt(1000000000000000, 3000000000000000),
@@ -48,14 +48,70 @@ const mockData = new Array(100).fill(0).map((_, i) => ({
 
 export default function Master() {
   const [data, setData] = useState(mockData);
-  
 
-// Filter Status Amit
-const [filteredData, setFilteredData] = useState(mockData);
-  
+  // Search Function start
+  const [searchBy, setSearchBy] = useState('master.code'); // default to searching by name
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const searchOptions = [
+    { label: 'Name', value: 'master.code' },
+    { label: 'Master Code', value: 'masterCode' },
+    { label: 'Phone', value: 'master.phone' },
+    { label: 'Agents', value: 'agents' },
+
+  ];
+
+  const Filters = [{
+    filtername: 'Demo1', 
+    filtonChange: handeldemo, 
+    options: ['Demo 1', 'A', 'B'],
+    selectedValue: ""
+  },
+  {
+    filtername: 'Demo2',
+    filtonChange: handeldemo,
+    options: ['Demo 2', 'A', 'B'],
+    selectedValue: ""
+  }
+  ];
+
+  function handeldemo() {
+
+  }
+
+  function handleSearchChange(event) {
+    setSearchBy(event.target.value);
+  }
+
+  function handleSearchQueryChange(event) {
+    setSearchQuery(event.target.value);
+  }
+
+  function handleSearchSubmit() {
+
+    const searchedData = mockData.filter((item) => {
+      const searchProp = searchBy.split('.');
+      let searchValue = item;
+      for (let i = 0; i < searchProp.length; i++) {
+        searchValue = searchValue[searchProp[i]];
+      }
+      return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    // update the data state with the filtered data
+    setData(searchedData);
+  }
+  // Search Function END
+
+
+
+
+  // Filter Status Amit
+  const [filteredData, setFilteredData] = useState(mockData);
+
   const handleFilterSubmit = (selectedStatus) => {
     if (selectedStatus) {
-      let filtval = selectedStatus==="Blocked"? 0 : 1;
+      let filtval = selectedStatus === "Blocked" ? 0 : 1;
       const filtered = mockData.filter(item => item.actionstatus === Number(filtval));
       setData(filtered);
     } else {
@@ -63,22 +119,23 @@ const [filteredData, setFilteredData] = useState(mockData);
     }
   };
 
- 
 
-  const handleBlockClick = (value) => {
-      const updatedData = [...data];
-      updatedData[value].actionstatus =  mockData[value].actionstatus === 0 ? 1:0;
-      setData(updatedData);
+
+
+  function handleBlockClick(value) {
+    const updatedData = [...data];
+    updatedData[value].actionstatus = mockData[value].actionstatus === 0 ? 1 : 0;
+    setData(updatedData);
   };
-  
 
-  function shortdet(){
-console.log("detail clicked")
+
+  function shortdet() {
+    console.log("detail clicked")
   }
 
-// Filter Status 
+  // Filter Status 
 
- const masterColumns = useMemo(() => [
+  const masterColumns = useMemo(() => [
     {
       Header: 'Master Details',
       accessor: 'master',
@@ -87,13 +144,13 @@ console.log("detail clicked")
     },
     {
       Header: 'Master Code',
-      accessor: 'masterCode',      
+      accessor: 'masterCode',
     },
     {
       Header: 'Available Inventory',
       accessor: 'availableInventory',
       sortFn: availableInventorySort
-      
+
     },
     {
       Header: 'Used Column',
@@ -124,17 +181,17 @@ console.log("detail clicked")
     },
     {
       Header: 'Action',
-      accessor: 'id',      
+      accessor: 'id',
       Cell: ({ value }) => (
         <div className="flex row center">
-            <button className={mockData[value].actionstatus===0 ? "styling_aprove2 block_btn new":"styling_aprove2 Unblock_btn"} onClick={() => handleBlockClick(value)}>{mockData[value].actionstatus===0 ? "Block":"Unblock"}</button>
-            <Link to='/MasterDetails'>
-                <GrEdit />
-            </Link>
+          <button className={mockData[value].actionstatus === 0 ? "styling_aprove2 block_btn new" : "styling_aprove2 Unblock_btn"} onClick={() => handleBlockClick(value)}>{mockData[value].actionstatus === 0 ? "Block" : "Unblock"}</button>
+          <Link to='/MasterDetails'>
+            <GrEdit />
+          </Link>
         </div>
-    ),
-    sortFn: actionstatusSort,
-    },   
+      ),
+      sortFn: actionstatusSort,
+    },
   ], [data,])
 
   const [createModalOpen, toggleModal] = useReducer(st => !st, false)
@@ -159,134 +216,130 @@ console.log("detail clicked")
       newvalue2(true);
     }
   }
-  
 
 
-   // Table sorting Start
-   const [sortOrder, setSortOrder] = useState("asc"); // default to ascending order
 
-   function masterSort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...data].sort((a, b) => {
-       if (order === 'asc') {
-         return a.master.code.localeCompare(b.master.code);
-       } else {
-         return b.master.code.localeCompare(a.master.code);
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);
-   }
-   
-   function availableInventorySort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...data].sort((a, b) => {
-       if (order === 'asc') {
-         return a.availableInventory - b.availableInventory;
-       } else {
-         return b.availableInventory - a.availableInventory;
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);
-   
-   }
-   function usedColumnSort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...data].sort((a, b) => {
-       if (order === 'asc') {
-         return a.usedColumn - b.usedColumn;
-       } else {
-         return b.usedColumn - a.usedColumn;
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);
-   
-   }
-   
-   function balanceSort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...data].sort((a, b) => {
-       if (order === 'asc') {
-         return a.balance.num - b.balance.num;
-       } else {
-         return b.balance.num - a.balance.num;
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);
-   
-   }
-   function joindateSort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...data].sort((a, b) => {
-       if (order === 'asc') {
-         return  new Date(a.createdAt) -  new Date(b.createdAt);
-       } else {
-         return  new Date(b.createdAt) -  new Date(a.createdAt);
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);   
-   }
-   
+  // Table sorting Start
+  const [sortOrder, setSortOrder] = useState("asc"); // default to ascending order
 
-   function addressSort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...data].sort((a, b) => {
-       if (order === 'asc') {
-         return a.address.city.localeCompare(b.address.city);
-       } else {
-         return b.address.city.localeCompare(a.address.city);
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);
-   
-   }
-   function actionstatusSort(){
-     const order = sortOrder === 'asc' ? 'desc' : 'asc';
-     const sortedData = [...mockData].sort((a, b) => {
-       if (order === 'asc') {
-         return a.actionstatus - b.actionstatus;
-       } else {
-         return b.actionstatus - a.actionstatus;
-       }
-     });
-     setData(sortedData);
-     setSortOrder(order);
-     
-     
-   
-   }
-   
-   
-   
-     function handleSort(column) {
-       if (column.sortFn) {
-         column.sortFn();
-       }
-       
-     }
-     // Table sorting End
-   
-   
-   
-   
-   
-   
+  function masterSort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...data].sort((a, b) => {
+      if (order === 'asc') {
+        return a.master.code.localeCompare(b.master.code);
+      } else {
+        return b.master.code.localeCompare(a.master.code);
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+  }
+
+  function availableInventorySort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...data].sort((a, b) => {
+      if (order === 'asc') {
+        return a.availableInventory - b.availableInventory;
+      } else {
+        return b.availableInventory - a.availableInventory;
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+
+  }
+  function usedColumnSort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...data].sort((a, b) => {
+      if (order === 'asc') {
+        return a.usedColumn - b.usedColumn;
+      } else {
+        return b.usedColumn - a.usedColumn;
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+
+  }
+
+  function balanceSort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...data].sort((a, b) => {
+      if (order === 'asc') {
+        return a.balance.num - b.balance.num;
+      } else {
+        return b.balance.num - a.balance.num;
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+
+  }
+  function joindateSort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...data].sort((a, b) => {
+      if (order === 'asc') {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      } else {
+        return new Date(b.createdAt) - new Date(a.createdAt);
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+  }
+
+
+  function addressSort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...data].sort((a, b) => {
+      if (order === 'asc') {
+        return a.address.city.localeCompare(b.address.city);
+      } else {
+        return b.address.city.localeCompare(a.address.city);
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+
+  }
+  function actionstatusSort() {
+    const order = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = [...mockData].sort((a, b) => {
+      if (order === 'asc') {
+        return a.actionstatus - b.actionstatus;
+      } else {
+        return b.actionstatus - a.actionstatus;
+      }
+    });
+    setData(sortedData);
+    setSortOrder(order);
+
+
+
+  }
+
+
+
+  function handleSort(column) {
+    if (column.sortFn) {
+      column.sortFn();
+    }
+
+  }
+  // Table sorting End
+
+
 
 
   return (
     <>
       <CreateMasterModal isOpen={createModalOpen} onClickOutside={toggleModal} />
-      
-        <Sidebar />
-      
+
+      <Sidebar />
+
       <div className="main_body">
         <div className="aget_header">
-          <Header />                                                                                                                                                             
+          <Header />
         </div>
         <div className="master_body_container">
           <div className="body_master">
@@ -296,27 +349,18 @@ console.log("detail clicked")
                   <h3 style={{ fontSize: '22px', fontWeight: 600 }}>Master</h3>
                 </div>
                 <div className="header_search">
-                  <span>
-                    <label htmlFor="">Search</label>
-                    <input
-                      className="input_search"
-                      type="text"
-                      placeholder="Enter"
-                      name="search"
-                    />
-                  </span>
-                  <button className="primary">Submit</button>
+                  <Search searchOptions={searchOptions} handleSearchChange={handleSearchChange} handleSearchQueryChange={handleSearchQueryChange} handleSearchSubmit={handleSearchSubmit} />
                   <button onClick={toggleModal} className="primary">Create Master</button>
                 </div>
               </div>
             </div>
             <div className="filter_section">
-              <Filter statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit} />
+              <Filter statuses={['Blocked', 'Unblocked']} Filters={Filters} onSubmit={handleFilterSubmit} />
             </div>
           </div>
         </div>
         <div className="dashboard_table_container master" style={{ margin: '0 40px' }}>
-          <Table columns={masterColumns} data={data} onSort={handleSort}/>
+          <Table columns={masterColumns} data={data} onSort={handleSort} />
         </div>
       </div>
     </>

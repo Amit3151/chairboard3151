@@ -6,3 +6,10 @@
     border-radius: 25px;
     width: 100%;
 }
+
+.errrorrr {
+    position: absolute;
+    top: 298px;
+    left: 150px;
+    color: red;
+}

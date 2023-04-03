@@ -27,42 +27,40 @@ import Search from '../components/Search';
 
 export default function TestSearch() {
     const [searchBy, setSearchBy] = useState('agent.name'); // default to searching by name
-    const [searchQuery, setSearchQuery] = useState('');
-  
-    const searchOptions = [
-      { label: 'Name', value: 'agent.name' },
-      { label: 'Age', value: 'age' },
-      { label: 'Phone', value: 'agent.phone' },
-      { label: 'Total', value: 'agent.total' },
-    ];
-  
-    function handleSearchChange(event) {
-      setSearchBy(event.target.value);
-    }
-  
-    function handleSearchQueryChange(event) {
-      setSearchQuery(event.target.value);
-    }
-  
-  
+  const [searchQuery, setSearchQuery] = useState('');
 
+  const searchOptions = [
+    { label: 'Name', value: 'agent.name' },
+    { label: 'Age', value: 'age' },
+    { label: 'Phone', value: 'agent.phone' },
+    { label: 'Total', value: 'agent.total' },
+  ];
 
-  const filteredData = useMemo(() => {
-    if (searchQuery === '') {
-      return myData;
-    }
+  function handleSearchChange(event) {
+    setSearchBy(event.target.value);
+  }
 
-    return myData.filter((item) => {
-        const searchProp = searchBy.split('.'); // split the property path into an array
-        let searchValue = item;
-        for (let i = 0; i < searchProp.length; i++) {
-          searchValue = searchValue[searchProp[i]]; // dynamically access the correct property
-        }
-        return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
-      });
-    }, [myData, searchBy, searchQuery]);
+  function handleSearchQueryChange(event) {
+    setSearchQuery(event.target.value);
+  }
+  const [data, setData] = useState(myData);
+  function handleSearchSubmit() {
+    // perform search logic here
+    // e.g. filter the data based on searchBy and searchQuery state values
+    
+    const filteredData = myData.filter((item) => {
+      const searchProp = searchBy.split('.');
+      let searchValue = item;
+      for (let i = 0; i < searchProp.length; i++) {
+        searchValue = searchValue[searchProp[i]];
+      }
+      return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
+    });
+  
+    // update the data state with the filtered data
+    setData(filteredData);
+  }
 
-//   const [data, setData] = useState(filteredData);
 
   const columns = useMemo(() =>  [
     {
@@ -93,8 +91,8 @@ export default function TestSearch() {
     <>
    
     <div>
-        <Search searchOptions={searchOptions} handleSearchChange={handleSearchChange}  handleSearchQueryChange ={handleSearchQueryChange}/>
-    <Table columns={columns} data={filteredData} />
+        <Search searchOptions={searchOptions} handleSearchChange={handleSearchChange}  handleSearchQueryChange ={handleSearchQueryChange} handleSearchSubmit={handleSearchSubmit}/>
+    <Table columns={columns} data={data} />
     </div>
     
     </>

@@ -1,9 +1,28 @@
 import React, { useReducer } from 'react'
 import { ReactComponent as Eye } from '../images/clarity_eye-hide-line.svg'
 import '../css/Login.css'
+import { useState } from 'react';
 
 export default function Login() {
   const [showPassword, toggleShowPassword] = useReducer((st) => !st, false)
+
+   //Email input box
+   const [email, setEmail] = useState('');
+   const [error, setError] = useState('');
+
+   const handleEmailChange = (event) => {
+       const enteredEmail = event.target.value;
+       setEmail(enteredEmail);
+
+       // Regular expression to check if entered text is in email format
+       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+       if (!emailPattern.test(enteredEmail)) {
+           setError('(Please enter a valid Email)');
+       } else {
+           setError('');
+       }
+   };
   return (
     <div className="login flex row">
       <div className="login-form-container flex column">
@@ -25,7 +44,14 @@ export default function Login() {
         <form onSubmit={e => e.preventDefault()}>
           <div className="flex column">
             <label htmlFor="email" >Email</label>
-            <input id="email" type='email' placeholder="mail@abc.com" />
+            <input
+                                type="text"
+                                id="email-input"
+                                value={email}
+                                onChange={handleEmailChange}
+                                placeholder='abc@abc.com'
+                            />
+                            <div className='errrorrr'>{error && <p>{error}</p>}</div>
           </div>
           <div className="flex column">
             <label htmlFor="password" >Password</label>

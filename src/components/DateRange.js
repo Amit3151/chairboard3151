@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRangePicker } from 'react-date-range';
+import { DateRange  } from 'react-date-range';
 
 function DateRangeSelector() {
   const [dateRange, setDateRange] = useState([
@@ -34,7 +34,9 @@ function DateRangeSelector() {
       </div>
       {isOpen && (
         <div className="date-range-menu">
-          <DateRangePicker
+          <DateRange
+          editableDateInputs={true}
+          moveRangeOnFirstSelection={false}
             ranges={dateRange}
             onChange={handleDateChange}
             className="date-range-selector"

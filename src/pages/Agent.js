@@ -10,9 +10,55 @@ import Sidebar from '../components/Sidebar';
 import { Link } from "react-router-dom";
 import cross from "../images/cross-23.svg";
 import { AiOutlineClose } from 'react-icons/ai'
+import Block from "../components/Cells/Block";
+import Approved from "../components/Cells/Approved";
 
 
 export default function Agent() {
+  const myData = [
+    { id: 1, AgentDetails: {name:"Aditya Jangid 0",spanname:"A", mob:"854697845"} , MasterCode: 'ICHP8797', DistrictState: 'Alwar<br />Rajasthan', AvailableInventory: '46', ActivatedTags: '125', Balance: '125', JoiningTime: '06/01/23<br />18:35:35', Block: <Block />, SignUp: '3' },
+    { id: 2, AgentDetails: {name:"Aditya Jangid 1",spanname:"A", mob:"854697846"} , MasterCode: 'ICHP8798', DistrictState: 'Bikaner<br />Rajasthan', AvailableInventory: '47', ActivatedTags: '135', Balance: '225', JoiningTime: '06/02/23<br />16:35:35', Block: <Approved />, SignUp: '3' },
+    { id: 3, AgentDetails: {name:"Aditya Jangid 2",spanname:"A", mob:"854697847"} , MasterCode: 'ICHP8799', DistrictState: 'Jaipur<br />Rajasthan', AvailableInventory: '48', ActivatedTags: '145', Balance: '325', JoiningTime: '06/03/23<br />12:35:35', Block: <Block />, SignUp: '3' },
+  ]
+  const [tableData, setTableData] = useState(myData)
+
+  // Search Function start
+  const [searchBy, setSearchBy] = useState('AgentDetails.name'); // default to searching by name
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const searchOptions = [
+    { label: 'Name', value: 'AgentDetails.name' },
+    { label: 'MasterCode', value: 'MasterCode' },
+    { label: 'Mobile No.', value: 'AgentDetails.mob' },
+   
+
+  ];
+
+  function handleSearchChange(event) {
+    setSearchBy(event.target.value);
+  }
+
+  function handleSearchQueryChange(event) {
+    setSearchQuery(event.target.value);
+  }
+
+  function handleSearchSubmit() {
+
+    const searchedData = myData.filter((item) => {
+      const searchProp = searchBy.split('.');
+      let searchValue = item;
+      for (let i = 0; i < searchProp.length; i++) {
+        searchValue = searchValue[searchProp[i]];
+      }
+      return searchValue.toString().toLowerCase().includes(searchQuery.toLowerCase());
+    });
+
+    // update the data state with the filtered data
+    setTableData(searchedData);
+  }
+  // Search Function END
+
+
   const [value, newvalue] = useState(true);
   const [error, setError] = useState(false);
   const inputRef = useRef();
@@ -86,40 +132,80 @@ export default function Agent() {
     newvalue(!value)
   }
 
-  useEffect(() => {
-    document.addEventListener("mousedown", outclick);
-    return () => document.removeEventListener("mousedown", outclick);
-  })
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", outclick);
+  //   return () => document.removeEventListener("mousedown", outclick);
+  // })
 
   const [buttonText, setButtonText] = useState('Unblock');
   const [className, setClassName] = useState('styling_unblock');
-  
+
   const handleClick = () => {
-    buttonText=== "Unblock" ?setButtonText('Block'):setButtonText('Unblock');
-    className=== "styling_unblock" ?setClassName('styling_block') : setClassName('styling_unblock');
+    buttonText === "Unblock" ? setButtonText('Block') : setButtonText('Unblock');
+    className === "styling_unblock" ? setClassName('styling_block') : setClassName('styling_unblock');
   };
-  
+
   const [buttonText1, setButtonText1] = useState('Block');
   const [className1, setClassName1] = useState('styling_block');
 
   const handleClick1 = () => {
-    buttonText1=== "Unblock" ?setButtonText1('Block'):setButtonText1('Unblock');
-    className1=== "styling_unblock" ?setClassName1('styling_block') : setClassName1 ('styling_unblock');
+    buttonText1 === "Unblock" ? setButtonText1('Block') : setButtonText1('Unblock');
+    className1 === "styling_unblock" ? setClassName1('styling_block') : setClassName1('styling_unblock');
   };
 
-  // const data = [
-  //   { id: 1, AgentDetails: 'Aditya Jangid, 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: '', SignUp: '3'},
-  //   { id: 2, AgentDetails: 'Aditya Jangid, 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: '', SignUp: '3'},
-  //   { id: 3, AgentDetails: 'Aditya Jangid, 854697845', MasterCode: 'ICHP8797', DistrictState: 'Bikaner, Rajasthan', AvailableInventory : '46', ActivatedTags : '125', Balance : '125', JoiningTime: '06/01/23 , 18:35:35', Block: '', SignUp: '3'},
-  // ];  
 
-  //sorting :- same logic as Channel page , when the data will get added from the backend!!
 
-   // Filter Patch
-   const handleFilterSubmit = () => {
+  //sorting
+  const [isSortedDesc, setIsSortedDesc] = useState(true);
+
+  const sortDesc = () => {
+    const sortedList = [...tableData].sort((a, b) => b.AvailableInventory - a.AvailableInventory);
+    setTableData(sortedList);
+    setIsSortedDesc(!isSortedDesc)
+  };
+
+  const sortAsc = () => {
+    const sortedList = [...tableData].sort((a, b) => a.AvailableInventory - b.AvailableInventory);
+    setTableData(sortedList);
+    setIsSortedDesc(!isSortedDesc)
+  };
+
+  function sortit() {
+    return isSortedDesc ? sortDesc : sortAsc;
   }
 
-  
+  //sorting icon change
+  const [rotation, setRotation] = useState(0);
+
+  const handleClick2 = () => {
+    setRotation(rotation + 180);
+  }
+
+
+  // Filter Patch
+  const handleFilterSubmit = () => {
+  }
+
+  const Filters = [{
+    filtername: 'Demo1',
+    filtonChange: handeldemo,
+    options: ['Demo 1', 'A', 'B'],
+    selectedValue: ""
+  },
+  {
+    filtername: 'Demo2',
+    filtonChange: handeldemo,
+    options: ['Demo 2', 'A', 'B'],
+    selectedValue: ""
+  }
+  ];
+  // Filter Functions
+
+  function handeldemo() {
+
+  }
+
+
   return (
     <>
       <Sidebar />
@@ -130,69 +216,70 @@ export default function Agent() {
         <div className="aget_body_container">
           <div className="aget_body">
             <div className="search_bar" >
-              <Search title="Agent" />
+              <Search title="Agent" searchOptions={searchOptions} handleSearchChange={handleSearchChange} handleSearchQueryChange={handleSearchQueryChange} handleSearchSubmit={handleSearchSubmit} />
+
             </div>
             <div className="fillter_section">
-              <Filter statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit} />
+              <Filter Filters={Filters} statuses={['Blocked', 'Unblocked']} onSubmit={handleFilterSubmit} />
             </div>
             <div className="aget_main_cont">
               <div className="aget_main_box">
                 <div className="aget_main_box_heading">
                   <table>
-                  <thead>
+                    <thead>
                       <tr>
                         <td>
                           <span className="align">
                             Agent Details
-                            <img src={sort} alt="" />
+                            {/* <img src={sort} alt=""  /> */}
                           </span>
                         </td>
                         <td>
                           <span className="align">
                             Master Code
-                            <img src={sort} alt="" />
+                            {/* <img src={sort} alt="" /> */}
                           </span>
                         </td>
                         <td>
-                          <span className="align">
+                          <span className="align" onClick={handleClick2}>
                             District & State
-                            <img src={sort} alt="" />
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
-                          <span className="align">
+                          <span className="align" onClick={handleClick2}>
                             Available Inventory
-                            <img src={sort} alt="" />
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
-                          <span className="align">
+                          <span className="align" onClick={handleClick2}>
                             Activated Tags
-                            <img src={sort} alt="" />
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
-                          <span className="align">
+                          <span className="align" onClick={handleClick2}>
                             Balance
-                            <img src={sort} alt="" />
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
-                          <span className="align">
+                          <span className="align" onClick={handleClick2}>
                             Joining Time
-                            <img src={sort} alt="" />
+                            <img src={sort} alt="" onClick={sortit()} style={{ transform: `rotate(${rotation}deg)` }} />
                           </span>
                         </td>
                         <td>
                           <span className="align">
                             Block
-                            <img src={sort} alt="" />
+                            {/* <img src={sort} alt="" /> */}
                           </span>
                         </td>
                         <td>
                           <span className="align">
                             Sign up Step
-                            <img src={sort} alt="" />
+                            {/* <img src={sort} alt="" /> */}
                           </span>
                         </td>
                       </tr>
@@ -200,131 +287,28 @@ export default function Agent() {
 
                     {/* this is only dummy data , real data will come from backend */}
                     <tbody>
-                      <tr>
-                        <td>
-                          <div className="box_span">
-                            <span className="span_a">A</span>
-                            <span>
-                              Aditya Jangid, <br />
-                              854697845
-                            </span>
+                      {tableData.map((item, index) => (
+                        <tr key={index}>
+                          {/* <td>{item.id}</td> */}
+                          <td> <div className="box_span">
+                            <span className="span_a">{item.AgentDetails.spanname}</span>
+                            <span> {item.AgentDetails.name}, <br /> {item.AgentDetails.mob} </span>
+                          </div></td>
+                          <td>{item.MasterCode}</td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.DistrictState) }}></td>
+                          <td>{item.AvailableInventory}</td>
+                          <td>{item.ActivatedTags}</td>
+                          <td>{item.Balance}</td>
+                          <td dangerouslySetInnerHTML={{ __html: (item.JoiningTime) }}></td>
+                          <td><span>{item.Block}</span></td>
+                          <td className="signup">{item.SignUp} <div className="edit">
+                            <Link to='/AgentDetails'>
+                              <img src={edit} alt="" />
+                            </Link>
                           </div>
-                        </td>
-                        <td>ICHP8797</td>
-                        <td>
-                          Bikaner,<br /> Rajasthan
-                        </td>
-                        <td>46</td>
-                        <td>125</td>
-                        <td>225</td>
-                        <td>06/01/2023 <br />18:23:55</td>
-                        <td>
-                          <td>
-                            <button className={className} onClick={handleClick}>{buttonText}</button>
                           </td>
-                        </td>
-                        <td>
-                          <div className="edit">
-                            <span>3</span>
-                            <Link to='/AgentDetails'>
-                              <img src={edit} alt="" />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="box_span">
-                            <span className="span_a">A</span>
-                            <span>
-                              Aditya Jangid, <br />
-                              854697845
-                            </span>
-                          </div>
-                        </td>
-                        <td>ICHP8797</td>
-                        <td>
-                          Bikaner,<br /> Rajasthan
-                        </td>
-                        <td>46</td>
-                        <td>125</td>
-                        <td>225</td>
-                        <td>06/01/2023 <br />18:23:55</td>
-                        <td>
-                          <button className={styling_aprove} onClick={approve}>Approved</button>
-                          <div className={approve_box} >
-                            <div className="approve_inside">
-                              <div className="blur1" ref={aprove_ref}>
-                                <div className="apro_heading">
-                                  <span>Approve</span>
-                                  <AiOutlineClose onClick={closePop} />
-                                  <div className="cross_icn_wrap">
-                                    <img src={cross} alt="" onClick={notApprove} />
-                                  </div>
-                                </div>
-                                <div className="apro_input">
-                                  <label htmlFor="">Enter Master Code</label>
-                                  <input type="text" ref={inputRef} placeholder="Enter Master Code" />
-                                  {error && <span><img src={warning} alt="" /> {'Invaild Master Code'}</span>}
-                                </div>
-                                <div className="apro_button">
-                                  <button onClick={() => {
-                                    let pattern = /\d/g;
-                                    let result = pattern.test(inputRef.current.value);
-                                    if (!result) {
-                                      setError(true);
-                                    } else {
-                                      setError(false);
-                                    }
-                                  }}>Submit</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="edit">
-                            <span>3</span>
-                            <Link to='/AgentDetails'>
-                              <img src={edit} alt="" />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div className="box_span">
-                            <span className="span_a">A</span>
-                            <span>
-                              Aditya Jangid, <br />
-                              854697845
-                            </span>
-                          </div>
-                        </td>
-                        <td>ICHP8797</td>
-                        <td>
-                          Bikaner,<br /> Rajasthan
-                        </td>
-                        <td>46</td>
-                        <td>125</td>
-                        <td>225</td>
-                        <td>06/01/2023 <br />18:23:55</td>
-                        <td>
-
-                          <td>
-                            <button className={className1} onClick = {handleClick1}>{buttonText1}</button>
-                          </td>
-
-                        </td>
-                        <td>
-                          <div className="edit">
-                            <span>3</span>
-                            <Link to='/AgentDetails'>
-                              <img src={edit} alt="" />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
